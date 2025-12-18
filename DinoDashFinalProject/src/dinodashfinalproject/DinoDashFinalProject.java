@@ -1,5 +1,6 @@
 package dinodashfinalproject;
 
+//import Packages
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 
@@ -25,7 +26,7 @@ public class DinoDashFinalProject extends JFrame {
      */
     private void initUI() {        
         //set title of the JFrame
-        setTitle("Graphics Exercise #1");
+        setTitle("Dino Dash");
         //add a custom JPanel to draw on
         add(new GamePanel());
         //set the size of the window
