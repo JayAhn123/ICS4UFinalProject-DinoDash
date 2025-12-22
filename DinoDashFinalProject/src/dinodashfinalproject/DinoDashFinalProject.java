@@ -35,9 +35,11 @@ public class DinoDashFinalProject extends JFrame {
         //add a custom JPanel to draw on
         add(new GamePanel());
         //set the size of the window
-        setSize(700, 600);
+        setSize(700, 525);
         //make it visible 
         setVisible(true);
+        //make it so they cant resize the window
+        setResizable(false);
         //tell the JFrame what to do when closed
         //this is important if our application has multiple windows
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

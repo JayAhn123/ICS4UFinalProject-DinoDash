@@ -10,6 +10,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JPanel;
 import javax.swing.JOptionPane;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.awt.Rectangle;
 
 /**
  *
@@ -20,6 +25,31 @@ public class GamePanel extends JPanel implements Runnable {
     //global variables
     private Thread animator;
     private final int DELAY = 20;
+    private Color lightBlue = new Color(143, 217, 251);
+    private Font titleFont = loadTitleFont((float)80);
+    
+    /**
+     * This method loads the titleFont from the file and turns it into a font
+     * @param size - the size of the font
+     * @return - the font we need
+     */
+    private Font loadTitleFont(float size) {
+        //try opening a connection to the file and making the font
+        try {
+            // This looks for ThaleahFat.ttf 
+            //first it makes an inputStream so we can get a connection to the data
+            //getClass() makes it so that we are looking in the same spot as the code is running
+            //then we get ResourcesAsStream and it looks for that fiel specifically and opens a connection to it
+            InputStream is = getClass().getResourceAsStream("ThaleahFat.ttf");
+            return Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(size);
+            //then we return the font
+            //Font.createFont turns it into a font assuming it is in truetype font format and since it is at 1 point size 
+            //we change that with the deriveFont to the size we need which will make a new fotn based on the old one to the 
+            //size to the value we enter (needs to be a float to refer to size)
+        } catch (FontFormatException | IOException | NullPointerException e) { //catch errors
+            return new Font("Arial", Font.PLAIN, (int) size); // Fallback if file is missing or cant be read
+        }
+    }
 
     /**
      * Does the actual drawing
@@ -32,11 +62,15 @@ public class GamePanel extends JPanel implements Runnable {
         //must be casted from older Graphics class in order to have access to some newer methods
         Graphics2D g2d = (Graphics2D) g;
         //set background colour
-        g2d.setColor(Color.CYAN);
-        g2d.fillRect(0, 0, this.getWidth(), this.getHeight());
+        this.setBackground(lightBlue);
         //draw Game title
         g2d.setColor(Color.black);
-        g2d.drawString("Dino Dash", 350, 300);
+        g2d.setFont(titleFont);
+        g2d.drawString("Dino Dash", 180, 120);
+        //make a new rectanlge for the quit button and then draw it
+        Rectangle QuitBtn = new Rectangle(100,100,100,100);
+        g2d.setColor(Color.white);
+        g2d.fill(QuitBtn);
 
     }
 

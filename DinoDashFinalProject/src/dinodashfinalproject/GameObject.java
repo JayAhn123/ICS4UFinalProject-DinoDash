@@ -34,8 +34,7 @@ public class GameObject {
      * @param height - height for game object
      */
     public GameObject(int x, int y, int width, int height) {
-        this.x = x;
-        this.y = y;
+        this(width,height);
         this.width = width;
         this.height = height;
     }
@@ -134,7 +133,7 @@ public class GameObject {
      * @return
      */
     public GameObject clone() {
-
+        return new GameObject(x,y,width,height);
     }
 
 }
