@@ -5,11 +5,12 @@
 package dinodashfinalproject;
 
 //import packages needed
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 
-public class GameObject {
+public abstract class GameObject {
 
     //attributes
     int x;//x position of the game object
@@ -61,7 +62,7 @@ public class GameObject {
      *
      * @return - x position of the game object
      */
-    public int getX() {
+    protected int getX() {
         return x;//returns x position
     }
 
@@ -70,7 +71,7 @@ public class GameObject {
      *
      * @return - y position of the game object
      */
-    public int getY() {
+    protected int getY() {
         return y;//returns y position
     }
 
@@ -79,7 +80,7 @@ public class GameObject {
      *
      * @return - width of the game object
      */
-    public int getWidth() {
+    protected int getWidth() {
         return width;//returns width
     }
 
@@ -88,7 +89,7 @@ public class GameObject {
      *
      * @return - height of the game object
      */
-    public int getHeight() {
+    protected int getHeight() {
         return height;//returns height
     }
 
@@ -97,7 +98,7 @@ public class GameObject {
      *
      * @return - hitbox of the game object
      */
-    public Rectangle getHitbox() {
+    protected Rectangle getHitbox() {
         return hitbox;//returns the rectangle
     }
 
@@ -107,7 +108,7 @@ public class GameObject {
      *
      * @param x - new x position
      */
-    public void setX(int x) {
+    protected void setX(int x) {
         this.x = x;//sets x position
         hitbox.setLocation(x, y); //updates hitbox location
     }
@@ -117,7 +118,7 @@ public class GameObject {
      *
      * @param y - new y position
      */
-    public void setY(int y) {
+    protected void setY(int y) {
         this.y = y;//sets y position
         hitbox.setLocation(x, y);//updates hitbox
     }
@@ -127,7 +128,7 @@ public class GameObject {
      *
      * @param width - new width
      */
-    public void setWidth(int width) {
+    protected void setWidth(int width) {
         this.width = width;//sets width
     }
 
@@ -136,7 +137,7 @@ public class GameObject {
      *
      * @param height - new height
      */
-    public void setHeight(int height) {
+    protected void setHeight(int height) {
         this.height = height;//sets height
     }
 
@@ -145,7 +146,7 @@ public class GameObject {
      *
      * @param hitbox - new hitbox
      */
-    public void setHitbox(Rectangle hitbox) {
+    protected void setHitbox(Rectangle hitbox) {
         this.hitbox = hitbox;//sets hitbox
     }
 
@@ -155,9 +156,9 @@ public class GameObject {
      * @param other - other game object that is being compared
      * @return - boolean; true if they are equal, false if they are not equal
      */
-    public boolean equals(GameObject other) {
+    protected boolean equals(GameObject other) {
         //if attributes of current game object and other game object is equal
-        if (this.x == other.x && this.y == other.y && this.width == other.width && this.height == other.height && this.hitbox == other.hitbox && this.imageName.equals(other.imageName)) {
+        if (this.x == other.x && this.y == other.y && this.width == other.width && this.height == other.height && this.imageName.equals(other.imageName)) {
             return true;//return true
         } else {//else
             return false;//return false
@@ -165,12 +166,19 @@ public class GameObject {
     }
 
     /**
-     * Method that clones the current gameObject
+     * Abstract method that is supposed to clone the object
      *
      * @return
      */
-    public GameObject clone() {
-        return new GameObject(x, y, width, height, imageName);
+    protected abstract GameObject clone();
+
+    /**
+     * Method that draws the GameObject at its spot
+     *
+     * @param g2d the 2DGrpahics object you are drawing on
+     */
+    protected void draw(Graphics2D g2d) {
+        g2d.drawImage(img, x, y, null);//draw the object
     }
 
 }
