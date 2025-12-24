@@ -33,19 +33,23 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     private Thread animator;
     private final int DELAY = 20;
     private final Color lightBlue = new Color(143, 217, 251);
+    private final Color darkGreen = new Color(66, 165, 70);
     private final Font titleFont = loadTitleFont((float) 80);
     private boolean up_pressed = false;
     private boolean down_pressed = false;
     private boolean left_pressed = false;
     private boolean right_pressed = false;
     private boolean mouse_pressed = false;
-    private boolean mouse_Clicked = false;
     private int mouseX;
     private int mouseY;
     Button playBtn;
     Button infoBtn;
     Button shopBtn;
+    Button buySkin1Button;
+    Button buySkin2Button;
+    Button backButton;
     Image titleScreenGround;
+    private String gameState = "titleScreen";
 
     /**
      * This method loads the titleFont from the file and turns it into a font
@@ -81,17 +85,40 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         //the Graphics2D class is the class that handles all the drawing
         //must be casted from older Graphics class in order to have access to some newer methods
         Graphics2D g2d = (Graphics2D) g;
-        //set background colour
-        this.setBackground(lightBlue);
-        //draw Game title
-        g2d.setColor(Color.black);
-        g2d.setFont(titleFont);
-        g2d.drawString("Dino Dash", 180, 120);
-        playBtn.draw(g2d, mouseX, mouseY);//draw buttons
-        infoBtn.draw(g2d, mouseX, mouseY);
-        shopBtn.draw(g2d, mouseX, mouseY);
-        //draw ground
-        g2d.drawImage(titleScreenGround, 0, 390, null);
+        
+        //draw based of what the gamestate is
+        if (gameState.equals("titleScreen")) {
+            //set background colour
+            this.setBackground(lightBlue);
+            //draw Game title
+            g2d.setColor(Color.black);
+            g2d.setFont(titleFont);
+            g2d.drawString("Dino Dash", 180, 120);
+            playBtn.draw(g2d, mouseX, mouseY);//draw buttons
+            infoBtn.draw(g2d, mouseX, mouseY);
+            shopBtn.draw(g2d, mouseX, mouseY);
+            //draw ground
+            g2d.drawImage(titleScreenGround, 0, 390, null);
+        } else if (gameState.equals("shopScreen")) {
+            //draw background rectangles for skins
+            g2d.setColor(darkGreen);
+            g2d.fillRect(180, 100, 100, 150);
+            g2d.fillRect(380, 100, 100, 150);
+            //draw the buttons to buy the skins
+            buySkin1Button.draw(g2d, mouseX, mouseY);
+            buySkin2Button.draw(g2d, mouseX, mouseY);
+            //draw the back button
+            backButton.draw(g2d, mouseX, mouseY);
+
+        } else if (gameState.equals("infoScreen")) {
+            //draw the back button
+            backButton.draw(g2d, mouseX, mouseY);
+            
+        } else if (gameState.equals("levelSelectScreen")) {
+            //draw the back button
+            backButton.draw(g2d, mouseX, mouseY);
+            
+        }
     }
 
     /**
@@ -123,6 +150,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         playBtn = new Button(280, 180, 100, 50, "playButton", "playButtonHover");//create buttons for main menu
         infoBtn = new Button(280, 240, 100, 50, "infoButton", "infoButtonHover");
         shopBtn = new Button(280, 300, 100, 50, "shopButton", "shopButtonHover");
+        //make buttons for shop
+        buySkin1Button = new Button(180, 260, 100, 50, "buyButton", "buyButtonHover");
+        buySkin2Button = new Button(380, 260, 100, 50, "buyButton", "buyButtonHover");
+        //make back button
+        backButton = new Button(20, 420, 100, 50, "backButton", "backButtonHover");
         //load image
         titleScreenGround = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/TitleImg.png")).getImage();
     }
@@ -142,9 +174,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 
             //redraws the screen (calling the paint component method)
             repaint();
-
-            //reset mouse_Clicked to false so that its only true for one frame
-            mouse_Clicked = false;
 
             //calculate how much time has passed since the last call
             //this allows smooth updates and our ball will move at a constant speed (as opposed to being dependent on processor availability)
@@ -214,14 +243,26 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     }
 
     /**
-     * this method runs whenever the mouse is clicked and it sets mouse_Clicked
-     * to true
+     * this method runs whenever the mouse is clicked and it handled the mouse
+     * events
      *
      * @param e the mouse event
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-        mouse_Clicked = true; //set it to true
+        mouseX = e.getX(); //update the location
+        mouseY = e.getY();
+
+        //check which was clicked and based off of that do what needs to be done
+        if (infoBtn.wasClicked(mouseX, mouseY)) {
+            gameState = "infoScreen";
+        } else if (shopBtn.wasClicked(mouseX, mouseY)) {
+            gameState = "shopScreen";
+        } else if (playBtn.wasClicked(mouseX, mouseY)) {
+            gameState = "levelSelectScreen";
+        } else if (backButton.wasClicked(mouseX, mouseY)) {
+            gameState = "titleScreen";
+        }
     }
 
     /**
