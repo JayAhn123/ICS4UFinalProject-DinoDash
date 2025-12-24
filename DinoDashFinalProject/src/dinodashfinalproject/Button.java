@@ -60,4 +60,8 @@ public class Button extends GameObject {
         return new Button(x, y, width, height, imageName, imageHoverName); //return the new button
     }
 
+    public boolean wasClicked(int mouseX, int mouseY) {
+        return hitbox.contains(mouseX,mouseY);
+    }
+
 }
