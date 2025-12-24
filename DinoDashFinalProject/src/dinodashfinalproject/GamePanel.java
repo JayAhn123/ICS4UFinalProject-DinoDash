@@ -40,6 +40,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     private boolean mouse_Clicked = false;
     private int mouseX;
     private int mouseY;
+    Button playBtn;
+    Button infoBtn;
+    Button shopBtn;
 
     /**
      * This method loads the titleFont from the file and turns it into a font
@@ -81,6 +84,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         g2d.setColor(Color.black);
         g2d.setFont(titleFont);
         g2d.drawString("Dino Dash", 180, 120);
+        playBtn.draw(g2d, mouseX, mouseY);//draw buttons
+        infoBtn.draw(g2d, mouseX, mouseY);
+        shopBtn.draw(g2d, mouseX, mouseY);
     }
 
     /**
@@ -109,6 +115,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         addKeyListener(this); //add all the listeners
         addMouseListener(this);
         addMouseMotionListener(this);
+        playBtn = new Button(280, 180, 100, 50, "playButton", "playButtonHover");//create buttons for main menu
+        infoBtn = new Button(280, 240, 100, 50, "infoButton", "infoButtonHover");
+        shopBtn = new Button(280, 300, 100, 50, "shopButton", "shopButtonHover");
     }
 
     /**

@@ -33,7 +33,7 @@ public class Button extends GameObject {
     public Button(int x, int y, int width, int height, String imageName, String imageHoverName) {
         super(x, y, width, height, imageName); //chain to superclass constructor
         this.imageHoverName = imageHoverName; //set rest of attributes
-        imgHover = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/" + this.imageHoverName + ".jpg")).getImage();
+        imgHover = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/" + this.imageHoverName + ".png")).getImage();
     }
 
     /**

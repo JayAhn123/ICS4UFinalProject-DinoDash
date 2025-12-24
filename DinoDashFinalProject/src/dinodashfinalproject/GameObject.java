@@ -36,7 +36,7 @@ public abstract class GameObject {
         this.height = height;
         hitbox = new Rectangle(x, y, width, height);
         this.imageName = imageName;
-        img = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/" + this.imageName + ".jpg")).getImage();
+        img = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/" + this.imageName + ".png")).getImage();
     }
 
     /**
