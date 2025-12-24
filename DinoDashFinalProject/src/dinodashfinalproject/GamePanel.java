@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.Image;
 import java.io.IOException;
 import java.io.InputStream;
 import java.awt.Rectangle;
@@ -20,6 +21,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -43,6 +45,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     Button playBtn;
     Button infoBtn;
     Button shopBtn;
+    Image titleScreenGround;
 
     /**
      * This method loads the titleFont from the file and turns it into a font
@@ -87,6 +90,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         playBtn.draw(g2d, mouseX, mouseY);//draw buttons
         infoBtn.draw(g2d, mouseX, mouseY);
         shopBtn.draw(g2d, mouseX, mouseY);
+        //draw ground
+        g2d.drawImage(titleScreenGround, 0, 390, null);
     }
 
     /**
@@ -118,6 +123,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         playBtn = new Button(280, 180, 100, 50, "playButton", "playButtonHover");//create buttons for main menu
         infoBtn = new Button(280, 240, 100, 50, "infoButton", "infoButtonHover");
         shopBtn = new Button(280, 300, 100, 50, "shopButton", "shopButtonHover");
+        //load image
+        titleScreenGround = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/TitleImg.png")).getImage();
     }
 
     /**
