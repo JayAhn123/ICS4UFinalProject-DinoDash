@@ -35,6 +35,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     private final Color lightBlue = new Color(143, 217, 251);
     private final Color darkGreen = new Color(66, 165, 70);
     private final Font titleFont = loadTitleFont((float) 80);
+    private final Font infoTitleFont = titleFont.deriveFont((float) 40);
+    private final Font infoTextFont = titleFont.deriveFont((float) 18);
     private boolean up_pressed = false;
     private boolean down_pressed = false;
     private boolean left_pressed = false;
@@ -47,6 +49,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     Button shopBtn;
     Button buySkin1Button;
     Button buySkin2Button;
+    Button buySkin3Button;
     Button backButton;
     Image titleScreenGround;
     private String gameState = "titleScreen";
@@ -85,7 +88,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         //the Graphics2D class is the class that handles all the drawing
         //must be casted from older Graphics class in order to have access to some newer methods
         Graphics2D g2d = (Graphics2D) g;
-        
+
         //draw based of what the gamestate is
         if (gameState.equals("titleScreen")) {
             //set background colour
@@ -102,22 +105,38 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         } else if (gameState.equals("shopScreen")) {
             //draw background rectangles for skins
             g2d.setColor(darkGreen);
-            g2d.fillRect(180, 100, 100, 150);
-            g2d.fillRect(380, 100, 100, 150);
+            g2d.fillRect(100, 100, 100, 150);
+            g2d.fillRect(300, 100, 100, 150);
+            g2d.fillRect(500, 100, 100, 150);
             //draw the buttons to buy the skins
             buySkin1Button.draw(g2d, mouseX, mouseY);
             buySkin2Button.draw(g2d, mouseX, mouseY);
+            buySkin3Button.draw(g2d, mouseX, mouseY);
             //draw the back button
             backButton.draw(g2d, mouseX, mouseY);
 
         } else if (gameState.equals("infoScreen")) {
             //draw the back button
             backButton.draw(g2d, mouseX, mouseY);
-            
+            //set font and draw info
+            g2d.setColor(Color.black);
+            g2d.setFont(infoTitleFont);
+            g2d.drawString("Welcome to Dino Dash", 170, 30);
+            g2d.setFont(infoTextFont);
+            g2d.drawString("There are two modes: Infinite mode and level mode.", 25, 75);
+            g2d.drawString("In level mode the goal is to reach the end of the level without dying", 35, 95);
+            g2d.drawString("In infinite mode the goal is to defeat as many enemies as you can without dying", 35, 115);
+            g2d.drawString("Use WASD to move and press P to pause", 25, 155);
+            g2d.drawString("You can buy new skins in the shop with coins you collect from the game", 25, 195);
+            g2d.drawString("There are powerups you can get in the game which will either:", 25, 235);
+            g2d.drawString("Give you a heart back", 35, 255);
+            g2d.drawString("Make you jump higher", 35, 275);
+            g2d.drawString("Make you run faster", 35, 295);
+
         } else if (gameState.equals("levelSelectScreen")) {
             //draw the back button
             backButton.draw(g2d, mouseX, mouseY);
-            
+
         }
     }
 
@@ -151,8 +170,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         infoBtn = new Button(280, 240, 100, 50, "infoButton", "infoButtonHover");
         shopBtn = new Button(280, 300, 100, 50, "shopButton", "shopButtonHover");
         //make buttons for shop
-        buySkin1Button = new Button(180, 260, 100, 50, "buyButton", "buyButtonHover");
-        buySkin2Button = new Button(380, 260, 100, 50, "buyButton", "buyButtonHover");
+        buySkin1Button = new Button(100, 260, 100, 50, "buyButton", "buyButtonHover");
+        buySkin2Button = new Button(300, 260, 100, 50, "buyButton", "buyButtonHover");
+        buySkin3Button = new Button(500, 260, 100, 50, "buyButton", "buyButtonHover");
         //make back button
         backButton = new Button(20, 420, 100, 50, "backButton", "backButtonHover");
         //load image
