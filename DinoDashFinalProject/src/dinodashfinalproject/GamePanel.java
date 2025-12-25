@@ -35,22 +35,27 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     private final Color lightBlue = new Color(143, 217, 251);
     private final Color darkGreen = new Color(66, 165, 70);
     private final Font titleFont = loadTitleFont((float) 80);
-    private final Font infoTitleFont = titleFont.deriveFont((float) 40);
+    private final Font headerFont = titleFont.deriveFont((float) 40);
     private final Font infoTextFont = titleFont.deriveFont((float) 18);
     private boolean up_pressed = false;
     private boolean down_pressed = false;
     private boolean left_pressed = false;
     private boolean right_pressed = false;
-    private boolean mouse_pressed = false;
     private int mouseX;
     private int mouseY;
     Button playBtn;
     Button infoBtn;
     Button shopBtn;
-    Button buySkin1Button;
+    Button equipSkin1Button;
     Button buySkin2Button;
     Button buySkin3Button;
     Button backButton;
+    Button lvl1Button;
+    Button lvl2Button;
+    Button lvl3Button;
+    Button lvl4Button;
+    Button lvl5Button;
+    Button infiniteModeButton;
     Image titleScreenGround;
     private String gameState = "titleScreen";
 
@@ -109,7 +114,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             g2d.fillRect(300, 100, 100, 150);
             g2d.fillRect(500, 100, 100, 150);
             //draw the buttons to buy the skins
-            buySkin1Button.draw(g2d, mouseX, mouseY);
+            equipSkin1Button.draw(g2d, mouseX, mouseY);
             buySkin2Button.draw(g2d, mouseX, mouseY);
             buySkin3Button.draw(g2d, mouseX, mouseY);
             //draw the back button
@@ -120,7 +125,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             backButton.draw(g2d, mouseX, mouseY);
             //set font and draw info
             g2d.setColor(Color.black);
-            g2d.setFont(infoTitleFont);
+            g2d.setFont(headerFont);
             g2d.drawString("Welcome to Dino Dash", 170, 30);
             g2d.setFont(infoTextFont);
             g2d.drawString("There are two modes: Infinite mode and level mode.", 25, 75);
@@ -136,7 +141,24 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         } else if (gameState.equals("levelSelectScreen")) {
             //draw the back button
             backButton.draw(g2d, mouseX, mouseY);
+            //draw title
+            g2d.setFont(headerFont);
+            g2d.setColor(Color.black);
+            g2d.drawString("Level Select", 235, 40);
+            //draw buttons
+            lvl1Button.draw(g2d, mouseX, mouseY);
+            lvl2Button.draw(g2d, mouseX, mouseY);
+            lvl3Button.draw(g2d, mouseX, mouseY);
+            lvl4Button.draw(g2d, mouseX, mouseY);
+            lvl5Button.draw(g2d, mouseX, mouseY);
+            infiniteModeButton.draw(g2d, mouseX, mouseY);
 
+        } else if (gameState.equals("level1")) {
+        } else if (gameState.equals("level2")) {
+        } else if (gameState.equals("level3")) {
+        } else if (gameState.equals("level4")) {
+        } else if (gameState.equals("level5")) {
+        } else if (gameState.equals("infiniteMode")) {
         }
     }
 
@@ -170,11 +192,18 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         infoBtn = new Button(280, 240, 100, 50, "infoButton", "infoButtonHover");
         shopBtn = new Button(280, 300, 100, 50, "shopButton", "shopButtonHover");
         //make buttons for shop
-        buySkin1Button = new Button(100, 260, 100, 50, "buyButton", "buyButtonHover");
+        equipSkin1Button = new Button(100, 260, 100, 50, "equipButton", "equipButtonHover");
         buySkin2Button = new Button(300, 260, 100, 50, "buyButton", "buyButtonHover");
         buySkin3Button = new Button(500, 260, 100, 50, "buyButton", "buyButtonHover");
         //make back button
         backButton = new Button(20, 420, 100, 50, "backButton", "backButtonHover");
+        //make buttons for level select
+        lvl1Button = new Button(125, 100, 50, 50, "lvl1Button", "lvl1ButtonHover");
+        lvl2Button = new Button(225, 100, 50, 50, "lvl2Button", "lvl2ButtonHover");
+        lvl3Button = new Button(325, 100, 50, 50, "lvl3Button", "lvl3ButtonHover");
+        lvl4Button = new Button(425, 100, 50, 50, "lvl4Button", "lvl4ButtonHover");
+        lvl5Button = new Button(525, 100, 50, 50, "lvl5Button", "lvl5ButtonHover");
+        infiniteModeButton = new Button(290, 200, 120, 50, "infiniteModeButton", "infiniteModeButtonHover");
         //load image
         titleScreenGround = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/TitleImg.png")).getImage();
     }
@@ -262,49 +291,66 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         }
     }
 
-    /**
-     * this method runs whenever the mouse is clicked and it handled the mouse
-     * events
-     *
-     * @param e the mouse event
-     */
     @Override
-    public void mouseClicked(MouseEvent e) {
-        mouseX = e.getX(); //update the location
-        mouseY = e.getY();
+    public void mouseClicked(MouseEvent e) {//dont need to do anything
+    }
 
-        //check which was clicked and based off of that do what needs to be done
-        if (infoBtn.wasClicked(mouseX, mouseY)) {
-            gameState = "infoScreen";
-        } else if (shopBtn.wasClicked(mouseX, mouseY)) {
-            gameState = "shopScreen";
-        } else if (playBtn.wasClicked(mouseX, mouseY)) {
-            gameState = "levelSelectScreen";
-        } else if (backButton.wasClicked(mouseX, mouseY)) {
-            gameState = "titleScreen";
-        }
+    @Override
+    public void mousePressed(MouseEvent e) {//dont need to do anything
     }
 
     /**
-     * this method runs when the mouse is pressed down and it updates the state
-     * of mouse_Pressed
-     *
-     * @param e the mouse event
-     */
-    @Override
-    public void mousePressed(MouseEvent e) {
-        mouse_pressed = true; //set it to true
-    }
-
-    /**
-     * this method runs when the mouse is released and it updates the state of
-     * mouse_Pressed
+     * this method runs when the mouse is released and it handles the clicks
      *
      * @param e the mouse event
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-        mouse_pressed = false; //set it to false
+        mouseX = e.getX(); //update the location
+        mouseY = e.getY();
+
+        //check which was clicked and based off of that do what needs to be done
+        if (gameState.equals("titleScreen")) {
+
+            if (infoBtn.wasClicked(mouseX, mouseY)) {
+                gameState = "infoScreen";
+            } else if (shopBtn.wasClicked(mouseX, mouseY)) {
+                gameState = "shopScreen";
+            } else if (playBtn.wasClicked(mouseX, mouseY)) {
+                gameState = "levelSelectScreen";
+            }
+
+        } else if (gameState.equals("infoScreen")) {
+
+            if (backButton.wasClicked(mouseX, mouseY)) {
+                gameState = "titleScreen";
+            }
+
+        } else if (gameState.equals("shopScreen")) {
+
+            if (backButton.wasClicked(mouseX, mouseY)) {
+                gameState = "titleScreen";
+            }
+
+        } else if (gameState.equals("levelSelectScreen")) {
+
+            if (backButton.wasClicked(mouseX, mouseY)) {
+                gameState = "titleScreen";
+            } else if (infiniteModeButton.wasClicked(mouseX, mouseY)) {
+                gameState = "infiniteMode";
+            } else if (lvl1Button.wasClicked(mouseX, mouseY)) {
+                gameState = "level1";
+            } else if (lvl2Button.wasClicked(mouseX, mouseY)) {
+                gameState = "level2";
+            } else if (lvl3Button.wasClicked(mouseX, mouseY)) {
+                gameState = "level3";
+            } else if (lvl4Button.wasClicked(mouseX, mouseY)) {
+                gameState = "level4";
+            } else if (lvl5Button.wasClicked(mouseX, mouseY)) {
+                gameState = "level5";
+            }
+
+        }
     }
 
     @Override
@@ -315,8 +361,17 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     public void mouseExited(MouseEvent e) { //dont need to do anything
     }
 
+    /**
+     * this method runs anytime the user clicks and drags the mouse and it
+     * updates the mouse position as when dragging mouseMoved will not update
+     * the mouse's position
+     *
+     * @param e - the mouse event
+     */
     @Override
-    public void mouseDragged(MouseEvent e) { //dont need to do anything
+    public void mouseDragged(MouseEvent e) {
+        mouseX = e.getX(); //update the location of the mouse
+        mouseY = e.getY();
     }
 
     /**
