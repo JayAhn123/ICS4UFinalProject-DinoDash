@@ -13,13 +13,13 @@ import javax.swing.ImageIcon;
 public abstract class GameObject {
 
     //attributes
-    int x;//x position of the game object
-    int y;//y position of the game object
-    int width;//width of the game object
-    int height;//height of the game object
-    Rectangle hitbox; //the hitbox of the game object which is a rectangle type object
-    String imageName;
-    Image img; //the image that should be displayed for the object
+    protected int x;//x position of the game object
+    protected int y;//y position of the game object
+    protected int width;//width of the game object
+    protected int height;//height of the game object
+    protected Rectangle hitbox; //the hitbox of the game object which is a rectangle type object
+    protected String imageName;
+    protected Image img; //the image that should be displayed for the object
 
     /**
      * Primary Constructor that instantiates game object
@@ -130,6 +130,7 @@ public abstract class GameObject {
      */
     protected void setWidth(int width) {
         this.width = width;//sets width
+        hitbox.width = width; //update hitbox
     }
 
     /**
@@ -139,6 +140,7 @@ public abstract class GameObject {
      */
     protected void setHeight(int height) {
         this.height = height;//sets height
+        hitbox.height = height;// update hitbox
     }
 
     /**
