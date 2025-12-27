@@ -28,7 +28,7 @@ public class Player extends GameObject {
     }
 
     public void draw(Graphics2D g2d) {
-        g2d.drawImage(img, screenXPosition, screenYPosition, null);
+        g2d.fillRect(screenXPosition, screenYPosition, width, height);
     }
 
     public void move(boolean up_pressed, boolean down_pressed, boolean left_pressed, boolean right_pressed, ArrayList<Ground> groundTiles) {
