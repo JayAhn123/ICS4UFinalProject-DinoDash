@@ -40,8 +40,8 @@ public class Ground extends GameObject {
      */
     public void draw(Graphics2D g2d) {
         //dino will always be in middle of screen so the object will move around the dino thus needing an offset that will change when dino moves
-        for (int i = x + xOffset; i < width + xOffset; i += 50) {//for loop that will draw the ground piece by peice until it reaches the width
-            g2d.drawImage(img, i, y + yOffset, null);//draw the image at correct position
+        for (int i = x - xOffset; i < x + width - xOffset; i += 50) {//for loop that will draw the ground piece by peice until it reaches the width
+            g2d.drawImage(img, i, y - yOffset, null);//draw the image at correct position
         }
     }
 

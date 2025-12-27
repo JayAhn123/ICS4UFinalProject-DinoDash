@@ -158,7 +158,7 @@ public abstract class GameObject {
      * @param other - other game object that is being compared
      * @return - boolean; true if they are equal, false if they are not equal
      */
-    protected boolean equals(GameObject other) {
+    public boolean equals(GameObject other) {
         //if attributes of current game object and other game object is equal
         if (this.x == other.x && this.y == other.y && this.width == other.width && this.height == other.height && this.imageName.equals(other.imageName)) {
             return true;//return true
@@ -172,15 +172,6 @@ public abstract class GameObject {
      *
      * @return
      */
-    protected abstract GameObject clone();
-
-    /**
-     * Method that draws the GameObject at its spot
-     *
-     * @param g2d the 2DGrpahics object you are drawing on
-     */
-    protected void draw(Graphics2D g2d) {
-        g2d.drawImage(img, x, y, null);//draw the object
-    }
+    public abstract GameObject clone();
 
 }

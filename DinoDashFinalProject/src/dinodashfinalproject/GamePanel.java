@@ -21,6 +21,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 /**
@@ -58,6 +59,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     Button infiniteModeButton;
     Image titleScreenGround;
     private String gameState = "titleScreen";
+
+    ArrayList<Ground> groundTiles = new ArrayList();
+    Player player = new Player(325, 213, "GroundImg");
 
     /**
      * This method loads the titleFont from the file and turns it into a font
@@ -154,6 +158,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             infiniteModeButton.draw(g2d, mouseX, mouseY);
 
         } else if (gameState.equals("level1")) {
+            player.move(up_pressed, down_pressed, left_pressed, right_pressed, groundTiles);
+            Ground.setXOffset(player.getX() - Player.getScreenXPosition());
+            Ground.setYOffset(player.getY() - Player.getScreenYPosition());
+            player.draw(g2d);
+            for (Ground groundTile : groundTiles) {
+                groundTile.draw(g2d);
+            }
         } else if (gameState.equals("level2")) {
         } else if (gameState.equals("level3")) {
         } else if (gameState.equals("level4")) {
@@ -206,6 +217,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         infiniteModeButton = new Button(290, 200, 120, 50, "infiniteModeButton", "infiniteModeButtonHover");
         //load image
         titleScreenGround = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/TitleImg.png")).getImage();
+
+        groundTiles.add(new Ground(10, 316, 400));
     }
 
     /**
