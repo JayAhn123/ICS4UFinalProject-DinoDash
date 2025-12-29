@@ -20,6 +20,7 @@ public class Player extends GameObject {
     double xSpeed = 0;
     double ySpeed = 0;
     int coins;
+    int hearts;
 
     /**
      * primary constructor
@@ -29,6 +30,7 @@ public class Player extends GameObject {
         //no paramters needed ass dino will always start with default skin, at that
         //x,y position and with that width and height
         coins = 0;
+        hearts = 0;
     }
 
     /**
@@ -217,6 +219,14 @@ public class Player extends GameObject {
 
     public int getCoins() {
         return coins;
+    }
+
+    public void setHearts(int hearts) {
+        this.hearts = hearts;
+    }
+
+    public int getHearts() {
+        return hearts;
     }
 
 }
