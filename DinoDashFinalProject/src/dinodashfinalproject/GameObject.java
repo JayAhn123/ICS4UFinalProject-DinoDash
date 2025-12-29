@@ -20,6 +20,8 @@ public abstract class GameObject {
     protected Rectangle hitbox; //the hitbox of the game object which is a rectangle type object
     protected String imageName;
     protected Image img; //the image that should be displayed for the object
+    protected static int xOffset;
+    protected static int yOffset;
 
     /**
      * Primary Constructor that instantiates game object
@@ -150,6 +152,42 @@ public abstract class GameObject {
      */
     protected void setHitbox(Rectangle hitbox) {
         this.hitbox = hitbox;//sets hitbox
+    }
+
+    /**
+     * this method sets the xOffset
+     *
+     * @param offset - the new x offset
+     */
+    public static void setXOffset(int offset) {
+        xOffset = offset; //update offset
+    }
+
+    /**
+     * this method sets the yOffset
+     *
+     * @param offset - the new y offset
+     */
+    public static void setYOffset(int offset) {
+        yOffset = offset; //update offset
+    }
+
+    /**
+     * this method gets the x offset
+     *
+     * @return - the x offset
+     */
+    public static int getXOffset() {
+        return xOffset; //return offset
+    }
+
+    /**
+     * this method gets the y offset
+     *
+     * @return - the y offset
+     */
+    public static int getYOffset() {
+        return yOffset; //return offset
     }
 
     /**

@@ -61,6 +61,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     private String gameState = "titleScreen";
 
     ArrayList<Ground> groundTiles = new ArrayList();
+    Coin coins = new Coin(20, 291);
     Player player = new Player();
 
     /**
@@ -159,12 +160,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 
         } else if (gameState.equals("level1")) {
             player.move(up_pressed, down_pressed, left_pressed, right_pressed, groundTiles);
-            Ground.setXOffset(player.getX() - Player.getScreenXPosition());
-            Ground.setYOffset(player.getY() - Player.getScreenYPosition());
+            GameObject.setXOffset(player.getX() - Player.getScreenXPosition());
+            GameObject.setYOffset(player.getY() - Player.getScreenYPosition());
             player.draw(g2d);
             for (Ground groundTile : groundTiles) {
                 groundTile.draw(g2d);
             }
+            coins.draw(g2d);
+            coins.collisionProcedure(player);
         } else if (gameState.equals("level2")) {
         } else if (gameState.equals("level3")) {
         } else if (gameState.equals("level4")) {
@@ -219,7 +222,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         //load image
         titleScreenGround = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/TitleImg.png")).getImage();
 
-        groundTiles.add(new Ground(10, 316, 400));
+        groundTiles.add(new Ground(10, 316, 500));
     }
 
     /**

@@ -9,10 +9,6 @@ import java.awt.Graphics2D;
 
 public class Ground extends GameObject {
 
-    //attributes
-    private static int xOffset;
-    private static int yOffset;
-
     /**
      * primary constructor
      *
@@ -44,41 +40,4 @@ public class Ground extends GameObject {
             g2d.drawImage(img, i, y - yOffset, null);//draw the image at correct position
         }
     }
-
-    /**
-     * this method sets the xOffset
-     *
-     * @param offset - the new x offset
-     */
-    public static void setXOffset(int offset) {
-        xOffset = offset; //update offset
-    }
-
-    /**
-     * this method sets the yOffset
-     *
-     * @param offset - the new y offset
-     */
-    public static void setYOffset(int offset) {
-        yOffset = offset; //update offset
-    }
-
-    /**
-     * this method gets the x offset
-     *
-     * @return - the x offset
-     */
-    public static int getXOffset() {
-        return xOffset; //return offset
-    }
-
-    /**
-     * this method gets the y offset
-     *
-     * @return - the y offset
-     */
-    public static int getYOffset() {
-        return yOffset; //return offset
-    }
-
 }

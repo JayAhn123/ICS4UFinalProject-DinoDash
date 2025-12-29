@@ -19,6 +19,7 @@ public class Player extends GameObject {
     private static final int screenYPosition = 213;
     double xSpeed = 0;
     double ySpeed = 0;
+    int coins;
 
     /**
      * primary constructor
@@ -27,15 +28,16 @@ public class Player extends GameObject {
         super(325, 213, 50, 100, "GroundImg"); //chain to superclass constructor
         //no paramters needed ass dino will always start with default skin, at that
         //x,y position and with that width and height
+        coins = 0;
     }
 
     /**
      * clone method for player
      *
-     * @return
+     * @return - the cloned player
      */
     public Player clone() {
-        return new Player(); //return new player
+        return new Player();
     }
 
     /**
@@ -104,6 +106,11 @@ public class Player extends GameObject {
 
         //add to y speed for gravity that will pull us back down
         ySpeed += 0.3;
+
+        //we also need to set limit for gravity speed otherwise it will just keep speeding up
+        if (ySpeed > 13) {
+            ySpeed = 13; //if it gets above 13 then set it to 13
+        }
 
         //now we check collisions with ground and walls
         //horizontal collision first
@@ -202,6 +209,14 @@ public class Player extends GameObject {
      */
     public void setYSpeed(double ySpeed) {
         this.ySpeed = ySpeed;
+    }
+
+    public void setCoins(int coins) {
+        this.coins = coins;
+    }
+
+    public int getCoins() {
+        return coins;
     }
 
 }
