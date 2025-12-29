@@ -62,6 +62,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 
     ArrayList<Ground> groundTiles = new ArrayList();
     Coin coins = new Coin(20, 291);
+    Heart hearts = new Heart(60, 291);
+    JumpPowerup powerup = new JumpPowerup(100, 291);
     Player player = new Player();
 
     /**
@@ -163,11 +165,17 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             GameObject.setXOffset(player.getX() - Player.getScreenXPosition());
             GameObject.setYOffset(player.getY() - Player.getScreenYPosition());
             player.draw(g2d);
+            player.drawHearts(g2d);
+            player.drawCoins(g2d, infoTextFont);
             for (Ground groundTile : groundTiles) {
                 groundTile.draw(g2d);
             }
             coins.draw(g2d);
             coins.collisionProcedure(player);
+            hearts.draw(g2d);
+            hearts.collisionProcedure(player);
+            powerup.draw(g2d);
+            powerup.collisionProcedure(player);
         } else if (gameState.equals("level2")) {
         } else if (gameState.equals("level3")) {
         } else if (gameState.equals("level4")) {

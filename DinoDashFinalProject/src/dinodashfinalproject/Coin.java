@@ -14,11 +14,6 @@ public class Coin extends GameItem {
 
     public Coin(int x, int y) {
         super(x, y, "Coin");
-
-        hitbox.x++;
-        hitbox.y++;
-        hitbox.width -= 2;
-        hitbox.height -= 2;
     }
 
     public void collisionProcedure(Player player) {
@@ -30,12 +25,6 @@ public class Coin extends GameItem {
         }
     }
 
-    public void draw(Graphics2D g2d) {
-        if (visible) {
-            g2d.drawImage(img, x - xOffset, y - yOffset, null);//draw the image at correct position
-        }
-
-    }
 
     public GameObject clone() {
         return new Coin(x, y);

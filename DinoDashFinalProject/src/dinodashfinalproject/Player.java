@@ -5,8 +5,12 @@
 package dinodashfinalproject;
 
 //import packages
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -21,6 +25,8 @@ public class Player extends GameObject {
     double ySpeed = 0;
     int coins;
     int hearts;
+    Image heartImage;
+    int jumpHeight;
 
     /**
      * primary constructor
@@ -30,7 +36,10 @@ public class Player extends GameObject {
         //no paramters needed ass dino will always start with default skin, at that
         //x,y position and with that width and height
         coins = 0;
-        hearts = 0;
+        hearts = 3;
+        heartImage = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/playerHeart.png")).getImage();
+        jumpHeight = -6;
+
     }
 
     /**
@@ -99,7 +108,7 @@ public class Player extends GameObject {
             //then for each title in the array check if the hitboxes are intersecting
             for (Ground groundTile : groundTiles) {
                 if (groundTile.hitbox.intersects(hitbox)) {
-                    ySpeed = -6;//if they do intersect set y speed to -6 so we jump
+                    ySpeed = jumpHeight;//if they do intersect set y speed to -6 so we jump
                 }
             }
             //then once we are done checking put the hitbox back to the right spot
@@ -227,6 +236,26 @@ public class Player extends GameObject {
 
     public int getHearts() {
         return hearts;
+    }
+
+    public void setJumpHeight(int jumpHeight) {
+        this.jumpHeight = jumpHeight;
+    }
+
+    public int getJumpHeight() {
+        return jumpHeight;
+    }
+
+    public void drawCoins(Graphics2D g2d, Font font) {
+        g2d.setColor(Color.black);
+        g2d.setFont(font);
+        g2d.drawString("Coins: " + coins, 600, 18);
+    }
+
+    public void drawHearts(Graphics2D g2d) {
+        for (int i = 10; i < (hearts * 23) + 10; i += 23) {
+            g2d.drawImage(heartImage, i, 10, null);
+        }
     }
 
 }

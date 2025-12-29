@@ -18,11 +18,19 @@ public abstract class GameItem extends GameObject {
     public GameItem(int x, int y, String imageName) {
         super(x, y, 25, 25, imageName);
         visible = true;
+        hitbox.x++;
+        hitbox.y++;
+        hitbox.width -= 2;
+        hitbox.height -= 2;
     }
 
     public abstract void collisionProcedure(Player player);
 
-    public abstract void draw(Graphics2D g2d);
+    public void draw(Graphics2D g2d) {
+        if (visible) {
+            g2d.drawImage(img, x - xOffset, y - yOffset, null);//draw the image at correct position
+        }
+    }
 
     public boolean isVisible() {
         return visible;
