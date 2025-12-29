@@ -11,7 +11,7 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author mubas
+ * @author
  */
 public class Button extends GameObject {
 
@@ -60,8 +60,17 @@ public class Button extends GameObject {
         return new Button(x, y, width, height, imageName, imageHoverName); //return the new button
     }
 
+    /**
+     * this checks if the mouse position is on the button and is only called
+     * after mouse was released so if the mouse is on the button when it was
+     * released that means they clicked this button
+     *
+     * @param mouseX - x location of the mouse
+     * @param mouseY - y location of the mouse
+     * @return - Boolean of true if it is on the button false if not
+     */
     public boolean wasClicked(int mouseX, int mouseY) {
-        return hitbox.contains(mouseX,mouseY);
+        return hitbox.contains(mouseX, mouseY); //return if the hitbox includes the mouse current coordinates
     }
 
 }

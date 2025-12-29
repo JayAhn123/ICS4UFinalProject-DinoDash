@@ -61,7 +61,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     private String gameState = "titleScreen";
 
     ArrayList<Ground> groundTiles = new ArrayList();
-    Player player = new Player(325, 213, "GroundImg");
+    Player player = new Player();
 
     /**
      * This method loads the titleFont from the file and turns it into a font
@@ -129,9 +129,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             backButton.draw(g2d, mouseX, mouseY);
             //set font and draw info
             g2d.setColor(Color.black);
-            g2d.setFont(headerFont);
+            g2d.setFont(headerFont); //show header
             g2d.drawString("Welcome to Dino Dash", 170, 30);
-            g2d.setFont(infoTextFont);
+            g2d.setFont(infoTextFont);//switch font and show rest of info
             g2d.drawString("There are two modes: Infinite mode and level mode.", 25, 75);
             g2d.drawString("In level mode the goal is to reach the end of the level without dying", 35, 95);
             g2d.drawString("In infinite mode the goal is to defeat as many enemies as you can without dying", 35, 115);
@@ -199,6 +199,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         addKeyListener(this); //add all the listeners
         addMouseListener(this);
         addMouseMotionListener(this);
+        //add buttons on title screen
         playBtn = new Button(280, 180, 100, 50, "playButton", "playButtonHover");//create buttons for main menu
         infoBtn = new Button(280, 240, 100, 50, "infoButton", "infoButtonHover");
         shopBtn = new Button(280, 300, 100, 50, "shopButton", "shopButtonHover");
