@@ -15,7 +15,6 @@ import java.awt.FontFormatException;
 import java.awt.Image;
 import java.io.IOException;
 import java.io.InputStream;
-import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -59,7 +58,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     Button infiniteModeButton;
     Image titleScreenGround;
     private String gameState = "titleScreen";
-
+    
+    //variables for testing
     ArrayList<Ground> groundTiles = new ArrayList();
     Coin coins = new Coin(20, 291);
     Heart hearts = new Heart(60, 291);
@@ -161,20 +161,21 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             infiniteModeButton.draw(g2d, mouseX, mouseY);
 
         } else if (gameState.equals("level1")) {
-            player.move(up_pressed, down_pressed, left_pressed, right_pressed, groundTiles);
-            GameObject.setXOffset(player.getX() - Player.getScreenXPosition());
+            //test level
+            player.move(up_pressed, down_pressed, left_pressed, right_pressed, groundTiles); //move player
+            GameObject.setXOffset(player.getX() - Player.getScreenXPosition());//update offsets after movement
             GameObject.setYOffset(player.getY() - Player.getScreenYPosition());
-            player.draw(g2d);
-            player.drawHearts(g2d);
-            player.drawCoins(g2d, infoTextFont);
-            for (Ground groundTile : groundTiles) {
+            player.draw(g2d);//draw player
+            player.drawHearts(g2d);//draw the amount of hearts th eplayer has
+            player.drawCoins(g2d, infoTextFont);//draw the amount of couns the player has
+            for (Ground groundTile : groundTiles) {//for each ground tile draw it
                 groundTile.draw(g2d);
             }
-            coins.draw(g2d);
+            coins.draw(g2d);//draw the test coind and do its collision procedure
             coins.collisionProcedure(player);
-            hearts.draw(g2d);
+            hearts.draw(g2d);//drae test heart
             hearts.collisionProcedure(player);
-            powerup.draw(g2d);
+            powerup.draw(g2d);//draw test jump powerup
             powerup.collisionProcedure(player);
         } else if (gameState.equals("level2")) {
         } else if (gameState.equals("level3")) {
@@ -229,7 +230,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         infiniteModeButton = new Button(290, 200, 120, 50, "infiniteModeButton", "infiniteModeButtonHover");
         //load image
         titleScreenGround = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/TitleImg.png")).getImage();
-
+        
+        //add to arraylist of test level
         groundTiles.add(new Ground(10, 316, 500));
     }
 
@@ -330,12 +332,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
      * @param e the mouse event
      */
     @Override
-    public void mouseReleased(MouseEvent e) {
+    public void mouseReleased(MouseEvent e) { //COMMENTS NOT DONE
         mouseX = e.getX(); //update the location
         mouseY = e.getY();
 
         //check which was clicked and based off of that do what needs to be done
-        if (gameState.equals("titleScreen")) {
+        if (gameState.equals("titleScreen")) {//check which gamestate it is then check if anybuttons in that gamestate were clicked
 
             if (infoBtn.wasClicked(mouseX, mouseY)) {
                 gameState = "infoScreen";
@@ -345,7 +347,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
                 gameState = "levelSelectScreen";
             }
 
-        } else if (gameState.equals("infoScreen")) {
+        } else if (gameState.equals("infoScreen")) {//do this for all gamestates and buttons
 
             if (backButton.wasClicked(mouseX, mouseY)) {
                 gameState = "titleScreen";

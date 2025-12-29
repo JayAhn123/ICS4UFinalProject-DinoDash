@@ -4,30 +4,44 @@
  */
 package dinodashfinalproject;
 
-import java.awt.Graphics2D;
-
 /**
  *
  * @author mubas
  */
 public class Coin extends GameItem {
 
+    /**
+     * primary constructor for Coin object
+     *
+     * @param x - x position of coin
+     * @param y - y position of coin
+     */
     public Coin(int x, int y) {
-        super(x, y, "Coin");
+        super(x, y, "Coin");//chain to superclas constructor image will always be the same as a coin image
     }
 
+    /**
+     * method that checks if the player collides with the coin and then add 1 to
+     * the coin count if the player does
+     *
+     * @param player - the player
+     */
     public void collisionProcedure(Player player) {
-        if (visible) {
-            if (player.hitbox.intersects(hitbox)) {
-                player.setCoins(player.getCoins() + 1);
-                visible = false;
+        if (visible) {//check only if its visible
+            if (player.hitbox.intersects(hitbox)) {//check if they collide
+                player.setCoins(player.getCoins() + 1);//if they do add 1 to player coin count
+                visible = false;//set visible to false if they collect the coin
             }
         }
     }
 
-
+    /**
+     * clone method that will return a new coin that is the same
+     *
+     * @return - the new coin
+     */
     public GameObject clone() {
-        return new Coin(x, y);
+        return new Coin(x, y);//return new coin with same attributes
     }
 
 }

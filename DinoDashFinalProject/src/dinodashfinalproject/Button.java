@@ -44,6 +44,7 @@ public class Button extends GameObject {
      * @param mouseY - the y position of the mouse
      */
     public void draw(Graphics2D g2d, int mouseX, int mouseY) {
+        //if the mouse is on the button draw the hover version otherwise drar the normal version
         if (hitbox.contains(mouseX, mouseY)) {
             g2d.drawImage(imgHover, x, y, null);//draw the button with the image when its being hovered on
         } else {

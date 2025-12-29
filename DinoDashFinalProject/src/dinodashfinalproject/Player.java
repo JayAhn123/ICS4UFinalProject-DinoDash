@@ -14,13 +14,13 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author mubas
+ * @author arbas
  */
 public class Player extends GameObject {
 
     //attributes
-    private static final int screenXPosition = 325;
-    private static final int screenYPosition = 213;
+    private static final int SCREENXPOSITION = 325;
+    private static final int SCREENYPOSITION = 213;
     double xSpeed = 0;
     double ySpeed = 0;
     int coins;
@@ -35,7 +35,7 @@ public class Player extends GameObject {
         super(325, 213, 50, 100, "GroundImg"); //chain to superclass constructor
         //no paramters needed ass dino will always start with default skin, at that
         //x,y position and with that width and height
-        coins = 0;
+        coins = 0; //set other attributes to defualts
         hearts = 3;
         heartImage = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/playerHeart.png")).getImage();
         jumpHeight = -6;
@@ -48,7 +48,7 @@ public class Player extends GameObject {
      * @return - the cloned player
      */
     public Player clone() {
-        return new Player();
+        return new Player();//INCOMPLETE
     }
 
     /**
@@ -57,7 +57,7 @@ public class Player extends GameObject {
      * @param g2d - the graphics2D object to draw with
      */
     public void draw(Graphics2D g2d) {
-        g2d.fillRect(screenXPosition, screenYPosition, width, height);//incomplete placeholder rectangle currently
+        g2d.fillRect(SCREENXPOSITION, SCREENYPOSITION, width, height);//incomplete placeholder rectangle currently
     }
 
     /**
@@ -192,7 +192,7 @@ public class Player extends GameObject {
      * @return the screenXPosition
      */
     public static int getScreenXPosition() {
-        return screenXPosition;
+        return SCREENXPOSITION;
     }
 
     /**
@@ -201,7 +201,7 @@ public class Player extends GameObject {
      * @return the screenYPosition
      */
     public static int getScreenYPosition() {
-        return screenYPosition;
+        return SCREENYPOSITION;
     }
 
     /**
@@ -222,39 +222,85 @@ public class Player extends GameObject {
         this.ySpeed = ySpeed;
     }
 
+    /**
+     * setter for the amount of coins the player has
+     *
+     * @param coins - the amount of coins the player should have
+     */
     public void setCoins(int coins) {
         this.coins = coins;
     }
 
+    /**
+     * getter for the amount of coins the player has
+     *
+     * @return - the amount of coins as an int
+     */
     public int getCoins() {
         return coins;
     }
 
+    /**
+     * setter for the amount of hearts the player has
+     *
+     * @param hearts - the amount of hearts as an int
+     */
     public void setHearts(int hearts) {
         this.hearts = hearts;
     }
 
+    /**
+     * getter for the amount of hearts the player has
+     *
+     * @return - the amount of hearts as an int
+     */
     public int getHearts() {
         return hearts;
     }
 
+    /**
+     * setter for the jump height of the player
+     *
+     * @param jumpHeight the value we make the ySpeed of the player when they
+     * jump as an int
+     */
     public void setJumpHeight(int jumpHeight) {
         this.jumpHeight = jumpHeight;
     }
 
+    /**
+     * getter for jump height of the player
+     *
+     * @return - the value we make the ySpeed of the player when they jump as an
+     * int
+     */
     public int getJumpHeight() {
         return jumpHeight;
     }
 
+    /**
+     * a method that draws the amount of coins the player has as a string in the
+     * upper right corner
+     *
+     * @param g2d - the graphics2d object to draw on
+     * @param font - font used to draw
+     */
     public void drawCoins(Graphics2D g2d, Font font) {
-        g2d.setColor(Color.black);
+        g2d.setColor(Color.black);//set colour and font
         g2d.setFont(font);
-        g2d.drawString("Coins: " + coins, 600, 18);
+        g2d.drawString("Coins: " + coins, 600, 18); // draw string at correct position
     }
 
+    /**
+     * method that draw the amount of hearts the user has
+     *
+     * @param g2d - the graphics2d object to draw on
+     */
     public void drawHearts(Graphics2D g2d) {
+        //for loop that will start where the first heart should be drawn and will keep going to 
+        //the next x position for the next heart and will run as many times as there are hearts
         for (int i = 10; i < (hearts * 23) + 10; i += 23) {
-            g2d.drawImage(heartImage, i, 10, null);
+            g2d.drawImage(heartImage, i, 10, null);//draw the image at the right x position
         }
     }
 
