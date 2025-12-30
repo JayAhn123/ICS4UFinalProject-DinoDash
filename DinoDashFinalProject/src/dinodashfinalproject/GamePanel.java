@@ -58,13 +58,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     Button infiniteModeButton;
     Image titleScreenGround;
     private String gameState = "titleScreen";
-    
+
     //variables for testing
     ArrayList<Ground> groundTiles = new ArrayList();
     Coin coins = new Coin(20, 291);
     Heart hearts = new Heart(60, 291);
-    JumpPowerup powerup = new JumpPowerup(100, 291);
-    Player player = new Player(0,0);
+    JumpPowerup jumpPowerup = new JumpPowerup(100, 291);
+    SpeedPowerup speedPowerup = new SpeedPowerup(140, 291);
+    Player player = new Player();
 
     /**
      * This method loads the titleFont from the file and turns it into a font
@@ -175,8 +176,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             coins.collisionProcedure(player);
             hearts.draw(g2d);//drae test heart
             hearts.collisionProcedure(player);
-            powerup.draw(g2d);//draw test jump powerup
-            powerup.collisionProcedure(player);
+            jumpPowerup.draw(g2d);//draw test jump powerup
+            jumpPowerup.collisionProcedure(player);
+            speedPowerup.draw(g2d);//draw test jump powerup
+            speedPowerup.collisionProcedure(player);
         } else if (gameState.equals("level2")) {
         } else if (gameState.equals("level3")) {
         } else if (gameState.equals("level4")) {
@@ -230,7 +233,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         infiniteModeButton = new Button(290, 200, 120, 50, "infiniteModeButton", "infiniteModeButtonHover");
         //load image
         titleScreenGround = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/TitleImg.png")).getImage();
-        
+
         //add to arraylist of test level
         groundTiles.add(new Ground(10, 316, 500));
     }

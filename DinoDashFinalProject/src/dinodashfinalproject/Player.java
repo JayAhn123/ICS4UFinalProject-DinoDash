@@ -16,27 +16,31 @@ import javax.swing.ImageIcon;
  *
  * @author arbas
  */
-public class Player extends GameCharacter {
+public class Player extends GameObject {
 
     //attributes
     private static final int SCREENXPOSITION = 325;
     private static final int SCREENYPOSITION = 213;
+    double xSpeed = 0;
+    double ySpeed = 0;
     int coins;
     int hearts;
     Image heartImage;
     int jumpHeight;
+    int maxSpeed;
 
     /**
      * primary constructor
      */
-    public Player(double xSpeed, double ySpeed) {
-        super(325, 213, 50, 100, "GroundImg", xSpeed, ySpeed); //chain to superclass constructor
-        //no paramters for position needed ass dino will always start with default skin, at that
+    public Player() {
+        super(325, 213, 50, 100, "GroundImg"); //chain to superclass constructor
+        //no paramters needed ass dino will always start with default skin, at that
         //x,y position and with that width and height
         coins = 0; //set other attributes to defualts
         hearts = 3;
         heartImage = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/playerHeart.png")).getImage();
         jumpHeight = -6;
+        maxSpeed = 7;
 
     }
 
@@ -46,7 +50,7 @@ public class Player extends GameCharacter {
      * @return - the cloned player
      */
     public Player clone() {
-        return new Player(0, 0);//INCOMPLETE
+        return new Player();//INCOMPLETE
     }
 
     /**
@@ -91,9 +95,9 @@ public class Player extends GameCharacter {
 
         //since we add to xspeed when moving we need to put a limit otherwise we will infinitly get faster
         //s once we reach max speed if our speed goes above then just set it back to max speed
-        if (xSpeed > 7) { //do negative and positive because we can go in both directions left or right
+        if (xSpeed > maxSpeed) { //do negative and positive because we can go in both directions left or right
             xSpeed = 7; //reset back to max
-        } else if (xSpeed < -7) {
+        } else if (xSpeed < -maxSpeed) {
             xSpeed = -7;//reset back to max
         }
 
@@ -167,6 +171,24 @@ public class Player extends GameCharacter {
     }
 
     /**
+     * getter for the xSpeed
+     *
+     * @return the xSpeed
+     */
+    public double getXSpeed() {
+        return xSpeed;
+    }
+
+    /**
+     * getter for y speed
+     *
+     * @return the ySpeed
+     */
+    public double getYSpeed() {
+        return ySpeed;
+    }
+
+    /**
      * getter for the x position at which the dino is always drawn at
      *
      * @return the screenXPosition
@@ -182,6 +204,24 @@ public class Player extends GameCharacter {
      */
     public static int getScreenYPosition() {
         return SCREENYPOSITION;
+    }
+
+    /**
+     * setter for x speed
+     *
+     * @param xSpeed - the new x speed
+     */
+    public void setXSpeed(double xSpeed) {
+        this.xSpeed = xSpeed;
+    }
+
+    /**
+     * setter for y speed
+     *
+     * @param ySpeed the new y speed
+     */
+    public void setYSpeed(double ySpeed) {
+        this.ySpeed = ySpeed;
     }
 
     /**
@@ -241,6 +281,24 @@ public class Player extends GameCharacter {
     }
 
     /**
+     * setter for the max speed
+     *
+     * @param maxSpeed the max speed of the player
+     */
+    public void setMaxSpeed(int maxSpeed) {
+        this.maxSpeed = maxSpeed;
+    }
+
+    /**
+     * getter for max speed of the player
+     *
+     * @return - the max speed
+     */
+    public int getMaxSpeed() {
+        return maxSpeed;
+    }
+
+    /**
      * a method that draws the amount of coins the player has as a string in the
      * upper right corner
      *
@@ -264,14 +322,6 @@ public class Player extends GameCharacter {
         for (int i = 10; i < (hearts * 23) + 10; i += 23) {
             g2d.drawImage(heartImage, i, 10, null);//draw the image at the right x position
         }
-    }
-
-    /**THIS TOSTRING TO NOT GOOD REFINE IT LATER
-     * toString method for player class
-     * @return - formatted string with all the informations about the player
-     */
-    public String toString() {
-        return "Player{" + "coins=" + coins + ", hearts=" + hearts + ", heartImage=" + heartImage + ", jumpHeight=" + jumpHeight + '}';
     }
 
 }
