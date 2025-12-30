@@ -208,7 +208,7 @@ public abstract class GameObject {
     /**
      * Abstract method that is supposed to clone the object
      *
-     * @return
+     * @return - copy of the object
      */
     public abstract GameObject clone();
 

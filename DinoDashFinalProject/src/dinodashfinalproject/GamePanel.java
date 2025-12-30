@@ -64,7 +64,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     Coin coins = new Coin(20, 291);
     Heart hearts = new Heart(60, 291);
     JumpPowerup powerup = new JumpPowerup(100, 291);
-    Player player = new Player();
+    Player player = new Player(0,0);
 
     /**
      * This method loads the titleFont from the file and turns it into a font

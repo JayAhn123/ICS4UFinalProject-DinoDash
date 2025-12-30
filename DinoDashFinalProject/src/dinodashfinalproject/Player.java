@@ -16,13 +16,11 @@ import javax.swing.ImageIcon;
  *
  * @author arbas
  */
-public class Player extends GameObject {
+public class Player extends GameCharacter {
 
     //attributes
     private static final int SCREENXPOSITION = 325;
     private static final int SCREENYPOSITION = 213;
-    double xSpeed = 0;
-    double ySpeed = 0;
     int coins;
     int hearts;
     Image heartImage;
@@ -31,9 +29,9 @@ public class Player extends GameObject {
     /**
      * primary constructor
      */
-    public Player() {
-        super(325, 213, 50, 100, "GroundImg"); //chain to superclass constructor
-        //no paramters needed ass dino will always start with default skin, at that
+    public Player(double xSpeed, double ySpeed) {
+        super(325, 213, 50, 100, "GroundImg", xSpeed, ySpeed); //chain to superclass constructor
+        //no paramters for position needed ass dino will always start with default skin, at that
         //x,y position and with that width and height
         coins = 0; //set other attributes to defualts
         hearts = 3;
@@ -48,7 +46,7 @@ public class Player extends GameObject {
      * @return - the cloned player
      */
     public Player clone() {
-        return new Player();//INCOMPLETE
+        return new Player(0, 0);//INCOMPLETE
     }
 
     /**
@@ -169,24 +167,6 @@ public class Player extends GameObject {
     }
 
     /**
-     * getter for the xSpeed
-     *
-     * @return the xSpeed
-     */
-    public double getXSpeed() {
-        return xSpeed;
-    }
-
-    /**
-     * getter for y speed
-     *
-     * @return the ySpeed
-     */
-    public double getYSpeed() {
-        return ySpeed;
-    }
-
-    /**
      * getter for the x position at which the dino is always drawn at
      *
      * @return the screenXPosition
@@ -202,24 +182,6 @@ public class Player extends GameObject {
      */
     public static int getScreenYPosition() {
         return SCREENYPOSITION;
-    }
-
-    /**
-     * setter for x speed
-     *
-     * @param xSpeed - the new x speed
-     */
-    public void setXSpeed(double xSpeed) {
-        this.xSpeed = xSpeed;
-    }
-
-    /**
-     * setter for y speed
-     *
-     * @param ySpeed the new y speed
-     */
-    public void setYSpeed(double ySpeed) {
-        this.ySpeed = ySpeed;
     }
 
     /**
@@ -302,6 +264,14 @@ public class Player extends GameObject {
         for (int i = 10; i < (hearts * 23) + 10; i += 23) {
             g2d.drawImage(heartImage, i, 10, null);//draw the image at the right x position
         }
+    }
+
+    /**THIS TOSTRING TO NOT GOOD REFINE IT LATER
+     * toString method for player class
+     * @return - formatted string with all the informations about the player
+     */
+    public String toString() {
+        return "Player{" + "coins=" + coins + ", hearts=" + hearts + ", heartImage=" + heartImage + ", jumpHeight=" + jumpHeight + '}';
     }
 
 }

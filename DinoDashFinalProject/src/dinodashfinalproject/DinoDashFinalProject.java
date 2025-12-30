@@ -1,8 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package dinodashfinalproject;
 
 //import Packages
@@ -10,9 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 
 
-/**
- *
- * @author JaAhn8882
+/* Jay Ahn, Araib Basit, Bernie Gao
+ * Dec 29 2025
+ * Main Class that displays the game
  */
 public class DinoDashFinalProject extends JFrame {
 
