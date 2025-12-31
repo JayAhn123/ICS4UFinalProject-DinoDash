@@ -213,4 +213,9 @@ public class Enemy extends GameObject {
         this.safeHitbox = safeHitbox;
     }
 
+    public void reset() {
+        visible = true;
+        health = 3;
+    }
+
 }

@@ -69,6 +69,7 @@ public class Player extends GameObject {
     int jumpAnimationCount;
     int moveAnimationCount;
     int idleAnimationCount;
+    boolean dead;
 
     /**
      * primary constructor
@@ -123,6 +124,7 @@ public class Player extends GameObject {
         jumpAnimationCount = 0;
         moveAnimationCount = 0;
         idleAnimationCount = 0;
+        dead = false;
     }
 
     /**
@@ -401,6 +403,12 @@ public class Player extends GameObject {
 
     }
 
+    public void checkDeath() {
+        if (hearts < 1 || y > 500) {
+            dead = true;
+        }
+    }
+
     /**
      * getter for the xSpeed
      *
@@ -553,6 +561,39 @@ public class Player extends GameObject {
         for (int i = 10; i < (hearts * 23) + 10; i += 23) {
             g2d.drawImage(heartImage, i, 10, null);//draw the image at the right x position
         }
+    }
+
+    /**
+     * method that returns a boolean true is dead false if not
+     *
+     * @return - a boolean true if dead false if alive
+     */
+    public boolean isDead() {
+        return dead;
+    }
+
+    /**
+     * method that sets whether or not the player is dead
+     *
+     * @param dead - true if dead false if not
+     *
+     */
+    public void setDead(boolean dead) {
+        this.dead = dead;//set variable
+    }
+
+    public void reset() {
+        dead = false;
+        hearts = 3;
+        xOffset = 0;
+        yOffset = 0;
+        setX(SCREENXPOSITION);
+        setY(SCREENYPOSITION);
+        xSpeed = 0;
+        ySpeed = 0;
+        airborne = false;
+        maxSpeed = 7;
+        jumpHeight = -6;
     }
 
 }

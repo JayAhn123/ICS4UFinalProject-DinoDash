@@ -56,6 +56,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     Button lvl4Button;
     Button lvl5Button;
     Button infiniteModeButton;
+    Button returnButton;
     Image titleScreenGround;
     private String gameState = "titleScreen";
 
@@ -65,7 +66,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     Heart hearts = new Heart(60, 291);
     JumpPowerup jumpPowerup = new JumpPowerup(100, 291);
     SpeedPowerup speedPowerup = new SpeedPowerup(140, 291);
-    Enemy enemy1 = new Enemy(700,266,500,1000);
+    Enemy enemy1 = new Enemy(700, 266, 500, 1000);
     Player player = new Player();
 
     /**
@@ -168,6 +169,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             GameObject.setXOffset(player.getX() - Player.getScreenXPosition());//update offsets after movement
             GameObject.setYOffset(player.getY() - Player.getScreenYPosition());
             player.draw(g2d);//draw player
+            player.checkDeath();
             player.drawHearts(g2d);//draw the amount of hearts th eplayer has
             player.drawCoins(g2d, infoTextFont);//draw the amount of couns the player has
             for (Ground groundTile : groundTiles) {//for each ground tile draw it
@@ -184,11 +186,19 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             enemy1.move();
             enemy1.draw(g2d);
             enemy1.collisionProcedure(player);
+            if (player.isDead()) {
+                gameState = "gameOver";
+            }
         } else if (gameState.equals("level2")) {
         } else if (gameState.equals("level3")) {
         } else if (gameState.equals("level4")) {
         } else if (gameState.equals("level5")) {
         } else if (gameState.equals("infiniteMode")) {
+        } else if (gameState.equals("gameOver")) {
+            g2d.setColor(Color.black);
+            g2d.setFont(titleFont);
+            g2d.drawString("You Died", 215, 200);
+            returnButton.draw(g2d, mouseX, mouseY);
         }
     }
 
@@ -237,7 +247,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         infiniteModeButton = new Button(290, 200, 120, 50, "infiniteModeButton", "infiniteModeButtonHover");
         //load image
         titleScreenGround = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/TitleImg.png")).getImage();
-
+        returnButton = new Button(300, 280, 100, 50, "returnButton", "returnButtonHover");
         //add to arraylist of test level
         groundTiles.add(new Ground(10, 316, 1050));
     }
@@ -373,6 +383,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             } else if (infiniteModeButton.wasClicked(mouseX, mouseY)) {
                 gameState = "infiniteMode";
             } else if (lvl1Button.wasClicked(mouseX, mouseY)) {
+                player.reset();
+                enemy1.reset();
+                coins.reset();
+                hearts.reset();
+                jumpPowerup.reset();
+                speedPowerup.reset();
                 gameState = "level1";
             } else if (lvl2Button.wasClicked(mouseX, mouseY)) {
                 gameState = "level2";
@@ -384,6 +400,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
                 gameState = "level5";
             }
 
+        } else if (gameState.equals("gameOver")) {
+            if (returnButton.wasClicked(mouseX, mouseY)) {
+                gameState = "levelSelectScreen";
+            }
         }
     }
 

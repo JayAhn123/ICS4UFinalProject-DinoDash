@@ -36,6 +36,11 @@ public abstract class GameItem extends GameObject {
     //abstract method for collisionsnd what happend when a collision happens
     public abstract void collisionProcedure(Player player);
 
+    public void reset() {
+        visible = true;
+    }
+
+
     /**
      * method that will draw the game item at the right spot
      *
