@@ -70,11 +70,11 @@ public class Enemy extends GameObject {
             if (player.hitbox.intersects(hitbox)) {
                 player.setHearts(player.getHearts() - 1);
                 if (player.getX() < x) {
-                    player.setX(player.getX() - 20);
-                    player.setXSpeed(-30);
+                    player.setX(player.getX() - 60);
+                    player.setXSpeed(-player.getMaxSpeed());
                 } else {
-                    player.setX(player.getX() + 20);
-                    player.setXSpeed(30);
+                    player.setX(player.getX() + 60);
+                    player.setXSpeed(player.getMaxSpeed());
                 }
             } else if (player.hitbox.intersects(safeHitbox)) {
                 health -= 1;
