@@ -65,6 +65,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     Heart hearts = new Heart(60, 291);
     JumpPowerup jumpPowerup = new JumpPowerup(100, 291);
     SpeedPowerup speedPowerup = new SpeedPowerup(140, 291);
+    Enemy enemy1 = new Enemy(700,266,500,1000);
     Player player = new Player();
 
     /**
@@ -180,6 +181,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             jumpPowerup.collisionProcedure(player);
             speedPowerup.draw(g2d);//draw test jump powerup
             speedPowerup.collisionProcedure(player);
+            enemy1.move();
+            enemy1.draw(g2d);
+            enemy1.collisionProcedure(player);
         } else if (gameState.equals("level2")) {
         } else if (gameState.equals("level3")) {
         } else if (gameState.equals("level4")) {
@@ -235,7 +239,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         titleScreenGround = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/TitleImg.png")).getImage();
 
         //add to arraylist of test level
-        groundTiles.add(new Ground(10, 316, 1000));
+        groundTiles.add(new Ground(10, 316, 1050));
     }
 
     /**

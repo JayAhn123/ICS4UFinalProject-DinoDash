@@ -322,9 +322,9 @@ public class Player extends GameObject {
         //since we add to xspeed when moving we need to put a limit otherwise we will infinitly get faster
         //s once we reach max speed if our speed goes above then just set it back to max speed
         if (xSpeed > maxSpeed) { //do negative and positive because we can go in both directions left or right
-            xSpeed = 7; //reset back to max
+            xSpeed = maxSpeed; //reset back to max
         } else if (xSpeed < -maxSpeed) {
-            xSpeed = -7;//reset back to max
+            xSpeed = -maxSpeed;//reset back to max
         }
 
         //then we check if the user wants to jump
