@@ -235,7 +235,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         titleScreenGround = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/TitleImg.png")).getImage();
 
         //add to arraylist of test level
-        groundTiles.add(new Ground(10, 316, 500));
+        groundTiles.add(new Ground(10, 316, 1000));
     }
 
     /**

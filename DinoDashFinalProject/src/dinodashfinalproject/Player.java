@@ -28,12 +28,53 @@ public class Player extends GameObject {
     Image heartImage;
     int jumpHeight;
     int maxSpeed;
+    Image rightStill1;
+    Image rightStill2;
+    Image rightStill3;
+    Image rightStill4;
+    Image rightStill5;
+    Image rightStill6;
+    Image rightStill7;
+    Image rightStill8;
+    Image rightRun1;
+    Image rightRun2;
+    Image rightRun3;
+    Image rightRun4;
+    Image rightRun5;
+    Image rightRun6;
+    Image rightRun7;
+    Image rightRun8;
+    Image rightJump1;
+    Image rightJump2;
+    Image leftStill1;
+    Image leftStill2;
+    Image leftStill3;
+    Image leftStill4;
+    Image leftStill5;
+    Image leftStill6;
+    Image leftStill7;
+    Image leftStill8;
+    Image leftRun1;
+    Image leftRun2;
+    Image leftRun3;
+    Image leftRun4;
+    Image leftRun5;
+    Image leftRun6;
+    Image leftRun7;
+    Image leftRun8;
+    Image leftJump1;
+    Image leftJump2;
+    boolean facingRight;
+    boolean airborne;
+    int jumpAnimationCount;
+    int moveAnimationCount;
+    int idleAnimationCount;
 
     /**
      * primary constructor
      */
     public Player() {
-        super(325, 213, 50, 100, "GroundImg"); //chain to superclass constructor
+        super(325, 213, 64, 64, "GroundImg"); //chain to superclass constructor
         //no paramters needed ass dino will always start with default skin, at that
         //x,y position and with that width and height
         coins = 0; //set other attributes to defualts
@@ -41,7 +82,47 @@ public class Player extends GameObject {
         heartImage = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/playerHeart.png")).getImage();
         jumpHeight = -6;
         maxSpeed = 7;
-
+        rightStill1 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur1.png")).getImage();
+        rightStill2 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur2.png")).getImage();
+        rightStill3 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur3.png")).getImage();
+        rightStill4 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur4.png")).getImage();
+        rightStill5 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur5.png")).getImage();
+        rightStill6 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur6.png")).getImage();
+        rightStill7 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur7.png")).getImage();
+        rightStill8 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur8.png")).getImage();
+        rightRun1 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur9.png")).getImage();
+        rightRun2 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur10.png")).getImage();
+        rightRun3 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur11.png")).getImage();
+        rightRun4 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur12.png")).getImage();
+        rightRun5 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur13.png")).getImage();
+        rightRun6 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur14.png")).getImage();
+        rightRun7 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur15.png")).getImage();
+        rightRun8 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur16.png")).getImage();
+        rightJump1 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur17.png")).getImage();
+        rightJump2 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur18.png")).getImage();
+        leftStill1 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur1Left.png")).getImage();
+        leftStill2 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur2Left.png")).getImage();
+        leftStill3 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur3Left.png")).getImage();
+        leftStill4 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur4Left.png")).getImage();
+        leftStill5 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur5Left.png")).getImage();
+        leftStill6 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur6Left.png")).getImage();
+        leftStill7 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur7Left.png")).getImage();
+        leftStill8 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur8Left.png")).getImage();
+        leftRun1 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur9Left.png")).getImage();
+        leftRun2 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur10Left.png")).getImage();
+        leftRun3 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur11Left.png")).getImage();
+        leftRun4 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur12Left.png")).getImage();
+        leftRun5 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur13Left.png")).getImage();
+        leftRun6 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur14Left.png")).getImage();
+        leftRun7 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur15Left.png")).getImage();
+        leftRun8 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur16Left.png")).getImage();
+        leftJump1 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur17Left.png")).getImage();
+        leftJump2 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur18Left.png")).getImage();
+        facingRight = true;
+        airborne = false;
+        jumpAnimationCount = 0;
+        moveAnimationCount = 0;
+        idleAnimationCount = 0;
     }
 
     /**
@@ -59,7 +140,150 @@ public class Player extends GameObject {
      * @param g2d - the graphics2D object to draw with
      */
     public void draw(Graphics2D g2d) {
-        g2d.fillRect(SCREENXPOSITION, SCREENYPOSITION, width, height);//incomplete placeholder rectangle currently
+        if (airborne) {
+            jumpAnimationCount++;
+            if (facingRight) {
+                if (jumpAnimationCount < 6) {
+                    g2d.drawImage(rightJump1, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                } else {
+                    g2d.drawImage(rightJump2, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                }
+            } else {
+                if (jumpAnimationCount < 6) {
+                    g2d.drawImage(leftJump1, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                } else {
+                    g2d.drawImage(leftJump2, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                }
+            }
+        } else {
+            if (xSpeed == 0) {
+
+                idleAnimationCount++;
+
+                if (idleAnimationCount >= 40) {
+                    idleAnimationCount = 0;
+                }
+
+                if (facingRight) {
+                    if (idleAnimationCount < 5) {
+                        g2d.drawImage(rightStill1, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    } else if (idleAnimationCount >= 5 && idleAnimationCount < 10) {
+                        g2d.drawImage(rightStill2, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    } else if (idleAnimationCount >= 10 && idleAnimationCount < 15) {
+                        g2d.drawImage(rightStill3, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    } else if (idleAnimationCount >= 15 && idleAnimationCount < 20) {
+                        g2d.drawImage(rightStill4, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    } else if (idleAnimationCount >= 20 && idleAnimationCount < 25) {
+                        g2d.drawImage(rightStill5, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    } else if (idleAnimationCount >= 25 && idleAnimationCount < 30) {
+                        g2d.drawImage(rightStill6, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    } else if (idleAnimationCount >= 30 && idleAnimationCount < 35) {
+                        g2d.drawImage(rightStill7, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    } else if (idleAnimationCount >= 35 && idleAnimationCount < 40) {
+                        g2d.drawImage(rightStill8, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    }
+                } else {
+                    if (idleAnimationCount < 5) {
+                        g2d.drawImage(leftStill1, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    } else if (idleAnimationCount >= 5 && idleAnimationCount < 10) {
+                        g2d.drawImage(leftStill2, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    } else if (idleAnimationCount >= 10 && idleAnimationCount < 15) {
+                        g2d.drawImage(leftStill3, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    } else if (idleAnimationCount >= 15 && idleAnimationCount < 20) {
+                        g2d.drawImage(leftStill4, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    } else if (idleAnimationCount >= 20 && idleAnimationCount < 25) {
+                        g2d.drawImage(leftStill5, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    } else if (idleAnimationCount >= 25 && idleAnimationCount < 30) {
+                        g2d.drawImage(leftStill6, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    } else if (idleAnimationCount >= 30 && idleAnimationCount < 35) {
+                        g2d.drawImage(leftStill7, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    } else if (idleAnimationCount >= 35 && idleAnimationCount < 40) {
+                        g2d.drawImage(leftStill8, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    }
+                }
+
+            } else {
+                moveAnimationCount++;
+
+                if (moveAnimationCount >= 40) {
+                    moveAnimationCount = 0;
+                }
+
+                if (facingRight) {
+                    if (moveAnimationCount < 5) {
+                        g2d.drawImage(rightRun1, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    } else if (moveAnimationCount >= 5 && moveAnimationCount < 10) {
+                        g2d.drawImage(rightRun2, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    } else if (moveAnimationCount >= 10 && moveAnimationCount < 15) {
+                        g2d.drawImage(rightRun3, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    } else if (moveAnimationCount >= 15 && moveAnimationCount < 20) {
+                        g2d.drawImage(rightRun4, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    } else if (moveAnimationCount >= 20 && moveAnimationCount < 25) {
+                        g2d.drawImage(rightRun5, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    } else if (moveAnimationCount >= 25 && moveAnimationCount < 30) {
+                        g2d.drawImage(rightRun6, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    } else if (moveAnimationCount >= 30 && moveAnimationCount < 35) {
+                        g2d.drawImage(rightRun7, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    } else if (moveAnimationCount >= 35 && moveAnimationCount < 40) {
+                        g2d.drawImage(rightRun8, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    }
+                } else {
+                    if (moveAnimationCount < 5) {
+                        g2d.drawImage(leftRun1, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    } else if (moveAnimationCount >= 5 && moveAnimationCount < 10) {
+                        g2d.drawImage(leftRun2, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    } else if (moveAnimationCount >= 10 && moveAnimationCount < 15) {
+                        g2d.drawImage(leftRun3, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    } else if (moveAnimationCount >= 15 && moveAnimationCount < 20) {
+                        g2d.drawImage(leftRun4, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    } else if (moveAnimationCount >= 20 && moveAnimationCount < 25) {
+                        g2d.drawImage(leftRun5, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    } else if (moveAnimationCount >= 25 && moveAnimationCount < 30) {
+                        g2d.drawImage(leftRun6, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    } else if (moveAnimationCount >= 30 && moveAnimationCount < 35) {
+                        g2d.drawImage(leftRun7, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    } else if (moveAnimationCount >= 35 && moveAnimationCount < 40) {
+                        g2d.drawImage(leftRun8, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -80,10 +304,12 @@ public class Player extends GameObject {
             //if left is pressed lower x speed by 1 to move left by becomeing a negative xspeed which we add to 
             //our x location 
             xSpeed--;
+            facingRight = false;//update direction faced
         } else if (right_pressed) {
             //if right is pressed increase our x speed to add to our x position as 
             //increasing our x position make the dino move to the right
             xSpeed++;
+            facingRight = true;//update direction faced
         }
 
         //to prevent sliding when not moving if our x speed become small enough in either direction the make it 0
@@ -111,6 +337,7 @@ public class Player extends GameObject {
             for (Ground groundTile : groundTiles) {
                 if (groundTile.hitbox.intersects(hitbox)) {
                     ySpeed = jumpHeight;//if they do intersect set y speed to -6 so we jump
+                    airborne = true; //set airborne to true because we are now in air and need to do air animation
                 }
             }
             //then once we are done checking put the hitbox back to the right spot
@@ -158,6 +385,10 @@ public class Player extends GameObject {
                     hitbox.y += Math.signum(ySpeed);
                 }
                 hitbox.y -= Math.signum(ySpeed);
+                if (ySpeed > 0) {
+                    airborne = false;//rset airborne to false and reset animation counter
+                    jumpAnimationCount = 0;
+                }
                 ySpeed = 0;
                 y = hitbox.y;
             }
