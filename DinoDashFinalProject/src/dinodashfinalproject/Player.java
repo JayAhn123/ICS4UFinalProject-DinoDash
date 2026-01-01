@@ -81,7 +81,7 @@ public class Player extends GameObject {
         coins = 0; //set other attributes to defualts
         hearts = 3;
         heartImage = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/playerHeart.png")).getImage();
-        jumpHeight = -6;
+        jumpHeight = -10;
         maxSpeed = 7;
         rightStill1 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur1.png")).getImage();
         rightStill2 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur2.png")).getImage();
@@ -593,7 +593,7 @@ public class Player extends GameObject {
         ySpeed = 0;
         airborne = false;
         maxSpeed = 7;
-        jumpHeight = -6;
+        jumpHeight = -10;
     }
 
 }

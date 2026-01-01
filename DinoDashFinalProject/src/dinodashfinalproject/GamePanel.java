@@ -61,13 +61,18 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     private String gameState = "titleScreen";
 
     //variables for testing
-    ArrayList<Ground> groundTiles = new ArrayList();
-    Coin coins = new Coin(20, 291);
-    Heart hearts = new Heart(60, 291);
-    JumpPowerup jumpPowerup = new JumpPowerup(100, 291);
-    SpeedPowerup speedPowerup = new SpeedPowerup(140, 291);
-    Enemy enemy1 = new Enemy(700, 266, 500, 1000);
+    ArrayList<Ground> groundLevel1 = new ArrayList();
+    ArrayList<GameItem> itemLevel1 = new ArrayList();
+    ArrayList<GameItem> tempItemLevel1 = new ArrayList();
+    ArrayList<Enemy> enemyLevel1 = new ArrayList();
     Player player = new Player();
+
+    //infinite mode
+    ArrayList<Ground> groundLevel6 = new ArrayList();
+    ArrayList<GameItem> itemLevel6 = new ArrayList();
+    ArrayList<GameItem> tempItemLevel6 = new ArrayList();
+    ArrayList<Enemy> enemyLevel6 = new ArrayList();
+    ArrayList<Enemy> enemyToRemove = new ArrayList();
 
     /**
      * This method loads the titleFont from the file and turns it into a font
@@ -164,36 +169,23 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             infiniteModeButton.draw(g2d, mouseX, mouseY);
 
         } else if (gameState.equals("level1")) {
-            //test level
-            player.move(up_pressed, down_pressed, left_pressed, right_pressed, groundTiles); //move player
-            GameObject.setXOffset(player.getX() - Player.getScreenXPosition());//update offsets after movement
-            GameObject.setYOffset(player.getY() - Player.getScreenYPosition());
-            player.draw(g2d);//draw player
-            player.checkDeath();
-            player.drawHearts(g2d);//draw the amount of hearts th eplayer has
-            player.drawCoins(g2d, infoTextFont);//draw the amount of couns the player has
-            for (Ground groundTile : groundTiles) {//for each ground tile draw it
-                groundTile.draw(g2d);
-            }
-            coins.draw(g2d);//draw the test coind and do its collision procedure
-            coins.collisionProcedure(player);
-            hearts.draw(g2d);//drae test heart
-            hearts.collisionProcedure(player);
-            jumpPowerup.draw(g2d);//draw test jump powerup
-            jumpPowerup.collisionProcedure(player);
-            speedPowerup.draw(g2d);//draw test jump powerup
-            speedPowerup.collisionProcedure(player);
-            enemy1.move();
-            enemy1.draw(g2d);
-            enemy1.collisionProcedure(player);
-            if (player.isDead()) {
-                gameState = "gameOver";
-            }
+
+            playLevel(g2d, groundLevel1, itemLevel1, tempItemLevel1, enemyLevel1);
+
         } else if (gameState.equals("level2")) {
         } else if (gameState.equals("level3")) {
         } else if (gameState.equals("level4")) {
         } else if (gameState.equals("level5")) {
         } else if (gameState.equals("infiniteMode")) {
+
+            enemyLevel6.removeAll(enemyToRemove);
+
+            if (enemyLevel6.size() < 5) {
+                enemyLevel6.add(new Enemy((int) (Math.random() * 950) - 100, 270, -100, 850));
+            }
+
+            playLevel(g2d, groundLevel6, itemLevel6, tempItemLevel6, enemyLevel6);
+
         } else if (gameState.equals("gameOver")) {
             g2d.setColor(Color.black);
             g2d.setFont(titleFont);
@@ -249,7 +241,17 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         titleScreenGround = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/TitleImg.png")).getImage();
         returnButton = new Button(300, 280, 100, 50, "returnButton", "returnButtonHover");
         //add to arraylist of test level
-        groundTiles.add(new Ground(10, 316, 1050));
+        groundLevel1.add(new Ground(10, 316, 1050));
+        itemLevel1.add(new Coin(20, 291));
+        itemLevel1.add(new Heart(60, 291));
+        itemLevel1.add(new JumpPowerup(100, 291));
+        itemLevel1.add(new SpeedPowerup(140, 291));
+        enemyLevel1.add(new Enemy(700, 266, 500, 1000));
+
+        groundLevel6.add(new Ground(-100, 320, 1000));
+        groundLevel6.add(new Ground(350, 100, 100));
+        groundLevel6.add(new Ground(100, 170, 50));
+        groundLevel6.add(new Ground(650, 170, 50));
     }
 
     /**
@@ -381,14 +383,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             if (backButton.wasClicked(mouseX, mouseY)) {
                 gameState = "titleScreen";
             } else if (infiniteModeButton.wasClicked(mouseX, mouseY)) {
+                resetLevel(itemLevel6, tempItemLevel6, enemyLevel6);
+                enemyLevel6.clear();
                 gameState = "infiniteMode";
             } else if (lvl1Button.wasClicked(mouseX, mouseY)) {
-                player.reset();
-                enemy1.reset();
-                coins.reset();
-                hearts.reset();
-                jumpPowerup.reset();
-                speedPowerup.reset();
+                resetLevel(itemLevel1, tempItemLevel1, enemyLevel1);
                 gameState = "level1";
             } else if (lvl2Button.wasClicked(mouseX, mouseY)) {
                 gameState = "level2";
@@ -438,5 +437,46 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     public void mouseMoved(MouseEvent e) {
         mouseX = e.getX(); //update the location
         mouseY = e.getY();
+    }
+
+    public void resetLevel(ArrayList<GameItem> itemLevel, ArrayList<GameItem> tempItemLevel, ArrayList<Enemy> enemyLevel) {
+        player.reset();
+        tempItemLevel.clear();
+        for (GameItem gameItem : itemLevel) {
+            gameItem.reset();
+        }
+        for (Enemy enemy : enemyLevel) {
+            enemy.reset();
+        }
+    }
+
+    public void playLevel(Graphics2D g2d, ArrayList<Ground> groundLevel, ArrayList<GameItem> itemLevel, ArrayList<GameItem> tempItemLevel, ArrayList<Enemy> enemyLevel) {
+        //test level
+        player.move(up_pressed, down_pressed, left_pressed, right_pressed, groundLevel); //move player
+        GameObject.setXOffset(player.getX() - Player.getScreenXPosition());//update offsets after movement
+        GameObject.setYOffset(player.getY() - Player.getScreenYPosition());
+        player.draw(g2d);//draw player
+        player.checkDeath();
+        player.drawHearts(g2d);//draw the amount of hearts th eplayer has
+        player.drawCoins(g2d, infoTextFont);//draw the amount of couns the player has
+        for (Ground groundTile : groundLevel) {//for each ground tile draw it
+            groundTile.draw(g2d);
+        }
+        for (GameItem gameItem : itemLevel) {
+            gameItem.draw(g2d);
+            gameItem.collisionProcedure(player);
+        }
+        for (GameItem gameItem : tempItemLevel) {
+            gameItem.draw(g2d);
+            gameItem.collisionProcedure(player);
+        }
+        for (Enemy enemy : enemyLevel) {
+            enemy.move();
+            enemy.draw(g2d);
+            enemy.collisionProcedure(player, tempItemLevel, gameState, enemyToRemove);
+        }
+        if (player.isDead()) {
+            gameState = "gameOver";
+        }
     }
 }

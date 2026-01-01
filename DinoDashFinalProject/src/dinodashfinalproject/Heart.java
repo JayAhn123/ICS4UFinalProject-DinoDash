@@ -29,7 +29,9 @@ public class Heart extends GameItem {
     public void collisionProcedure(Player player) {
         if (visible) {//check only if its visible
             if (player.hitbox.intersects(hitbox)) {//check if they collide
-                player.setHearts(player.getHearts() + 1);//if they do add 1 to player heart count
+                if (player.getHearts() < 5) {
+                    player.setHearts(player.getHearts() + 1);//if they do add 1 to player heart count
+                }
                 visible = false;//set visible to false if they collect the heart
             }
         }

@@ -7,6 +7,7 @@ package dinodashfinalproject;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 /**
@@ -14,7 +15,7 @@ import javax.swing.ImageIcon;
  * @author mubas
  */
 public class Enemy extends GameObject {
-
+    
     boolean visible;
     int startXRange;
     int endXRange;
@@ -22,7 +23,7 @@ public class Enemy extends GameObject {
     int health;
     Rectangle safeHitbox;
     Image leftImage;
-
+    
     public Enemy(int x, int y, int startXRange, int endXRange) {
         super(x, y, 50, 50, "EnemyRight");
         visible = true;
@@ -31,7 +32,7 @@ public class Enemy extends GameObject {
         health = 3;
         xSpeed = 4;
         safeHitbox = new Rectangle(x + 3, y, width - 6, 10);
-        hitbox = new Rectangle(x, y + 10, width, 40);
+        hitbox = new Rectangle(x, y + 11, width, 39);
         leftImage = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/EnemyLeft.png")).getImage();
     }
 
@@ -51,21 +52,21 @@ public class Enemy extends GameObject {
             }
         }
     }
-
+    
     public void move() {
         x += xSpeed;
-
+        
         if (x > endXRange) {
             xSpeed = -xSpeed;
         } else if (x < startXRange) {
             xSpeed = -xSpeed;
         }
-
+        
         safeHitbox.x = x + 3;
         hitbox.x = x;
     }
-
-    public void collisionProcedure(Player player) {
+    
+    public void collisionProcedure(Player player, ArrayList<GameItem> tempItem, String gameState, ArrayList<Enemy> enemyToRemove) {
         if (visible) {
             if (player.hitbox.intersects(hitbox)) {
                 player.setHearts(player.getHearts() - 1);
@@ -82,11 +83,25 @@ public class Enemy extends GameObject {
                 if (health == 0) {
                     visible = false;
                     //run enemy drop
+                    int chance = (int) (Math.random() * 20);
+                    if (chance == 5 || chance == 6 || chance == 7 || chance == 3) {
+                        tempItem.add(new Coin(x, y + 24));
+                    } else if (chance == 2) {
+                        tempItem.add(new Heart(x, y + 24));
+                    } else if (chance == 8) {
+                        tempItem.add(new JumpPowerup(x, y + 24));
+                    } else if (chance == 4) {
+                        tempItem.add(new SpeedPowerup(x, y + 24));
+                    }
+                    
+                    if (gameState.equals("infiniteMode")) {
+                        enemyToRemove.add(this);
+                    }
                 }
             }
         }
     }
-
+    
     public GameObject clone() {
         return new Enemy(x, y, startXRange, endXRange);
 
@@ -212,10 +227,10 @@ public class Enemy extends GameObject {
     public void setSafeHitbox(Rectangle safeHitbox) {
         this.safeHitbox = safeHitbox;
     }
-
+    
     public void reset() {
         visible = true;
         health = 3;
     }
-
+    
 }

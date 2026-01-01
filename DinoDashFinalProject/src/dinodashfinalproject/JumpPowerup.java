@@ -34,12 +34,12 @@ public class JumpPowerup extends GameItem {
     public void collisionProcedure(Player player) {
         if (visible) { // if its visible and has not been collected yet
             if (player.hitbox.intersects(hitbox)) {//check if they collide
-                player.setJumpHeight(-9);//if they do make the player jump higher
+                player.setJumpHeight(-13);//if they do make the player jump higher
                 startTime = System.nanoTime();//get the start time of the when the powerup started
                 visible = false;//set visible to false
             }
 
-        } else if (!visible && player.getJumpHeight() != -6) {//if its not visible which means it has already been collected
+        } else if (!visible && player.getJumpHeight() != -10) {//if its not visible which means it has already been collected
             //and the player jump hieght has not already been reset back then this runs
 
             //get current time
@@ -48,7 +48,7 @@ public class JumpPowerup extends GameItem {
             timeActivated = currentTime - startTime;
             //if it  is more than 5 seconds
             if (timeActivated / 100000000 > 50) {
-                player.setJumpHeight(-6);//reset jump heigh back to normal
+                player.setJumpHeight(-10);//reset jump heigh back to normal
             }
         }
     }
