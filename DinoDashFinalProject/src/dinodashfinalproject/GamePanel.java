@@ -151,7 +151,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             g2d.drawString("- In the game, press P to pause the game", 35, 195);
 
             g2d.drawString("There are 3 powerups that can be found in the game which will either:", 25, 235);
-            g2d.drawString("- Extra Heart: Gives one more life", 35, 255);
+            g2d.drawString("- Extra Heart: Gives one more life (Max Heart is 5)", 35, 255);
             g2d.drawString("- High Jump: Makes dinosaur jump higher", 35, 275);
             g2d.drawString("- Speed Boost: Makes dinosaur run faster", 35, 295);
             g2d.drawString("Shop: purchase or equip unlocked skins", 25, 335);
