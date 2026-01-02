@@ -144,15 +144,19 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             g2d.drawString("Welcome to Dino Dash", 170, 30);
             g2d.setFont(infoTextFont);//switch font and show rest of info
             g2d.drawString("There are two modes: Infinite mode and level mode.", 25, 75);
-            g2d.drawString("In level mode the goal is to reach the end of the level without dying", 35, 95);
-            g2d.drawString("In infinite mode the goal is to defeat as many enemies as you can without dying", 35, 115);
-            g2d.drawString("Use WASD to move and press P to pause", 25, 155);
-            g2d.drawString("You can buy new skins in the shop with coins you collect from the game", 25, 195);
-            g2d.drawString("There are powerups you can get in the game which will either:", 25, 235);
-            g2d.drawString("Give you a heart back", 35, 255);
-            g2d.drawString("Make you jump higher", 35, 275);
-            g2d.drawString("Make you run faster", 35, 295);
+            g2d.drawString("- In level mode the goal is to reach the end of the level without dying", 35, 95);
+            g2d.drawString("- In infinite mode the goal is to defeat as many enemies as you can without dying", 35, 115);
+            g2d.drawString("Game Tutorial:", 25, 155);
+            g2d.drawString("- A to move left, D to move right and W to jump", 35, 175);
+            g2d.drawString("- In the game, press P to pause the game", 35, 195);
 
+            g2d.drawString("There are 3 powerups that can be found in the game which will either:", 25, 235);
+            g2d.drawString("- Extra Heart: Gives one more life", 35, 255);
+            g2d.drawString("- High Jump: Makes dinosaur jump higher", 35, 275);
+            g2d.drawString("- Speed Boost: Makes dinosaur run faster", 35, 295);
+            g2d.drawString("Shop: purchase or equip unlocked skins", 25, 335);
+            g2d.drawString("- Purchase new skins using coins, they are obtainable through all the modes", 25, 355);
+            g2d.drawString("TIP: Infinite mode is more effective when it comes to collecting lots of coins", 25, 375);
         } else if (gameState.equals("levelSelectScreen")) {
             //draw the back button
             backButton.draw(g2d, mouseX, mouseY);
