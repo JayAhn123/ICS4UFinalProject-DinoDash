@@ -84,7 +84,7 @@ public class Enemy extends GameObject {
                     visible = false;
                     //run enemy drop
                     int chance = (int) (Math.random() * 20);
-                    if (chance == 5 || chance == 6 || chance == 7 || chance == 3) {
+                    if (chance >=11 && chance <= 19) {
                         tempItem.add(new Coin(x, y + 24));
                     } else if (chance == 2) {
                         tempItem.add(new Heart(x, y + 24));

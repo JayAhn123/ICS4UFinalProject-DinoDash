@@ -70,6 +70,7 @@ public class Player extends GameObject {
     int moveAnimationCount;
     int idleAnimationCount;
     boolean dead;
+    boolean win;
 
     /**
      * primary constructor
@@ -125,6 +126,7 @@ public class Player extends GameObject {
         moveAnimationCount = 0;
         idleAnimationCount = 0;
         dead = false;
+        win = false;
     }
 
     /**
@@ -401,10 +403,17 @@ public class Player extends GameObject {
         x = hitbox.x;
         y = hitbox.y;
 
+        for (Ground groundTile : groundTiles) {
+            hitbox.y++;
+            if (groundTile.isWinBlock() && groundTile.hitbox.intersects(hitbox)) {
+                win = true;
+            }
+            hitbox.y--;
+        }
     }
 
     public void checkDeath() {
-        if (hearts < 1 || y > 500) {
+        if (hearts < 1 || y > 600) {
             dead = true;
         }
     }
@@ -582,8 +591,28 @@ public class Player extends GameObject {
         this.dead = dead;//set variable
     }
 
+    /**
+     * method that returns a boolean true is the player won false if not
+     *
+     * @return - a boolean true if the player won false if not
+     */
+    public boolean isWin() {
+        return win;
+    }
+
+    /**
+     * method that sets whether or not the player won
+     *
+     * @param win - true if won false if not
+     *
+     */
+    public void setWin(boolean win) {
+        this.win = win;//set variable
+    }
+
     public void reset() {
         dead = false;
+        win = false;
         hearts = 3;
         xOffset = 0;
         yOffset = 0;

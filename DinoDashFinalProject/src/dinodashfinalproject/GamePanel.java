@@ -57,6 +57,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     Button lvl5Button;
     Button infiniteModeButton;
     Button returnButton;
+    Button continueButton;
     Image titleScreenGround;
     private String gameState = "titleScreen";
 
@@ -185,7 +186,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             enemyLevel6.removeAll(enemyToRemove);
 
             if (enemyLevel6.size() < 5) {
-                enemyLevel6.add(new Enemy((int) (Math.random() * 950) - 100, 270, -100, 850));
+                enemyLevel6.add(new Enemy((int) (Math.random() * 950) - 100, 475, -100, 850));
             }
 
             playLevel(g2d, groundLevel6, itemLevel6, tempItemLevel6, enemyLevel6);
@@ -195,6 +196,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             g2d.setFont(titleFont);
             g2d.drawString("You Died", 215, 200);
             returnButton.draw(g2d, mouseX, mouseY);
+        } else if (gameState.equals("win")) {
+            g2d.setColor(Color.black);
+            g2d.setFont(titleFont);
+            g2d.drawString("You Won", 215, 200);
+            continueButton.draw(g2d, mouseX, mouseY);
         }
     }
 
@@ -244,18 +250,20 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         //load image
         titleScreenGround = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/TitleImg.png")).getImage();
         returnButton = new Button(300, 280, 100, 50, "returnButton", "returnButtonHover");
+        continueButton = new Button(300, 280, 100, 50, "continueButton", "continueButtonHover");
         //add to arraylist of test level
-        groundLevel1.add(new Ground(10, 316, 1050));
+        groundLevel1.add(new Ground(10, 316, 1050, false));
+        groundLevel1.add(new Ground(1050, 316, 50, true));
         itemLevel1.add(new Coin(20, 291));
         itemLevel1.add(new Heart(60, 291));
         itemLevel1.add(new JumpPowerup(100, 291));
         itemLevel1.add(new SpeedPowerup(140, 291));
         enemyLevel1.add(new Enemy(700, 266, 500, 1000));
 
-        groundLevel6.add(new Ground(-100, 320, 1000));
-        groundLevel6.add(new Ground(350, 100, 100));
-        groundLevel6.add(new Ground(100, 170, 50));
-        groundLevel6.add(new Ground(650, 170, 50));
+        groundLevel6.add(new Ground(-110, 525, 1000, false));
+        groundLevel6.add(new Ground(340, 290, 100, false));
+        groundLevel6.add(new Ground(90, 360, 50, false));
+        groundLevel6.add(new Ground(640, 360, 50, false));
     }
 
     /**
@@ -407,6 +415,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             if (returnButton.wasClicked(mouseX, mouseY)) {
                 gameState = "levelSelectScreen";
             }
+        } else if (gameState.equals("win")) {
+            if (continueButton.wasClicked(mouseX, mouseY)) {
+                gameState = "levelSelectScreen";
+            }
         }
     }
 
@@ -481,6 +493,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         }
         if (player.isDead()) {
             gameState = "gameOver";
+        }
+        if (player.isWin()) {
+            gameState = "win";
         }
     }
 }
