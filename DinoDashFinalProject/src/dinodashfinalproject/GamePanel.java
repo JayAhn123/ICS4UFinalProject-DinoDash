@@ -34,6 +34,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     private final int DELAY = 20;
     private final Color lightBlue = new Color(143, 217, 251);
     private final Color darkGreen = new Color(66, 165, 70);
+    private final Color brown = new Color(175, 87, 14);
     private final Font titleFont = loadTitleFont((float) 80);
     private final Font headerFont = titleFont.deriveFont((float) 40);
     private final Font infoTextFont = titleFont.deriveFont((float) 18);
@@ -57,9 +58,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     Button lvl5Button;
     Button infiniteModeButton;
     Button returnButton;
+    Button quitButton;
     Button continueButton;
     Image titleScreenGround;
     private String gameState = "titleScreen";
+    boolean pause;
 
     //variables for testing
     ArrayList<Ground> groundLevel1 = new ArrayList();
@@ -251,6 +254,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         titleScreenGround = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/TitleImg.png")).getImage();
         returnButton = new Button(300, 280, 100, 50, "returnButton", "returnButtonHover");
         continueButton = new Button(300, 280, 100, 50, "continueButton", "continueButtonHover");
+        quitButton = new Button(300, 280, 100, 50, "quitButton", "quitButtonHover");
+        pause = false;
         //add to arraylist of test level
         groundLevel1.add(new Ground(10, 316, 1050, false));
         groundLevel1.add(new Ground(1050, 316, 50, true));
@@ -346,6 +351,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             down_pressed = false;
         } else if (e.getKeyChar() == 'd') {
             right_pressed = false;
+        } else if (e.getKeyChar() == 'p' && (gameState.equals("level1") || gameState.equals("level2") || gameState.equals("level3") || gameState.equals("level4") || gameState.equals("level5") || gameState.equals("infiniteMode"))) {
+            if (pause) {
+                pause = false;
+            } else {
+                pause = true;
+            }
         }
     }
 
@@ -419,6 +430,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             if (continueButton.wasClicked(mouseX, mouseY)) {
                 gameState = "levelSelectScreen";
             }
+        } else if (pause && (gameState.equals("level1") || gameState.equals("level2") || gameState.equals("level3") || gameState.equals("level4") || gameState.equals("level5") || gameState.equals("infiniteMode"))) {
+            if (quitButton.wasClicked(mouseX, mouseY)) {
+                gameState = "levelSelectScreen";
+            }
         }
     }
 
@@ -464,15 +479,18 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         for (Enemy enemy : enemyLevel) {
             enemy.reset();
         }
+        pause = false;
     }
 
     public void playLevel(Graphics2D g2d, ArrayList<Ground> groundLevel, ArrayList<GameItem> itemLevel, ArrayList<GameItem> tempItemLevel, ArrayList<Enemy> enemyLevel) {
         //test level
-        player.move(up_pressed, down_pressed, left_pressed, right_pressed, groundLevel); //move player
-        GameObject.setXOffset(player.getX() - Player.getScreenXPosition());//update offsets after movement
-        GameObject.setYOffset(player.getY() - Player.getScreenYPosition());
-        player.draw(g2d);//draw player
-        player.checkDeath();
+        if (!pause) {
+            player.move(up_pressed, down_pressed, left_pressed, right_pressed, groundLevel); //move player
+            GameObject.setXOffset(player.getX() - Player.getScreenXPosition());//update offsets after movement
+            GameObject.setYOffset(player.getY() - Player.getScreenYPosition());
+            player.checkDeath();
+        }
+        player.draw(g2d, pause);//draw player
         player.drawHearts(g2d);//draw the amount of hearts th eplayer has
         player.drawCoins(g2d, infoTextFont);//draw the amount of couns the player has
         for (Ground groundTile : groundLevel) {//for each ground tile draw it
@@ -487,7 +505,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             gameItem.collisionProcedure(player);
         }
         for (Enemy enemy : enemyLevel) {
-            enemy.move();
+            if (!pause) {
+                enemy.move();
+            }
             enemy.draw(g2d);
             enemy.collisionProcedure(player, tempItemLevel, gameState, enemyToRemove);
         }
@@ -496,6 +516,15 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         }
         if (player.isWin()) {
             gameState = "win";
+        }
+
+        if (pause) {
+            g2d.setColor(brown);
+            g2d.fillRect(70, 47, 550, 400);
+            g2d.setColor(Color.black);
+            g2d.setFont(titleFont);
+            g2d.drawString("Paused", 230, 110);
+            quitButton.draw(g2d, mouseX, mouseY);
         }
     }
 }

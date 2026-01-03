@@ -142,10 +142,13 @@ public class Player extends GameObject {
      * method that draws player to screen
      *
      * @param g2d - the graphics2D object to draw with
+     * @param pause - if they game is pause or not
      */
-    public void draw(Graphics2D g2d) {
+    public void draw(Graphics2D g2d, boolean pause) {
         if (airborne) {
-            jumpAnimationCount++;
+            if (!pause) {
+                jumpAnimationCount++;
+            }
             if (facingRight) {
                 if (jumpAnimationCount < 6) {
                     g2d.drawImage(rightJump1, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
@@ -165,8 +168,9 @@ public class Player extends GameObject {
             }
         } else {
             if (xSpeed == 0) {
-
-                idleAnimationCount++;
+                if (!pause) {
+                    idleAnimationCount++;
+                }
 
                 if (idleAnimationCount >= 40) {
                     idleAnimationCount = 0;
@@ -227,7 +231,9 @@ public class Player extends GameObject {
                 }
 
             } else {
-                moveAnimationCount++;
+                if (!pause) {
+                    moveAnimationCount++;
+                }
 
                 if (moveAnimationCount >= 40) {
                     moveAnimationCount = 0;
