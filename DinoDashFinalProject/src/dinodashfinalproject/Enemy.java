@@ -79,7 +79,7 @@ public class Enemy extends GameObject {
                 }
             } else if (player.hitbox.intersects(safeHitbox)) {
                 health -= 1;
-                player.setYSpeed(-3);
+                player.setYSpeed(-5);
                 if (health == 0) {
                     visible = false;
                     //run enemy drop

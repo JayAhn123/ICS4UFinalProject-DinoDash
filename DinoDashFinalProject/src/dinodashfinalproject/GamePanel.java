@@ -20,6 +20,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
@@ -63,6 +64,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     Image titleScreenGround;
     private String gameState = "titleScreen";
     boolean pause;
+    String name;
+    int score;
 
     //variables for testing
     ArrayList<Ground> groundLevel1 = new ArrayList();
@@ -190,6 +193,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 
             if (enemyLevel6.size() < 5) {
                 enemyLevel6.add(new Enemy((int) (Math.random() * 950) - 100, 475, -100, 850));
+                score++;
             }
 
             playLevel(g2d, groundLevel6, itemLevel6, tempItemLevel6, enemyLevel6);
@@ -408,6 +412,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             } else if (infiniteModeButton.wasClicked(mouseX, mouseY)) {
                 resetLevel(itemLevel6, tempItemLevel6, enemyLevel6);
                 enemyLevel6.clear();
+                score = 0;
+                name = JOptionPane.showInputDialog("What is your name?");
                 gameState = "infiniteMode";
             } else if (lvl1Button.wasClicked(mouseX, mouseY)) {
                 resetLevel(itemLevel1, tempItemLevel1, enemyLevel1);
@@ -512,6 +518,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             enemy.collisionProcedure(player, tempItemLevel, gameState, enemyToRemove);
         }
         if (player.isDead()) {
+            if (gameState.equals("infiniteMode")) {
+                saveScore();
+            }
             gameState = "gameOver";
         }
         if (player.isWin()) {
@@ -525,6 +534,22 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             g2d.setFont(titleFont);
             g2d.drawString("Paused", 230, 110);
             quitButton.draw(g2d, mouseX, mouseY);
+        }
+    }
+
+    public void saveScore() {
+        try {
+            // Create a FileWriter object
+            // to write in the file
+            FileWriter fWriter = new FileWriter("src/dinodashfinalproject/Scores.txt", true);
+
+            // Writing into file
+            fWriter.write("\n" + name + "\n" + (score - 5));
+
+            // Closing the file writing connection
+            fWriter.close();
+        } catch (IOException e) {
+            System.out.println("Error: " + e);
         }
     }
 }
