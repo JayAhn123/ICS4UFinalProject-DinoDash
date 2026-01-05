@@ -130,11 +130,18 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             //draw ground
             g2d.drawImage(titleScreenGround, 0, 390, null);
         } else if (gameState.equals("shopScreen")) {
+            g2d.setColor(darkGreen);//sets color to dark green
+            //draws a box that shows the amount of coin user has
+            g2d.fillRect(435, 415, 165, 50);
             //draw background rectangles for skins
-            g2d.setColor(darkGreen);
             g2d.fillRect(100, 100, 100, 150);
             g2d.fillRect(300, 100, 100, 150);
             g2d.fillRect(500, 100, 100, 150);
+            //draws String that indicates user's coin
+            g2d.setFont(headerFont);//sets font
+            g2d.setColor(Color.black);//sets color
+            g2d.drawRect(434,414,165,50);//draws border for the coin box
+            g2d.drawString("Coin: " + player.getCoins(), 450, 450);//draws amount of user's coins
             //draw the buttons to buy the skins
             equipSkin1Button.draw(g2d, mouseX, mouseY);
             buySkin2Button.draw(g2d, mouseX, mouseY);
@@ -261,13 +268,17 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         quitButton = new Button(300, 280, 100, 50, "quitButton", "quitButtonHover");
         pause = false;
         //add to arraylist of test level
-        groundLevel1.add(new Ground(10, 316, 1050, false));
-        groundLevel1.add(new Ground(1050, 316, 50, true));
-        itemLevel1.add(new Coin(20, 291));
-        itemLevel1.add(new Heart(60, 291));
-        itemLevel1.add(new JumpPowerup(100, 291));
-        itemLevel1.add(new SpeedPowerup(140, 291));
-        enemyLevel1.add(new Enemy(700, 266, 500, 1000));
+        groundLevel1.add(new Ground(0,300,1100,false));
+        enemyLevel1.add(new Enemy(500,250,500,1000));
+        groundLevel1.add(new Ground(400,300,500,false));
+        //groundLevel1.add(new Ground(10, 316, 1050, false));
+        //groundLevel1.add(new Ground(1050, 316, 50, true));
+        //itemLevel1.add(new Coin(20, 291));
+        //itemLevel1.add(new Heart(60, 291));
+        //itemLevel1.add(new JumpPowerup(100, 291));
+        //itemLevel1.add(new SpeedPowerup(140, 291));
+        //enemyLevel1.add(new Enemy(700, 266, 500, 1000));
+        
 
         groundLevel6.add(new Ground(-110, 525, 1000, false));
         groundLevel6.add(new Ground(340, 290, 100, false));
