@@ -29,7 +29,7 @@ public class Enemy extends GameObject {
         visible = true;
         this.startXRange = startXRange;
         this.endXRange = endXRange;
-        health = 3;
+        health = 2;
         xSpeed = 4;
         safeHitbox = new Rectangle(x + 3, y, width - 6, 10);
         hitbox = new Rectangle(x, y + 11, width, 39);
@@ -230,7 +230,7 @@ public class Enemy extends GameObject {
     
     public void reset() {
         visible = true;
-        health = 3;
+        health = 2;
     }
     
 }
