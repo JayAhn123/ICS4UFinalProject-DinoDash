@@ -130,11 +130,18 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             //draw ground
             g2d.drawImage(titleScreenGround, 0, 390, null);
         } else if (gameState.equals("shopScreen")) {
+            g2d.setColor(darkGreen);//sets color to dark green
+            //draws a box that shows the amount of coin user has
+            g2d.fillRect(435, 415, 165, 50);
             //draw background rectangles for skins
-            g2d.setColor(darkGreen);
             g2d.fillRect(100, 100, 100, 150);
             g2d.fillRect(300, 100, 100, 150);
             g2d.fillRect(500, 100, 100, 150);
+            //draws String that indicates user's coin
+            g2d.setFont(headerFont);//sets font
+            g2d.setColor(Color.black);//sets color
+            g2d.drawRect(434,414,165,50);//draws border for the coin box
+            g2d.drawString("Coin: " + player.getCoins(), 450, 450);//draws amount of user's coins
             //draw the buttons to buy the skins
             equipSkin1Button.draw(g2d, mouseX, mouseY);
             buySkin2Button.draw(g2d, mouseX, mouseY);
