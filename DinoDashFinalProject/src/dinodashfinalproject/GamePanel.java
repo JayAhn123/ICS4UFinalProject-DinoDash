@@ -20,8 +20,11 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 import javax.swing.ImageIcon;
 
 /**
@@ -61,6 +64,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     Button returnButton;
     Button quitButton;
     Button continueButton;
+    Button leaderboardButton;
     Image titleScreenGround;
     private String gameState = "titleScreen";
     boolean pause;
@@ -140,7 +144,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             //draws String that indicates user's coin
             g2d.setFont(headerFont);//sets font
             g2d.setColor(Color.black);//sets color
-            g2d.drawRect(434,414,165,50);//draws border for the coin box
+            g2d.drawRect(434, 414, 165, 50);//draws border for the coin box
             g2d.drawString("Coin: " + player.getCoins(), 450, 450);//draws amount of user's coins
             //draw the buttons to buy the skins
             equipSkin1Button.draw(g2d, mouseX, mouseY);
@@ -185,6 +189,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             lvl4Button.draw(g2d, mouseX, mouseY);
             lvl5Button.draw(g2d, mouseX, mouseY);
             infiniteModeButton.draw(g2d, mouseX, mouseY);
+            leaderboardButton.draw(g2d, mouseX, mouseY);
 
         } else if (gameState.equals("level1")) {
 
@@ -215,6 +220,22 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             g2d.setFont(titleFont);
             g2d.drawString("You Won", 215, 200);
             continueButton.draw(g2d, mouseX, mouseY);
+        } else if (gameState.equals("leaderboard")) {
+            ArrayList<Integer> scores = new ArrayList();
+            ArrayList<String> names = new ArrayList();
+            getScores(scores, names);
+            sortScores(scores, names);
+            g2d.setColor(Color.black);
+            g2d.setFont(titleFont);
+            g2d.drawString("Leaderboard", 120, 50);
+            g2d.setFont(headerFont);
+            g2d.drawString("Name", 140, 90);
+            g2d.drawString("Score", 430, 90);
+            g2d.setFont(infoTextFont);
+            for (int i = 0; i < 10; i++) {
+                g2d.drawString((i + 1) + ". " + names.get(i), 140, i * 30 + 120);
+                g2d.drawString(scores.get(i) + "", 430, i * 30 + 120);
+            }
         }
     }
 
@@ -266,11 +287,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         returnButton = new Button(300, 280, 100, 50, "returnButton", "returnButtonHover");
         continueButton = new Button(300, 280, 100, 50, "continueButton", "continueButtonHover");
         quitButton = new Button(300, 280, 100, 50, "quitButton", "quitButtonHover");
+        leaderboardButton = new Button(300, 280, 100, 50, "highScoresButton", "highScoresButtonHover");
         pause = false;
         //add to arraylist of test level
-        groundLevel1.add(new Ground(0,300,1100,false));
-        enemyLevel1.add(new Enemy(500,250,500,1000));
-        groundLevel1.add(new Ground(400,300,500,false));
+        groundLevel1.add(new Ground(0, 300, 1100, false));
+        enemyLevel1.add(new Enemy(500, 250, 500, 1000));
+        groundLevel1.add(new Ground(400, 300, 500, false));
         //groundLevel1.add(new Ground(10, 316, 1050, false));
         //groundLevel1.add(new Ground(1050, 316, 50, true));
         //itemLevel1.add(new Coin(20, 291));
@@ -278,7 +300,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         //itemLevel1.add(new JumpPowerup(100, 291));
         //itemLevel1.add(new SpeedPowerup(140, 291));
         //enemyLevel1.add(new Enemy(700, 266, 500, 1000));
-        
 
         groundLevel6.add(new Ground(-110, 525, 1000, false));
         groundLevel6.add(new Ground(340, 290, 100, false));
@@ -437,6 +458,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
                 gameState = "level4";
             } else if (lvl5Button.wasClicked(mouseX, mouseY)) {
                 gameState = "level5";
+            } else if (leaderboardButton.wasClicked(mouseX, mouseY)) {
+                gameState = "leaderboard";
             }
 
         } else if (gameState.equals("gameOver")) {
@@ -562,5 +585,82 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         } catch (IOException e) {
             System.out.println("Error: " + e);
         }
+    }
+
+    public void getScores(ArrayList<Integer> scores, ArrayList<String> names) {
+        try {
+            File f = new File("src/dinodashfinalproject/Scores.txt");
+            Scanner s = new Scanner(f);
+            while (s.hasNextLine()) {
+                names.add(s.nextLine());
+                scores.add(Integer.parseInt(s.nextLine()));
+
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: " + e);
+        }
+    }
+
+    public void sortScores(ArrayList<Integer> scores, ArrayList<String> names) {
+        quickSortDescending(scores, 0, scores.size() - 1, names);
+    }
+
+    /**
+     * a method that sorts an arrayList in descending order using the quicksort
+     * algorithm
+     *
+     * @param arr - the arrayList to be sorted
+     * @param left - the index of the left side of the split
+     * @param right - the index of the right side of the split
+     * @param names - the array of names associated with the scores
+     */
+    public static void quickSortDescending(ArrayList<Integer> arr, int left, int right, ArrayList<String> names) {
+        //if the left index is greater than or equal to the right index that means we have broken down the array
+        //all the way and the sort is complete
+        if (left >= right) {
+            return;
+        }
+
+        //setup index variables
+        int i = left;
+        int j = right;
+
+        //get the pivot points value
+        int pivot = arr.get((i + j) / 2);
+
+        //while left index is less than the right index - we do this to make sure i is looking on the left half of the section and j is looking at the
+        //right half of the section and they dont cross over each other and go to the other side of the section of the array we are sorting
+        while (i < j) {
+            //keep going through the left side of the array until we reach a number that is less than the pivot
+            //and needs to be switched to the other side
+            while (arr.get(i) > pivot) {
+                i++;//move down array
+            }
+            //go through the right side of the array until we reach a number that is greater than the pivot
+            //and needs to be switched to the left side
+            while (arr.get(j) < pivot) {
+                j--;//move up array
+            }
+            //now that we have found numbers that are below and above the pivot if they left ones index is less
+            //than the rights ones we switch their positions
+            if (i <= j) {// this makes sure we are switching the number that are actually on incorrect side and that i or j havent 
+                //just crossed over to the lower/higher than pivot side and found a number that is less than the pivot and is on the right side or 
+                //is higher than the pivot and on the left side of the pivot because those are where they are supposed to be
+
+                int temp = arr.get(i);//swap the elements
+                String temp2 = names.get(i);//swap the elements
+                arr.set(i, arr.get(j));
+                arr.set(j, temp);
+                names.set(i, names.get(j));
+                names.set(j, temp2);
+                i++;//move the left index right one
+                j--;//move the right index left one
+            }
+
+        }
+        //now continue sorting the array breaking it apart into to parts and then sorting each part
+        quickSortDescending(arr, left, j, names);
+        quickSortDescending(arr, i, right, names);
+
     }
 }
