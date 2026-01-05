@@ -261,13 +261,17 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         quitButton = new Button(300, 280, 100, 50, "quitButton", "quitButtonHover");
         pause = false;
         //add to arraylist of test level
-        groundLevel1.add(new Ground(10, 316, 1050, false));
-        groundLevel1.add(new Ground(1050, 316, 50, true));
-        itemLevel1.add(new Coin(20, 291));
-        itemLevel1.add(new Heart(60, 291));
-        itemLevel1.add(new JumpPowerup(100, 291));
-        itemLevel1.add(new SpeedPowerup(140, 291));
-        enemyLevel1.add(new Enemy(700, 266, 500, 1000));
+        groundLevel1.add(new Ground(0,300,1100,false));
+        enemyLevel1.add(new Enemy(500,250,500,1000));
+        groundLevel1.add(new Ground(400,300,500,false));
+        //groundLevel1.add(new Ground(10, 316, 1050, false));
+        //groundLevel1.add(new Ground(1050, 316, 50, true));
+        //itemLevel1.add(new Coin(20, 291));
+        //itemLevel1.add(new Heart(60, 291));
+        //itemLevel1.add(new JumpPowerup(100, 291));
+        //itemLevel1.add(new SpeedPowerup(140, 291));
+        //enemyLevel1.add(new Enemy(700, 266, 500, 1000));
+        
 
         groundLevel6.add(new Ground(-110, 525, 1000, false));
         groundLevel6.add(new Ground(340, 290, 100, false));
