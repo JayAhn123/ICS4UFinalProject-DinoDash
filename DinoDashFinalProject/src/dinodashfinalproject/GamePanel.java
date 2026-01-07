@@ -65,6 +65,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     Button quitButton;
     Button continueButton;
     Button leaderboardButton;
+    Button searchButton;
     Image titleScreenGround;
     private String gameState = "titleScreen";
     boolean pause;
@@ -82,6 +83,21 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     ArrayList<GameItem> itemLevel2 = new ArrayList();
     ArrayList<GameItem> tempItemLevel2 = new ArrayList();
     ArrayList<Enemy> enemyLevel2 = new ArrayList();
+
+    ArrayList<Ground> groundLevel3 = new ArrayList();
+    ArrayList<GameItem> itemLevel3 = new ArrayList();
+    ArrayList<GameItem> tempItemLevel3 = new ArrayList();
+    ArrayList<Enemy> enemyLevel3 = new ArrayList();
+
+    ArrayList<Ground> groundLevel4 = new ArrayList();
+    ArrayList<GameItem> itemLevel4 = new ArrayList();
+    ArrayList<GameItem> tempItemLevel4 = new ArrayList();
+    ArrayList<Enemy> enemyLevel4 = new ArrayList();
+
+    ArrayList<Ground> groundLevel5 = new ArrayList();
+    ArrayList<GameItem> itemLevel5 = new ArrayList();
+    ArrayList<GameItem> tempItemLevel5 = new ArrayList();
+    ArrayList<Enemy> enemyLevel5 = new ArrayList();
 
     //infinite mode
     ArrayList<Ground> groundLevel6 = new ArrayList();
@@ -202,8 +218,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         } else if (gameState.equals("level2")) {
             playLevel(g2d, groundLevel2, itemLevel2, tempItemLevel2, enemyLevel2);
         } else if (gameState.equals("level3")) {
+            playLevel(g2d, groundLevel3, itemLevel3, tempItemLevel3, enemyLevel3);
         } else if (gameState.equals("level4")) {
+            playLevel(g2d, groundLevel4, itemLevel4, tempItemLevel4, enemyLevel4);
         } else if (gameState.equals("level5")) {
+            playLevel(g2d, groundLevel5, itemLevel5, tempItemLevel5, enemyLevel5);
         } else if (gameState.equals("infiniteMode")) {
 
             enemyLevel6.removeAll(enemyToRemove);
@@ -228,6 +247,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             continueButton.draw(g2d, mouseX, mouseY);
         } else if (gameState.equals("leaderboard")) {
             backButton.draw(g2d, mouseX, mouseY);//draws the back button for leaderboard
+            searchButton.draw(g2d, mouseX, mouseY);//draws the search button for leaderboard
             ArrayList<Integer> scores = new ArrayList();
             ArrayList<String> names = new ArrayList();
             getScores(scores, names);
@@ -295,6 +315,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         continueButton = new Button(300, 280, 100, 50, "continueButton", "continueButtonHover");
         quitButton = new Button(300, 280, 100, 50, "quitButton", "quitButtonHover");
         leaderboardButton = new Button(300, 280, 100, 50, "highScoresButton", "highScoresButtonHover");
+        searchButton = new Button(300, 420, 100, 50, "searchButton", "searchButtonHover");
         pause = false;
         //add to arraylist of test level
         //Level 1
@@ -582,12 +603,16 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
                 resetLevel(itemLevel1, tempItemLevel1, enemyLevel1);
                 gameState = "level1";
             } else if (lvl2Button.wasClicked(mouseX, mouseY)) {
+                resetLevel(itemLevel2, tempItemLevel2, enemyLevel2);
                 gameState = "level2";
             } else if (lvl3Button.wasClicked(mouseX, mouseY)) {
+                resetLevel(itemLevel3, tempItemLevel3, enemyLevel3);
                 gameState = "level3";
             } else if (lvl4Button.wasClicked(mouseX, mouseY)) {
+                resetLevel(itemLevel4, tempItemLevel4, enemyLevel4);
                 gameState = "level4";
             } else if (lvl5Button.wasClicked(mouseX, mouseY)) {
+                resetLevel(itemLevel5, tempItemLevel5, enemyLevel5);
                 gameState = "level5";
             } else if (leaderboardButton.wasClicked(mouseX, mouseY)) {
                 gameState = "leaderboard";
@@ -596,6 +621,33 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         } else if (gameState.equals("leaderboard")) {//else if user is in leaderboard screen
             if (backButton.wasClicked(mouseX, mouseY)) {//if back button was clicked
                 gameState = "levelSelectScreen";//game state sets back to level selection screen
+            } else if (searchButton.wasClicked(mouseX, mouseY)) {
+                ArrayList<Integer> scores = new ArrayList();
+                ArrayList<Integer> indexOfScores = new ArrayList();
+                ArrayList<String> names = new ArrayList();
+                int highest = -1;
+                getScores(scores, names);
+                String name = JOptionPane.showInputDialog("Enter the person whose score you are looking for:");
+                for (int i = 0; i < names.size() - 1; i++) {
+                    if (name.equals(names.get(i))) {
+                        indexOfScores.add(i);
+                    }
+                }
+
+                if (indexOfScores.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Person not found.");
+                } else if (indexOfScores.size() == 1) {
+                    highest = scores.get(indexOfScores.get(0));
+                    JOptionPane.showMessageDialog(null, name + "'s highest score is " + highest);
+
+                } else {
+                    for (int i = 0; i < indexOfScores.size() - 1; i++) {
+                        if (scores.get(indexOfScores.get(i)) > highest) {
+                            highest = scores.get(indexOfScores.get(i));
+                        }
+                    }
+                    JOptionPane.showMessageDialog(null, name + "'s highest score is " + highest);
+                }
             }
         } else if (gameState.equals("gameOver")) {
             if (returnButton.wasClicked(mouseX, mouseY)) {
