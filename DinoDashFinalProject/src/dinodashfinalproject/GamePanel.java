@@ -68,7 +68,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     Image titleScreenGround;
     private String gameState = "titleScreen";
     boolean pause;
-    String name;
+    String name = "";
     int score;
 
     //variables for testing
@@ -498,7 +498,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
                     resetLevel(itemLevel6, tempItemLevel6, enemyLevel6);
                     enemyLevel6.clear();
                     score = 0;
-                    name = JOptionPane.showInputDialog("What is your name?");
+                    while (name == null || name.equals("")) {
+                        name = JOptionPane.showInputDialog("What is your name?");
+                    }
                     gameState = "infiniteMode";
                 } else if (lvl1Button.wasClicked(mouseX, mouseY)) {
                     resetLevel(itemLevel1, tempItemLevel1, enemyLevel1);
