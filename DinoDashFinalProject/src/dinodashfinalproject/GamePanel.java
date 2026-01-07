@@ -77,7 +77,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     ArrayList<GameItem> tempItemLevel1 = new ArrayList();
     ArrayList<Enemy> enemyLevel1 = new ArrayList();
     Player player = new Player();
-    
+
     ArrayList<Ground> groundLevel2 = new ArrayList();
     ArrayList<GameItem> itemLevel2 = new ArrayList();
     ArrayList<GameItem> tempItemLevel2 = new ArrayList();
@@ -211,7 +211,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
                 enemyLevel6.add(new Enemy((int) (Math.random() * 950) - 100, 475, -100, 850));
                 score++;
             }
-
+            g2d.setFont(headerFont);//sets font to header font
+            g2d.drawString("Score: " + (score - 5), 280, 35);//draws user's current score
             playLevel(g2d, groundLevel6, itemLevel6, tempItemLevel6, enemyLevel6);
 
         } else if (gameState.equals("gameOver")) {
@@ -493,36 +494,42 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
                 gameState = "titleScreen";
             }
 
-        } else if (gameState.equals("levelSelectScreen") || gameState.equals("leaderboard")) {//else if user is in level selection screen or leaderboard
+        } else if (gameState.equals("levelSelectScreen")) {//else if user is in level selection screen
 
             if (backButton.wasClicked(mouseX, mouseY)) {//if user clicked the back button
                 gameState = "titleScreen";//sets game state to title screen
-            }
-            if (gameState.equals("levelSelectScreen")) {//if user is in level selection screen
-                if (infiniteModeButton.wasClicked(mouseX, mouseY)) {
-                    resetLevel(itemLevel6, tempItemLevel6, enemyLevel6);
-                    enemyLevel6.clear();
-                    score = 0;
-                    while (name == null || name.equals("")) {
-                        name = JOptionPane.showInputDialog("What is your name?");
-                    }
-                    gameState = "infiniteMode";
-                } else if (lvl1Button.wasClicked(mouseX, mouseY)) {
-                    resetLevel(itemLevel1, tempItemLevel1, enemyLevel1);
-                    gameState = "level1";
-                } else if (lvl2Button.wasClicked(mouseX, mouseY)) {
-                    gameState = "level2";
-                } else if (lvl3Button.wasClicked(mouseX, mouseY)) {
-                    gameState = "level3";
-                } else if (lvl4Button.wasClicked(mouseX, mouseY)) {
-                    gameState = "level4";
-                } else if (lvl5Button.wasClicked(mouseX, mouseY)) {
-                    gameState = "level5";
-                } else if (leaderboardButton.wasClicked(mouseX, mouseY)) {
-                    gameState = "leaderboard";
+            } else if (infiniteModeButton.wasClicked(mouseX, mouseY)) {
+                resetLevel(itemLevel6, tempItemLevel6, enemyLevel6);
+                enemyLevel6.clear();
+                score = 0;
+                while (name == null || name.equals("")) {
+                    name = JOptionPane.showInputDialog("What is your name? (Press q to cancel infinite mode)");
                 }
+                if (name.equalsIgnoreCase("q")) {//if user entered q for their name
+                    gameState = "levelSelectScreen";//sets game state back to level selection screen
+                    name = null;//sets name back to null so that user can play infinite mode later
+                } else {//else any other name
+                    gameState = "infiniteMode";//sets game state to infinite mode (starts infinite mode)
+                }
+            } else if (lvl1Button.wasClicked(mouseX, mouseY)) {
+                resetLevel(itemLevel1, tempItemLevel1, enemyLevel1);
+                gameState = "level1";
+            } else if (lvl2Button.wasClicked(mouseX, mouseY)) {
+                gameState = "level2";
+            } else if (lvl3Button.wasClicked(mouseX, mouseY)) {
+                gameState = "level3";
+            } else if (lvl4Button.wasClicked(mouseX, mouseY)) {
+                gameState = "level4";
+            } else if (lvl5Button.wasClicked(mouseX, mouseY)) {
+                gameState = "level5";
+            } else if (leaderboardButton.wasClicked(mouseX, mouseY)) {
+                gameState = "leaderboard";
             }
 
+        } else if (gameState.equals("leaderboard")) {//else if user is in leaderboard screen
+            if (backButton.wasClicked(mouseX, mouseY)) {//if back button was clicked
+                gameState = "levelSelectScreen";//game state sets back to level selection screen
+            }
         } else if (gameState.equals("gameOver")) {
             if (returnButton.wasClicked(mouseX, mouseY)) {
                 gameState = "levelSelectScreen";
