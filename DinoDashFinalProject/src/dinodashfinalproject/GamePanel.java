@@ -77,6 +77,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     ArrayList<GameItem> tempItemLevel1 = new ArrayList();
     ArrayList<Enemy> enemyLevel1 = new ArrayList();
     Player player = new Player();
+    
+    ArrayList<Ground> groundLevel2 = new ArrayList();
+    ArrayList<GameItem> itemLevel2 = new ArrayList();
+    ArrayList<GameItem> tempItemLevel2 = new ArrayList();
+    ArrayList<Enemy> enemyLevel2 = new ArrayList();
 
     //infinite mode
     ArrayList<Ground> groundLevel6 = new ArrayList();
