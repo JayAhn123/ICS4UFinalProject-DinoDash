@@ -290,16 +290,67 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         leaderboardButton = new Button(300, 280, 100, 50, "highScoresButton", "highScoresButtonHover");
         pause = false;
         //add to arraylist of test level
-        groundLevel1.add(new Ground(0, 300, 1100, false));
-        enemyLevel1.add(new Enemy(500, 250, 500, 1000));
-        groundLevel1.add(new Ground(400, 300, 500, false));
-        //groundLevel1.add(new Ground(10, 316, 1050, false));
-        //groundLevel1.add(new Ground(1050, 316, 50, true));
-        //itemLevel1.add(new Coin(20, 291));
-        //itemLevel1.add(new Heart(60, 291));
-        //itemLevel1.add(new JumpPowerup(100, 291));
-        //itemLevel1.add(new SpeedPowerup(140, 291));
-        //enemyLevel1.add(new Enemy(700, 266, 500, 1000));
+        //Level 1
+        groundLevel1.add(new Ground(0, 320, 400, false));
+        itemLevel1.add(new Coin(200, 290));
+
+        groundLevel1.add(new Ground(550, 280, 120, false));
+        itemLevel1.add(new Coin(580, 250));
+
+        groundLevel1.add(new Ground(800, 260, 120, false));
+        enemyLevel1.add(new Enemy(820, 230, 800, 920));
+
+        groundLevel1.add(new Ground(1100, 300, 160, false));
+        itemLevel1.add(new Coin(1150, 270));
+        itemLevel1.add(new Coin(1200, 270));
+
+        groundLevel1.add(new Ground(1450, 260, 120, false));
+        groundLevel1.add(new Ground(1700, 220, 120, false));
+        itemLevel1.add(new Coin(1730, 190));
+
+        groundLevel1.add(new Ground(2050, 320, 300, false));
+        enemyLevel1.add(new Enemy(2100, 290, 2050, 2300));
+        itemLevel1.add(new Heart(2250, 290));
+
+        groundLevel1.add(new Ground(2500, 280, 120, false));
+        groundLevel1.add(new Ground(2750, 240, 120, false));
+        itemLevel1.add(new Coin(2780, 210));
+
+        groundLevel1.add(new Ground(3100, 320, 250, false));
+        itemLevel1.add(new SpeedPowerup(3200, 290));
+
+        groundLevel1.add(new Ground(3500, 260, 120, false));
+        enemyLevel1.add(new Enemy(3520, 230, 3500, 3650));
+
+        groundLevel1.add(new Ground(3850, 300, 160, false));
+        itemLevel1.add(new Coin(3900, 270));
+        itemLevel1.add(new Coin(3950, 270));
+
+        groundLevel1.add(new Ground(4250, 260, 120, false));
+        groundLevel1.add(new Ground(4500, 220, 120, false));
+        itemLevel1.add(new Coin(4530, 190));
+
+        groundLevel1.add(new Ground(4850, 320, 350, false));
+        enemyLevel1.add(new Enemy(4950, 290, 4850, 5200));
+        itemLevel1.add(new JumpPowerup(5100, 290));
+
+        groundLevel1.add(new Ground(5400, 280, 120, false));
+        groundLevel1.add(new Ground(5650, 240, 120, false));
+        itemLevel1.add(new Coin(5680, 210));
+
+        groundLevel1.add(new Ground(6000, 320, 300, false));
+        itemLevel1.add(new Heart(6150, 290));
+        itemLevel1.add(new Coin(6200, 290));
+
+        groundLevel1.add(new Ground(6450, 280, 120, false));
+        groundLevel1.add(new Ground(6700, 240, 120, false));
+        groundLevel1.add(new Ground(6950, 200, 120, false));
+        itemLevel1.add(new Coin(6980, 170));
+
+        groundLevel1.add(new Ground(7200, 320, 600, true));
+        itemLevel1.add(new Coin(7400, 290));
+        itemLevel1.add(new Coin(7450, 290));
+        itemLevel1.add(new Heart(7500, 290));
 
         groundLevel6.add(new Ground(-110, 525, 1000, false));
         groundLevel6.add(new Ground(340, 290, 100, false));
