@@ -200,6 +200,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             playLevel(g2d, groundLevel1, itemLevel1, tempItemLevel1, enemyLevel1);
 
         } else if (gameState.equals("level2")) {
+            playLevel(g2d, groundLevel2, itemLevel2, tempItemLevel2, enemyLevel2);
         } else if (gameState.equals("level3")) {
         } else if (gameState.equals("level4")) {
         } else if (gameState.equals("level5")) {
@@ -358,6 +359,72 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         itemLevel1.add(new Coin(7450, 290));
         itemLevel1.add(new Heart(7500, 290));
 
+        //level 2
+        groundLevel2.add(new Ground(0, 320, 350, false));
+        itemLevel2.add(new Coin(180, 290));
+
+        groundLevel2.add(new Ground(520, 270, 110, false));
+        itemLevel2.add(new Coin(550, 240));
+
+        groundLevel2.add(new Ground(760, 240, 110, false));
+        enemyLevel2.add(new Enemy(780, 210, 760, 880));
+
+        groundLevel2.add(new Ground(1050, 300, 150, false));
+        itemLevel2.add(new Coin(1100, 270));
+        itemLevel2.add(new Coin(1150, 270));
+
+        groundLevel2.add(new Ground(1400, 260, 110, false));
+        groundLevel2.add(new Ground(1650, 220, 110, false));
+        itemLevel2.add(new Coin(1680, 190));
+
+        groundLevel2.add(new Ground(1950, 320, 260, false));
+        enemyLevel2.add(new Enemy(2000, 290, 1950, 2200));
+
+        groundLevel2.add(new Ground(2350, 280, 110, false));
+        groundLevel2.add(new Ground(2600, 240, 110, false));
+        itemLevel2.add(new Coin(2630, 210));
+
+        groundLevel2.add(new Ground(2950, 320, 230, false));
+        itemLevel2.add(new SpeedPowerup(3050, 290));
+
+        groundLevel2.add(new Ground(3300, 260, 110, false));
+        enemyLevel2.add(new Enemy(3320, 230, 3300, 3450));
+
+        groundLevel2.add(new Ground(3650, 300, 150, false));
+        itemLevel2.add(new Coin(3700, 270));
+        itemLevel2.add(new Coin(3750, 270));
+
+        groundLevel2.add(new Ground(4050, 260, 110, false));
+        groundLevel2.add(new Ground(4300, 220, 110, false));
+        itemLevel2.add(new Coin(4330, 190));
+
+        groundLevel2.add(new Ground(4650, 320, 300, false));
+        enemyLevel2.add(new Enemy(4700, 290, 4650, 4950));
+        itemLevel2.add(new Heart(4900, 290));
+
+        groundLevel2.add(new Ground(5100, 280, 110, false));
+        groundLevel2.add(new Ground(5350, 240, 110, false));
+        itemLevel2.add(new Coin(5380, 210));
+
+        groundLevel2.add(new Ground(5700, 200, 110, false));
+        groundLevel2.add(new Ground(5950, 240, 110, false));
+        itemLevel2.add(new Coin(5980, 210));
+
+        groundLevel2.add(new Ground(6300, 320, 280, false));
+        enemyLevel2.add(new Enemy(6350, 290, 6300, 6580));
+        itemLevel2.add(new JumpPowerup(6500, 290));
+
+        groundLevel2.add(new Ground(6750, 280, 110, false));
+        groundLevel2.add(new Ground(7000, 240, 110, false));
+        groundLevel2.add(new Ground(7250, 200, 110, false));
+        itemLevel2.add(new Coin(7280, 170));
+
+        groundLevel2.add(new Ground(7600, 320, 650, true));
+        itemLevel2.add(new Coin(7800, 290));
+        itemLevel2.add(new Coin(7850, 290));
+        itemLevel2.add(new Heart(7950, 290));
+
+        //infinite mode
         groundLevel6.add(new Ground(-110, 525, 1000, false));
         groundLevel6.add(new Ground(340, 290, 100, false));
         groundLevel6.add(new Ground(90, 360, 50, false));
