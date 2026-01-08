@@ -52,6 +52,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     Button infoBtn;
     Button shopBtn;
     Button equipSkin1Button;
+    Button equipSkin2Button;
+    Button equipSkin3Button;
     Button buySkin2Button;
     Button buySkin3Button;
     Button backButton;
@@ -159,9 +161,18 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             //draws a box that shows the amount of coin user has
             g2d.fillRect(435, 415, 165, 50);
             //draw background rectangles for skins
-            g2d.fillRect(100, 100, 100, 150);
-            g2d.fillRect(300, 100, 100, 150);
-            g2d.fillRect(500, 100, 100, 150);
+            if (player.equippedSkin == 1) {
+                g2d.fillRect(100, 100, 100, 150);
+
+            }
+            if (player.equippedSkin == 2) {
+                g2d.fillRect(300, 100, 100, 150);
+
+            }
+            if (player.equippedSkin == 3) {
+                g2d.fillRect(500, 100, 100, 150);
+
+            }
             //draws String that indicates user's coin
             g2d.setFont(headerFont);//sets font
             g2d.setColor(Color.black);//sets color
@@ -169,10 +180,22 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             g2d.drawString("Coin: " + player.getCoins(), 450, 450);//draws amount of user's coins
             //draw the buttons to buy the skins
             equipSkin1Button.draw(g2d, mouseX, mouseY);
-            buySkin2Button.draw(g2d, mouseX, mouseY);
-            buySkin3Button.draw(g2d, mouseX, mouseY);
+            if (player.skin2Bought) {
+                equipSkin2Button.draw(g2d, mouseX, mouseY);
+            } else {
+                buySkin2Button.draw(g2d, mouseX, mouseY);
+            }
+            if (player.skin3Bought) {
+                equipSkin3Button.draw(g2d, mouseX, mouseY);
+            } else {
+                buySkin3Button.draw(g2d, mouseX, mouseY);
+            }
+
             //draw the back button
             backButton.draw(g2d, mouseX, mouseY);
+
+            //draw the skinds
+            g2d.drawImage(player.rightStill1, 118, 145, null);
 
         } else if (gameState.equals("infoScreen")) {
             //draw the back button
@@ -298,6 +321,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         shopBtn = new Button(280, 300, 100, 50, "shopButton", "shopButtonHover");
         //make buttons for shop
         equipSkin1Button = new Button(100, 260, 100, 50, "equipButton", "equipButtonHover");
+        equipSkin2Button = new Button(300, 260, 100, 50, "equipButton", "equipButtonHover");
+        equipSkin3Button = new Button(500, 260, 100, 50, "equipButton", "equipButtonHover");
         buySkin2Button = new Button(300, 260, 100, 50, "buyButton", "buyButtonHover");
         buySkin3Button = new Button(500, 260, 100, 50, "buyButton", "buyButtonHover");
         //make back button
@@ -659,6 +684,18 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 
             if (backButton.wasClicked(mouseX, mouseY)) {
                 gameState = "titleScreen";
+            } else if (!player.skin2Bought && buySkin2Button.wasClicked(mouseX, mouseY) && player.getCoins() >= 50) {
+                player.skin2Bought = true;
+                player.setCoins(player.getCoins() - 50);
+            } else if (!player.skin3Bought && buySkin3Button.wasClicked(mouseX, mouseY) && player.getCoins() >= 100) {
+                player.skin3Bought = true;
+                player.setCoins(player.getCoins() - 100);
+            } else if (equipSkin1Button.wasClicked(mouseX, mouseY)) {
+                player.equippedSkin = 1;
+            } else if (equipSkin2Button.wasClicked(mouseX, mouseY) && player.skin2Bought) {
+                player.equippedSkin = 2;
+            } else if (equipSkin3Button.wasClicked(mouseX, mouseY) && player.skin3Bought) {
+                player.equippedSkin = 3;
             }
 
         } else if (gameState.equals("levelSelectScreen")) {//else if user is in level selection screen
