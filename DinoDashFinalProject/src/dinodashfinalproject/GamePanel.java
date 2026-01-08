@@ -406,7 +406,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         itemLevel1.add(new Heart(7500, 290));
 
         //level 2
-        groundLevel2.add(new Ground(0, 320, 350, false));
+        groundLevel2.add(new Ground(-10, 320, 400, false));
         itemLevel2.add(new Coin(180, 290));
 
         groundLevel2.add(new Ground(520, 270, 100, false));
