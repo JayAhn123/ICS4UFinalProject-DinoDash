@@ -68,6 +68,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     Button continueButton;
     Button leaderboardButton;
     Button searchButton;
+    Button creditsButton;
     Image titleScreenGround;
     private String gameState = "titleScreen";
     boolean pause;
@@ -218,6 +219,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             g2d.drawString("Shop: purchase or equip unlocked skins", 25, 335);
             g2d.drawString("- Purchase new skins using coins, they are obtainable through all the modes", 25, 355);
             g2d.drawString("TIP: Infinite mode is more effective when it comes to collecting lots of coins", 25, 375);
+            creditsButton.draw(g2d, mouseX, mouseY);
         } else if (gameState.equals("levelSelectScreen")) {
             //draw the back button
             backButton.draw(g2d, mouseX, mouseY);
@@ -286,6 +288,15 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
                 g2d.drawString((i + 1) + ". " + names.get(i), 140, i * 30 + 120);
                 g2d.drawString(scores.get(i) + "", 430, i * 30 + 120);
             }
+        } else if (gameState.equals("credits")) {
+            backButton.draw(g2d, mouseX, mouseY);
+            g2d.setFont(titleFont);
+            g2d.setColor(Color.black);
+            g2d.drawString("Credits", 210, 70);
+            g2d.setFont(headerFont);
+            g2d.drawString("Araib - lead programmmer", 150, 150);
+            g2d.drawString("Bernie - Level Design", 150, 200);
+            g2d.drawString("Jay - project manager", 150, 250);
         }
     }
 
@@ -341,6 +352,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         quitButton = new Button(300, 280, 100, 50, "quitButton", "quitButtonHover");
         leaderboardButton = new Button(300, 280, 100, 50, "highScoresButton", "highScoresButtonHover");
         searchButton = new Button(300, 420, 100, 50, "searchButton", "searchButtonHover");
+        creditsButton = new Button(550, 420, 100, 50, "creditsButton", "creditsButtonHover");
         pause = false;
         //add to arraylist of test level
         //Level 1
@@ -678,6 +690,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 
             if (backButton.wasClicked(mouseX, mouseY)) {
                 gameState = "titleScreen";
+            } else if (creditsButton.wasClicked(mouseX, mouseY)) {
+                gameState = "credits";
             }
 
         } else if (gameState.equals("shopScreen")) {
@@ -776,6 +790,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         } else if (pause && (gameState.equals("level1") || gameState.equals("level2") || gameState.equals("level3") || gameState.equals("level4") || gameState.equals("level5") || gameState.equals("infiniteMode"))) {
             if (quitButton.wasClicked(mouseX, mouseY)) {
                 gameState = "levelSelectScreen";
+            }
+        } else if (gameState.equals("credits")) {
+            if (backButton.wasClicked(mouseX, mouseY)) {//if back button was clicked
+                gameState = "infoScreen";//game state sets back to level selection screen
             }
         }
     }
