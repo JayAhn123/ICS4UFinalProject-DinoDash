@@ -52,6 +52,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     Button infoBtn;
     Button shopBtn;
     Button equipSkin1Button;
+    Button equipSkin2Button;
+    Button equipSkin3Button;
     Button buySkin2Button;
     Button buySkin3Button;
     Button backButton;
@@ -66,6 +68,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     Button continueButton;
     Button leaderboardButton;
     Button searchButton;
+    Button creditsButton;
     Image titleScreenGround;
     private String gameState = "titleScreen";
     boolean pause;
@@ -157,22 +160,43 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         } else if (gameState.equals("shopScreen")) {
             g2d.setColor(darkGreen);//sets color to dark green
             //draws a box that shows the amount of coin user has
-            g2d.fillRect(435, 415, 165, 50);
+            g2d.fillRect(435, 421, 165, 50);
             //draw background rectangles for skins
-            g2d.fillRect(100, 100, 100, 150);
-            g2d.fillRect(300, 100, 100, 150);
-            g2d.fillRect(500, 100, 100, 150);
+            if (player.equippedSkin == 1) {
+                g2d.fillRect(100, 100, 100, 150);
+
+            }
+            if (player.equippedSkin == 2) {
+                g2d.fillRect(300, 100, 100, 150);
+
+            }
+            if (player.equippedSkin == 3) {
+                g2d.fillRect(500, 100, 100, 150);
+
+            }
             //draws String that indicates user's coin
             g2d.setFont(headerFont);//sets font
             g2d.setColor(Color.black);//sets color
-            g2d.drawRect(434, 414, 165, 50);//draws border for the coin box
-            g2d.drawString("Coin: " + player.getCoins(), 450, 450);//draws amount of user's coins
+            g2d.drawRect(434, 420, 165, 50);//draws border for the coin box
+            g2d.drawString("Coin: " + player.getCoins(), 450, 456);//draws amount of user's coins
             //draw the buttons to buy the skins
             equipSkin1Button.draw(g2d, mouseX, mouseY);
-            buySkin2Button.draw(g2d, mouseX, mouseY);
-            buySkin3Button.draw(g2d, mouseX, mouseY);
+            if (player.skin2Bought) {
+                equipSkin2Button.draw(g2d, mouseX, mouseY);
+            } else {
+                buySkin2Button.draw(g2d, mouseX, mouseY);
+            }
+            if (player.skin3Bought) {
+                equipSkin3Button.draw(g2d, mouseX, mouseY);
+            } else {
+                buySkin3Button.draw(g2d, mouseX, mouseY);
+            }
+
             //draw the back button
             backButton.draw(g2d, mouseX, mouseY);
+
+            //draw the skinds
+            g2d.drawImage(player.rightStill1, 118, 145, null);
 
         } else if (gameState.equals("infoScreen")) {
             //draw the back button
@@ -195,6 +219,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             g2d.drawString("Shop: purchase or equip unlocked skins", 25, 335);
             g2d.drawString("- Purchase new skins using coins, they are obtainable through all the modes", 25, 355);
             g2d.drawString("TIP: Infinite mode is more effective when it comes to collecting lots of coins", 25, 375);
+            creditsButton.draw(g2d, mouseX, mouseY);
         } else if (gameState.equals("levelSelectScreen")) {
             //draw the back button
             backButton.draw(g2d, mouseX, mouseY);
@@ -263,6 +288,15 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
                 g2d.drawString((i + 1) + ". " + names.get(i), 140, i * 30 + 120);
                 g2d.drawString(scores.get(i) + "", 430, i * 30 + 120);
             }
+        } else if (gameState.equals("credits")) {
+            backButton.draw(g2d, mouseX, mouseY);
+            g2d.setFont(titleFont);
+            g2d.setColor(Color.black);
+            g2d.drawString("Credits", 210, 70);
+            g2d.setFont(headerFont);
+            g2d.drawString("Araib - lead programmmer", 150, 150);
+            g2d.drawString("Bernie - Level Design", 150, 200);
+            g2d.drawString("Jay - project manager", 150, 250);
         }
     }
 
@@ -298,6 +332,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         shopBtn = new Button(280, 300, 100, 50, "shopButton", "shopButtonHover");
         //make buttons for shop
         equipSkin1Button = new Button(100, 260, 100, 50, "equipButton", "equipButtonHover");
+        equipSkin2Button = new Button(300, 260, 100, 50, "equipButton", "equipButtonHover");
+        equipSkin3Button = new Button(500, 260, 100, 50, "equipButton", "equipButtonHover");
         buySkin2Button = new Button(300, 260, 100, 50, "buyButton", "buyButtonHover");
         buySkin3Button = new Button(500, 260, 100, 50, "buyButton", "buyButtonHover");
         //make back button
@@ -316,63 +352,64 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         quitButton = new Button(300, 280, 100, 50, "quitButton", "quitButtonHover");
         leaderboardButton = new Button(300, 280, 100, 50, "highScoresButton", "highScoresButtonHover");
         searchButton = new Button(300, 420, 100, 50, "searchButton", "searchButtonHover");
+        creditsButton = new Button(550, 420, 100, 50, "creditsButton", "creditsButtonHover");
         pause = false;
         //add to arraylist of test level
         //Level 1
         groundLevel1.add(new Ground(0, 320, 400, false));
         itemLevel1.add(new Coin(200, 290));
 
-        groundLevel1.add(new Ground(550, 280, 120, false));
+        groundLevel1.add(new Ground(550, 280, 100, false));
         itemLevel1.add(new Coin(580, 250));
 
-        groundLevel1.add(new Ground(800, 260, 120, false));
-        enemyLevel1.add(new Enemy(820, 230, 800, 920));
+        groundLevel1.add(new Ground(800, 260, 200, false));
+        enemyLevel1.add(new Enemy(850, 210, 800, 1000));
 
-        groundLevel1.add(new Ground(1100, 300, 160, false));
+        groundLevel1.add(new Ground(1100, 300, 150, false));
         itemLevel1.add(new Coin(1150, 270));
         itemLevel1.add(new Coin(1200, 270));
 
-        groundLevel1.add(new Ground(1450, 260, 120, false));
-        groundLevel1.add(new Ground(1700, 220, 120, false));
+        groundLevel1.add(new Ground(1450, 260, 100, false));
+        groundLevel1.add(new Ground(1700, 220, 100, false));
         itemLevel1.add(new Coin(1730, 190));
 
-        groundLevel1.add(new Ground(2050, 320, 300, false));
-        enemyLevel1.add(new Enemy(2100, 290, 2050, 2300));
+        groundLevel1.add(new Ground(2050, 320, 400, false));
+        enemyLevel1.add(new Enemy(2150, 270, 2050, 2450));
         itemLevel1.add(new Heart(2250, 290));
 
-        groundLevel1.add(new Ground(2500, 280, 120, false));
-        groundLevel1.add(new Ground(2750, 240, 120, false));
+        groundLevel1.add(new Ground(2500, 280, 100, false));
+        groundLevel1.add(new Ground(2750, 240, 100, false));
         itemLevel1.add(new Coin(2780, 210));
 
         groundLevel1.add(new Ground(3100, 320, 250, false));
         itemLevel1.add(new SpeedPowerup(3200, 290));
 
-        groundLevel1.add(new Ground(3500, 260, 120, false));
-        enemyLevel1.add(new Enemy(3520, 230, 3500, 3650));
+        groundLevel1.add(new Ground(3500, 260, 200, false));
+        enemyLevel1.add(new Enemy(3550, 210, 3500, 3700));
 
-        groundLevel1.add(new Ground(3850, 300, 160, false));
+        groundLevel1.add(new Ground(3850, 300, 150, false));
         itemLevel1.add(new Coin(3900, 270));
         itemLevel1.add(new Coin(3950, 270));
 
-        groundLevel1.add(new Ground(4250, 260, 120, false));
-        groundLevel1.add(new Ground(4500, 220, 120, false));
+        groundLevel1.add(new Ground(4250, 260, 100, false));
+        groundLevel1.add(new Ground(4500, 220, 100, false));
         itemLevel1.add(new Coin(4530, 190));
 
-        groundLevel1.add(new Ground(4850, 320, 350, false));
-        enemyLevel1.add(new Enemy(4950, 290, 4850, 5200));
+        groundLevel1.add(new Ground(4850, 320, 400, false));
+        enemyLevel1.add(new Enemy(4950, 270, 4850, 5250));
         itemLevel1.add(new JumpPowerup(5100, 290));
 
-        groundLevel1.add(new Ground(5400, 280, 120, false));
-        groundLevel1.add(new Ground(5650, 240, 120, false));
+        groundLevel1.add(new Ground(5400, 280, 100, false));
+        groundLevel1.add(new Ground(5650, 240, 100, false));
         itemLevel1.add(new Coin(5680, 210));
 
         groundLevel1.add(new Ground(6000, 320, 300, false));
         itemLevel1.add(new Heart(6150, 290));
         itemLevel1.add(new Coin(6200, 290));
 
-        groundLevel1.add(new Ground(6450, 280, 120, false));
-        groundLevel1.add(new Ground(6700, 240, 120, false));
-        groundLevel1.add(new Ground(6950, 200, 120, false));
+        groundLevel1.add(new Ground(6450, 280, 100, false));
+        groundLevel1.add(new Ground(6700, 240, 100, false));
+        groundLevel1.add(new Ground(6950, 200, 100, false));
         itemLevel1.add(new Coin(6980, 170));
 
         groundLevel1.add(new Ground(7200, 320, 600, true));
@@ -381,69 +418,148 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         itemLevel1.add(new Heart(7500, 290));
 
         //level 2
-        groundLevel2.add(new Ground(0, 320, 350, false));
+        groundLevel2.add(new Ground(-10, 320, 400, false));
         itemLevel2.add(new Coin(180, 290));
 
-        groundLevel2.add(new Ground(520, 270, 110, false));
+        groundLevel2.add(new Ground(520, 270, 100, false));
         itemLevel2.add(new Coin(550, 240));
 
-        groundLevel2.add(new Ground(760, 240, 110, false));
-        enemyLevel2.add(new Enemy(780, 210, 760, 880));
+        groundLevel2.add(new Ground(760, 240, 100, false));
+        enemyLevel2.add(new Enemy(780, 190, 760, 860));
 
         groundLevel2.add(new Ground(1050, 300, 150, false));
-        itemLevel2.add(new Coin(1100, 270));
+        enemyLevel2.add(new Enemy(1080, 250, 1050, 1200));
         itemLevel2.add(new Coin(1150, 270));
 
-        groundLevel2.add(new Ground(1400, 260, 110, false));
-        groundLevel2.add(new Ground(1650, 220, 110, false));
+        groundLevel2.add(new Ground(1400, 260, 100, false));
+        groundLevel2.add(new Ground(1650, 220, 100, false));
         itemLevel2.add(new Coin(1680, 190));
 
-        groundLevel2.add(new Ground(1950, 320, 260, false));
-        enemyLevel2.add(new Enemy(2000, 290, 1950, 2200));
+        groundLevel2.add(new Ground(1950, 320, 250, false));
+        enemyLevel2.add(new Enemy(2000, 270, 1950, 2200));
 
-        groundLevel2.add(new Ground(2350, 280, 110, false));
-        groundLevel2.add(new Ground(2600, 240, 110, false));
+        groundLevel2.add(new Ground(2350, 280, 100, false));
+        groundLevel2.add(new Ground(2600, 240, 100, false));
+        enemyLevel2.add(new Enemy(2620, 190, 2600, 2700));
         itemLevel2.add(new Coin(2630, 210));
 
-        groundLevel2.add(new Ground(2950, 320, 230, false));
+        groundLevel2.add(new Ground(2950, 320, 250, false));
         itemLevel2.add(new SpeedPowerup(3050, 290));
 
-        groundLevel2.add(new Ground(3300, 260, 110, false));
-        enemyLevel2.add(new Enemy(3320, 230, 3300, 3450));
+        groundLevel2.add(new Ground(3300, 260, 100, false));
+        enemyLevel2.add(new Enemy(3320, 210, 3300, 3400));
 
         groundLevel2.add(new Ground(3650, 300, 150, false));
-        itemLevel2.add(new Coin(3700, 270));
+        enemyLevel2.add(new Enemy(3700, 250, 3650, 3800));
         itemLevel2.add(new Coin(3750, 270));
 
-        groundLevel2.add(new Ground(4050, 260, 110, false));
-        groundLevel2.add(new Ground(4300, 220, 110, false));
+        groundLevel2.add(new Ground(4050, 260, 100, false));
+        groundLevel2.add(new Ground(4300, 220, 100, false));
         itemLevel2.add(new Coin(4330, 190));
 
         groundLevel2.add(new Ground(4650, 320, 300, false));
-        enemyLevel2.add(new Enemy(4700, 290, 4650, 4950));
+        enemyLevel2.add(new Enemy(4700, 270, 4650, 4950));
         itemLevel2.add(new Heart(4900, 290));
 
-        groundLevel2.add(new Ground(5100, 280, 110, false));
-        groundLevel2.add(new Ground(5350, 240, 110, false));
+        groundLevel2.add(new Ground(5100, 280, 100, false));
+        groundLevel2.add(new Ground(5350, 240, 100, false));
+        enemyLevel2.add(new Enemy(5380, 190, 5350, 5450));
         itemLevel2.add(new Coin(5380, 210));
 
-        groundLevel2.add(new Ground(5700, 200, 110, false));
-        groundLevel2.add(new Ground(5950, 240, 110, false));
+        groundLevel2.add(new Ground(5700, 200, 100, false));
+        groundLevel2.add(new Ground(5950, 240, 100, false));
         itemLevel2.add(new Coin(5980, 210));
 
-        groundLevel2.add(new Ground(6300, 320, 280, false));
-        enemyLevel2.add(new Enemy(6350, 290, 6300, 6580));
+        groundLevel2.add(new Ground(6300, 320, 300, false));
+        enemyLevel2.add(new Enemy(6350, 270, 6300, 6600));
         itemLevel2.add(new JumpPowerup(6500, 290));
 
-        groundLevel2.add(new Ground(6750, 280, 110, false));
-        groundLevel2.add(new Ground(7000, 240, 110, false));
-        groundLevel2.add(new Ground(7250, 200, 110, false));
+        groundLevel2.add(new Ground(6750, 280, 100, false));
+        groundLevel2.add(new Ground(7000, 240, 100, false));
+        groundLevel2.add(new Ground(7250, 200, 100, false));
+        enemyLevel2.add(new Enemy(7280, 150, 7250, 7350));
         itemLevel2.add(new Coin(7280, 170));
 
         groundLevel2.add(new Ground(7600, 320, 650, true));
         itemLevel2.add(new Coin(7800, 290));
         itemLevel2.add(new Coin(7850, 290));
         itemLevel2.add(new Heart(7950, 290));
+
+        //level 3
+        groundLevel3.add(new Ground(0, 320, 400, false));
+        itemLevel3.add(new Coin(200, 290));
+
+        groundLevel3.add(new Ground(500, 270, 250, false));
+        enemyLevel3.add(new Enemy(550, 220, 500, 750));
+
+        groundLevel3.add(new Ground(850, 220, 250, false));
+        enemyLevel3.add(new Enemy(900, 170, 850, 1100));
+        enemyLevel3.add(new Enemy(1000, 170, 850, 1100));
+
+        groundLevel3.add(new Ground(1200, 320, 300, false));
+        itemLevel3.add(new Coin(1300, 290));
+        itemLevel3.add(new Coin(1350, 290));
+
+        groundLevel3.add(new Ground(1600, 300, 250, false));
+        groundLevel3.add(new Ground(1600, 180, 200, false));
+        enemyLevel3.add(new Enemy(1650, 250, 1600, 1850));
+
+        groundLevel3.add(new Ground(1950, 320, 350, false));
+        enemyLevel3.add(new Enemy(2050, 270, 1950, 2300));
+        enemyLevel3.add(new Enemy(2200, 270, 1950, 2300));
+
+        groundLevel3.add(new Ground(2400, 260, 250, false));
+        itemLevel3.add(new Coin(2500, 230));
+
+        groundLevel3.add(new Ground(2750, 210, 250, false));
+        enemyLevel3.add(new Enemy(2800, 160, 2750, 3000));
+
+        groundLevel3.add(new Ground(3100, 170, 250, false));
+        enemyLevel3.add(new Enemy(3150, 120, 3100, 3350));
+        enemyLevel3.add(new Enemy(3250, 120, 3100, 3350));
+
+        groundLevel3.add(new Ground(3450, 320, 300, false));
+        itemLevel3.add(new Heart(3600, 290));
+
+        groundLevel3.add(new Ground(3800, 280, 250, false));
+        groundLevel3.add(new Ground(3950, 160, 200, false));
+        enemyLevel3.add(new Enemy(3850, 230, 3800, 4050));
+
+        groundLevel3.add(new Ground(4250, 320, 350, false));
+        enemyLevel3.add(new Enemy(4350, 270, 4250, 4600));
+
+        groundLevel3.add(new Ground(4700, 260, 250, false));
+        enemyLevel3.add(new Enemy(4750, 210, 4700, 4950));
+        enemyLevel3.add(new Enemy(4850, 210, 4700, 4950));
+
+        groundLevel3.add(new Ground(5050, 220, 250, false));
+        itemLevel3.add(new Coin(5150, 190));
+
+        groundLevel3.add(new Ground(5400, 320, 300, false));
+        enemyLevel3.add(new Enemy(5500, 270, 5400, 5700));
+
+        groundLevel3.add(new Ground(5800, 260, 250, false));
+        groundLevel3.add(new Ground(5950, 140, 200, false));
+        enemyLevel3.add(new Enemy(5850, 210, 5800, 6050));
+
+        groundLevel3.add(new Ground(6300, 200, 250, false));
+        enemyLevel3.add(new Enemy(6350, 150, 6300, 6550));
+        enemyLevel3.add(new Enemy(6450, 150, 6300, 6550));
+
+        groundLevel3.add(new Ground(6650, 320, 350, false));
+        itemLevel3.add(new SpeedPowerup(6800, 290));
+
+        groundLevel3.add(new Ground(7100, 260, 250, false));
+        enemyLevel3.add(new Enemy(7150, 210, 7100, 7350));
+
+        groundLevel3.add(new Ground(7450, 220, 250, false));
+        enemyLevel3.add(new Enemy(7500, 170, 7450, 7700));
+        enemyLevel3.add(new Enemy(7600, 170, 7450, 7700));
+
+        groundLevel3.add(new Ground(7800, 320, 600, true));
+        itemLevel3.add(new Coin(8000, 290));
+        itemLevel3.add(new Coin(8050, 290));
+        itemLevel3.add(new Heart(8150, 290));
 
         //infinite mode
         groundLevel6.add(new Ground(-110, 525, 1000, false));
@@ -574,12 +690,26 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 
             if (backButton.wasClicked(mouseX, mouseY)) {
                 gameState = "titleScreen";
+            } else if (creditsButton.wasClicked(mouseX, mouseY)) {
+                gameState = "credits";
             }
 
         } else if (gameState.equals("shopScreen")) {
 
             if (backButton.wasClicked(mouseX, mouseY)) {
                 gameState = "titleScreen";
+            } else if (!player.skin2Bought && buySkin2Button.wasClicked(mouseX, mouseY) && player.getCoins() >= 50) {
+                player.skin2Bought = true;
+                player.setCoins(player.getCoins() - 50);
+            } else if (!player.skin3Bought && buySkin3Button.wasClicked(mouseX, mouseY) && player.getCoins() >= 100) {
+                player.skin3Bought = true;
+                player.setCoins(player.getCoins() - 100);
+            } else if (equipSkin1Button.wasClicked(mouseX, mouseY)) {
+                player.equippedSkin = 1;
+            } else if (equipSkin2Button.wasClicked(mouseX, mouseY) && player.skin2Bought) {
+                player.equippedSkin = 2;
+            } else if (equipSkin3Button.wasClicked(mouseX, mouseY) && player.skin3Bought) {
+                player.equippedSkin = 3;
             }
 
         } else if (gameState.equals("levelSelectScreen")) {//else if user is in level selection screen
@@ -660,6 +790,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         } else if (pause && (gameState.equals("level1") || gameState.equals("level2") || gameState.equals("level3") || gameState.equals("level4") || gameState.equals("level5") || gameState.equals("infiniteMode"))) {
             if (quitButton.wasClicked(mouseX, mouseY)) {
                 gameState = "levelSelectScreen";
+            }
+        } else if (gameState.equals("credits")) {
+            if (backButton.wasClicked(mouseX, mouseY)) {//if back button was clicked
+                gameState = "infoScreen";//game state sets back to level selection screen
             }
         }
     }

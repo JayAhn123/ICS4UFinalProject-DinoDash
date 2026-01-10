@@ -149,6 +149,9 @@ public class Player extends GameObject {
     int idleAnimationCount;
     boolean dead;
     boolean win;
+    boolean skin2Bought;
+    boolean skin3Bought;
+    int equippedSkin;
 
     /**
      * primary constructor
@@ -170,6 +173,9 @@ public class Player extends GameObject {
         idleAnimationCount = 0;
         dead = false;
         win = false;
+        skin2Bought = false;
+        skin3Bought = false;
+        equippedSkin = 1;
     }
 
     /**
