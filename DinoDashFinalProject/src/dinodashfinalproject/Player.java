@@ -32,42 +32,116 @@ public class Player extends GameObject {
     ArrayList<Image> rightRun = new ArrayList();
     ArrayList<Image> leftStill = new ArrayList();
     ArrayList<Image> leftRun = new ArrayList();
-    Image rightStill1;
-    Image rightStill2;
-    Image rightStill3;
-    Image rightStill4;
-    Image rightStill5;
-    Image rightStill6;
-    Image rightStill7;
-    Image rightStill8;
-    Image rightRun1;
-    Image rightRun2;
-    Image rightRun3;
-    Image rightRun4;
-    Image rightRun5;
-    Image rightRun6;
-    Image rightRun7;
-    Image rightRun8;
-    Image rightJump1;
-    Image rightJump2;
-    Image leftStill1;
-    Image leftStill2;
-    Image leftStill3;
-    Image leftStill4;
-    Image leftStill5;
-    Image leftStill6;
-    Image leftStill7;
-    Image leftStill8;
-    Image leftRun1;
-    Image leftRun2;
-    Image leftRun3;
-    Image leftRun4;
-    Image leftRun5;
-    Image leftRun6;
-    Image leftRun7;
-    Image leftRun8;
-    Image leftJump1;
-    Image leftJump2;
+    Image skin1rightStill1;
+    Image skin1rightStill2;
+    Image skin1rightStill3;
+    Image skin1rightStill4;
+    Image skin1rightStill5;
+    Image skin1rightStill6;
+    Image skin1rightStill7;
+    Image skin1rightStill8;
+    Image skin1rightRun1;
+    Image skin1rightRun2;
+    Image skin1rightRun3;
+    Image skin1rightRun4;
+    Image skin1rightRun5;
+    Image skin1rightRun6;
+    Image skin1rightRun7;
+    Image skin1rightRun8;
+    Image skin1rightJump1;
+    Image skin1rightJump2;
+    Image skin1leftStill1;
+    Image skin1leftStill2;
+    Image skin1leftStill3;
+    Image skin1leftStill4;
+    Image skin1leftStill5;
+    Image skin1leftStill6;
+    Image skin1leftStill7;
+    Image skin1leftStill8;
+    Image skin1leftRun1;
+    Image skin1leftRun2;
+    Image skin1leftRun3;
+    Image skin1leftRun4;
+    Image skin1leftRun5;
+    Image skin1leftRun6;
+    Image skin1leftRun7;
+    Image skin1leftRun8;
+    Image skin1leftJump1;
+    Image skin1leftJump2;
+
+    Image skin2rightStill1;
+    Image skin2rightStill2;
+    Image skin2rightStill3;
+    Image skin2rightStill4;
+    Image skin2rightStill5;
+    Image skin2rightStill6;
+    Image skin2rightStill7;
+    Image skin2rightStill8;
+    Image skin2rightRun1;
+    Image skin2rightRun2;
+    Image skin2rightRun3;
+    Image skin2rightRun4;
+    Image skin2rightRun5;
+    Image skin2rightRun6;
+    Image skin2rightRun7;
+    Image skin2rightRun8;
+    Image skin2rightJump1;
+    Image skin2rightJump2;
+    Image skin2leftStill1;
+    Image skin2leftStill2;
+    Image skin2leftStill3;
+    Image skin2leftStill4;
+    Image skin2leftStill5;
+    Image skin2leftStill6;
+    Image skin2leftStill7;
+    Image skin2leftStill8;
+    Image skin2leftRun1;
+    Image skin2leftRun2;
+    Image skin2leftRun3;
+    Image skin2leftRun4;
+    Image skin2leftRun5;
+    Image skin2leftRun6;
+    Image skin2leftRun7;
+    Image skin2leftRun8;
+    Image skin2leftJump1;
+    Image skin2leftJump2;
+
+    Image skin3rightStill1;
+    Image skin3rightStill2;
+    Image skin3rightStill3;
+    Image skin3rightStill4;
+    Image skin3rightStill5;
+    Image skin3rightStill6;
+    Image skin3rightStill7;
+    Image skin3rightStill8;
+    Image skin3rightRun1;
+    Image skin3rightRun2;
+    Image skin3rightRun3;
+    Image skin3rightRun4;
+    Image skin3rightRun5;
+    Image skin3rightRun6;
+    Image skin3rightRun7;
+    Image skin3rightRun8;
+    Image skin3rightJump1;
+    Image skin3rightJump2;
+    Image skin3leftStill1;
+    Image skin3leftStill2;
+    Image skin3leftStill3;
+    Image skin3leftStill4;
+    Image skin3leftStill5;
+    Image skin3leftStill6;
+    Image skin3leftStill7;
+    Image skin3leftStill8;
+    Image skin3leftRun1;
+    Image skin3leftRun2;
+    Image skin3leftRun3;
+    Image skin3leftRun4;
+    Image skin3leftRun5;
+    Image skin3leftRun6;
+    Image skin3leftRun7;
+    Image skin3leftRun8;
+    Image skin3leftJump1;
+    Image skin3leftJump2;
     boolean facingRight;
     boolean airborne;
     int jumpAnimationCount;
@@ -88,74 +162,7 @@ public class Player extends GameObject {
         heartImage = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/playerHeart.png")).getImage();
         jumpHeight = -10;
         maxSpeed = 7;
-        rightStill1 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur1.png")).getImage();
-        rightStill2 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur2.png")).getImage();
-        rightStill3 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur3.png")).getImage();
-        rightStill4 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur4.png")).getImage();
-        rightStill5 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur5.png")).getImage();
-        rightStill6 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur6.png")).getImage();
-        rightStill7 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur7.png")).getImage();
-        rightStill8 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur8.png")).getImage();
-        rightStill.add(rightStill1);
-        rightStill.add(rightStill2);
-        rightStill.add(rightStill3);
-        rightStill.add(rightStill4);
-        rightStill.add(rightStill5);
-        rightStill.add(rightStill6);
-        rightStill.add(rightStill7);
-        rightStill.add(rightStill8);
-        rightRun1 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur9.png")).getImage();
-        rightRun2 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur10.png")).getImage();
-        rightRun3 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur11.png")).getImage();
-        rightRun4 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur12.png")).getImage();
-        rightRun5 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur13.png")).getImage();
-        rightRun6 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur14.png")).getImage();
-        rightRun7 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur15.png")).getImage();
-        rightRun8 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur16.png")).getImage();
-        rightRun.add(rightRun1);
-        rightRun.add(rightRun2);
-        rightRun.add(rightRun3);
-        rightRun.add(rightRun4);
-        rightRun.add(rightRun5);
-        rightRun.add(rightRun6);
-        rightRun.add(rightRun7);
-        rightRun.add(rightRun8);
-        rightJump1 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur17.png")).getImage();
-        rightJump2 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur18.png")).getImage();
-        leftStill1 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur1Left.png")).getImage();
-        leftStill2 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur2Left.png")).getImage();
-        leftStill3 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur3Left.png")).getImage();
-        leftStill4 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur4Left.png")).getImage();
-        leftStill5 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur5Left.png")).getImage();
-        leftStill6 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur6Left.png")).getImage();
-        leftStill7 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur7Left.png")).getImage();
-        leftStill8 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur8Left.png")).getImage();
-        leftStill.add(leftStill1);
-        leftStill.add(leftStill2);
-        leftStill.add(leftStill3);
-        leftStill.add(leftStill4);
-        leftStill.add(leftStill5);
-        leftStill.add(leftStill6);
-        leftStill.add(leftStill7);
-        leftStill.add(leftStill8);
-        leftRun1 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur9Left.png")).getImage();
-        leftRun2 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur10Left.png")).getImage();
-        leftRun3 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur11Left.png")).getImage();
-        leftRun4 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur12Left.png")).getImage();
-        leftRun5 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur13Left.png")).getImage();
-        leftRun6 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur14Left.png")).getImage();
-        leftRun7 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur15Left.png")).getImage();
-        leftRun8 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur16Left.png")).getImage();
-        leftRun.add(leftRun1);
-        leftRun.add(leftRun2);
-        leftRun.add(leftRun3);
-        leftRun.add(leftRun4);
-        leftRun.add(leftRun5);
-        leftRun.add(leftRun6);
-        leftRun.add(leftRun7);
-        leftRun.add(leftRun8);
-        leftJump1 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur17Left.png")).getImage();
-        leftJump2 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur18Left.png")).getImage();
+        loadSkins();
         facingRight = true;
         airborne = false;
         jumpAnimationCount = 0;
@@ -187,18 +194,18 @@ public class Player extends GameObject {
             }
             if (facingRight) {
                 if (jumpAnimationCount < 6) {
-                    g2d.drawImage(rightJump1, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+                    g2d.drawImage(skin1rightJump1, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
 
                 } else {
-                    g2d.drawImage(rightJump2, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+                    g2d.drawImage(skin1rightJump2, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
 
                 }
             } else {
                 if (jumpAnimationCount < 6) {
-                    g2d.drawImage(leftJump1, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+                    g2d.drawImage(skin1leftJump1, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
 
                 } else {
-                    g2d.drawImage(leftJump2, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
+                    g2d.drawImage(skin1leftJump2, SCREENXPOSITION, SCREENYPOSITION, null);//incomplete placeholder rectangle currently
 
                 }
             }
@@ -573,6 +580,77 @@ public class Player extends GameObject {
         airborne = false;
         maxSpeed = 7;
         jumpHeight = -10;
+    }
+
+    private void loadSkins() {
+        skin1rightStill1 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur1.png")).getImage();
+        skin1rightStill2 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur2.png")).getImage();
+        skin1rightStill3 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur3.png")).getImage();
+        skin1rightStill4 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur4.png")).getImage();
+        skin1rightStill5 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur5.png")).getImage();
+        skin1rightStill6 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur6.png")).getImage();
+        skin1rightStill7 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur7.png")).getImage();
+        skin1rightStill8 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur8.png")).getImage();
+        rightStill.add(skin1rightStill1);
+        rightStill.add(skin1rightStill2);
+        rightStill.add(skin1rightStill3);
+        rightStill.add(skin1rightStill4);
+        rightStill.add(skin1rightStill5);
+        rightStill.add(skin1rightStill6);
+        rightStill.add(skin1rightStill7);
+        rightStill.add(skin1rightStill8);
+        skin1rightRun1 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur9.png")).getImage();
+        skin1rightRun2 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur10.png")).getImage();
+        skin1rightRun3 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur11.png")).getImage();
+        skin1rightRun4 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur12.png")).getImage();
+        skin1rightRun5 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur13.png")).getImage();
+        skin1rightRun6 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur14.png")).getImage();
+        skin1rightRun7 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur15.png")).getImage();
+        skin1rightRun8 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur16.png")).getImage();
+        rightRun.add(skin1rightRun1);
+        rightRun.add(skin1rightRun2);
+        rightRun.add(skin1rightRun3);
+        rightRun.add(skin1rightRun4);
+        rightRun.add(skin1rightRun5);
+        rightRun.add(skin1rightRun6);
+        rightRun.add(skin1rightRun7);
+        rightRun.add(skin1rightRun8);
+        skin1rightJump1 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur17.png")).getImage();
+        skin1rightJump2 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur18.png")).getImage();
+        skin1leftStill1 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur1Left.png")).getImage();
+        skin1leftStill2 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur2Left.png")).getImage();
+        skin1leftStill3 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur3Left.png")).getImage();
+        skin1leftStill4 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur4Left.png")).getImage();
+        skin1leftStill5 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur5Left.png")).getImage();
+        skin1leftStill6 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur6Left.png")).getImage();
+        skin1leftStill7 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur7Left.png")).getImage();
+        skin1leftStill8 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur8Left.png")).getImage();
+        leftStill.add(skin1leftStill1);
+        leftStill.add(skin1leftStill2);
+        leftStill.add(skin1leftStill3);
+        leftStill.add(skin1leftStill4);
+        leftStill.add(skin1leftStill5);
+        leftStill.add(skin1leftStill6);
+        leftStill.add(skin1leftStill7);
+        leftStill.add(skin1leftStill8);
+        skin1leftRun1 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur9Left.png")).getImage();
+        skin1leftRun2 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur10Left.png")).getImage();
+        skin1leftRun3 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur11Left.png")).getImage();
+        skin1leftRun4 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur12Left.png")).getImage();
+        skin1leftRun5 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur13Left.png")).getImage();
+        skin1leftRun6 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur14Left.png")).getImage();
+        skin1leftRun7 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur15Left.png")).getImage();
+        skin1leftRun8 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur16Left.png")).getImage();
+        leftRun.add(skin1leftRun1);
+        leftRun.add(skin1leftRun2);
+        leftRun.add(skin1leftRun3);
+        leftRun.add(skin1leftRun4);
+        leftRun.add(skin1leftRun5);
+        leftRun.add(skin1leftRun6);
+        leftRun.add(skin1leftRun7);
+        leftRun.add(skin1leftRun8);
+        skin1leftJump1 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur17Left.png")).getImage();
+        skin1leftJump2 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur18Left.png")).getImage();
     }
 
 }
