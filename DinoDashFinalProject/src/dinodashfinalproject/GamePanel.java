@@ -196,7 +196,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             backButton.draw(g2d, mouseX, mouseY);
 
             //draw the skinds
-            g2d.drawImage(player.rightStill1, 118, 145, null);
+            g2d.drawImage(player.skin1rightStill1, 118, 145, null);
 
         } else if (gameState.equals("infoScreen")) {
             //draw the back button
