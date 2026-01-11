@@ -8,6 +8,13 @@ package dinodashfinalproject;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.io.File;
+import java.io.IOException;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 
 public abstract class GameObject {
@@ -212,4 +219,20 @@ public abstract class GameObject {
      */
     public abstract GameObject clone();
 
+    /**
+     * plays sound effect
+     *
+     * @param soundName - name of the audio file
+     */
+    public void playSound(String soundName) {
+        try {//attempts to open file and play audio
+            File sound = new File("src/dinodashfinalproject/soundEffects/" + soundName + ".wav");//sets new file to sound file
+            AudioInputStream audioInput = AudioSystem.getAudioInputStream(sound);//gets audio file and converts it into audio input stream which is java's standard way to read raw audio data
+            Clip clip = AudioSystem.getClip();//initialize clip
+            clip.open(audioInput);//clip opens the audio input
+            clip.start();//plays the sound effect
+        } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {//catches any error that may occur
+            System.out.println("Error: " + e);//prints out the error
+        }
+    }
 }

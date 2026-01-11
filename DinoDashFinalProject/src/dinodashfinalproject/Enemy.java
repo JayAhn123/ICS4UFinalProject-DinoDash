@@ -69,6 +69,7 @@ public class Enemy extends GameObject {
     public void collisionProcedure(Player player, ArrayList<GameItem> tempItem, String gameState, ArrayList<Enemy> enemyToRemove) {
         if (visible) {
             if (player.hitbox.intersects(hitbox)) {
+                playSound("damagedSound");//plays sound effect when user takes damage
                 player.setHearts(player.getHearts() - 1);
                 if (player.getX() < x) {
                     player.setX(player.getX() - 60);

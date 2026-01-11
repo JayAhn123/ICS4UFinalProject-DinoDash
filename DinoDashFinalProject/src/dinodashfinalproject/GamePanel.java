@@ -26,6 +26,11 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.ImageIcon;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  *
@@ -875,6 +880,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             enemy.collisionProcedure(player, tempItemLevel, gameState, enemyToRemove);
         }
         if (player.isDead()) {
+            playSound("deadSound");//plays sound effect when user dies
             if (gameState.equals("infiniteMode")) {
                 saveScore();
             }
@@ -988,5 +994,22 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         quickSortDescending(arr, left, j, names);
         quickSortDescending(arr, i, right, names);
 
+    }
+
+    /**
+     * plays sound effect
+     *
+     * @param soundName - name of the audio file
+     */
+    public void playSound(String soundName) {
+        try {//attempts to open file and play audio
+            File sound = new File("src/dinodashfinalproject/soundEffects/" + soundName + ".wav");//sets new file to sound file
+            AudioInputStream audioInput = AudioSystem.getAudioInputStream(sound);//gets audio file and converts it into audio input stream which is java's standard way to read raw audio data
+            Clip clip = AudioSystem.getClip();//initialize clip
+            clip.open(audioInput);//clip opens the audio input
+            clip.start();//plays the sound effect
+        } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {//catches any error that may occur
+            System.out.println("Error: " + e);//prints out the error
+        }
     }
 }

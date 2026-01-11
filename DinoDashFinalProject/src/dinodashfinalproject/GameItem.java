@@ -40,7 +40,6 @@ public abstract class GameItem extends GameObject {
         visible = true;
     }
 
-
     /**
      * method that will draw the game item at the right spot
      *
