@@ -351,7 +351,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         titleScreenGround = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/TitleImg.png")).getImage();
         returnButton = new Button(300, 280, 100, 50, "returnButton", "returnButtonHover");
         continueButton = new Button(300, 280, 100, 50, "continueButton", "continueButtonHover");
-        quitButton = new Button(300, 280, 100, 50, "quitButton", "quitButtonHover");
+        quitButton = new Button(300, 400, 100, 50, "quitButton", "quitButtonHover");
         leaderboardButton = new Button(300, 280, 100, 50, "highScoresButton", "highScoresButtonHover");
         searchButton = new Button(300, 420, 100, 50, "searchButton", "searchButtonHover");
         creditsButton = new Button(550, 420, 100, 50, "creditsButton", "creditsButtonHover");
@@ -884,13 +884,16 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             gameState = "win";
         }
 
-        if (pause) {
-            g2d.setColor(brown);
-            g2d.fillRect(70, 47, 550, 400);
-            g2d.setColor(Color.black);
-            g2d.setFont(titleFont);
-            g2d.drawString("Paused", 230, 110);
-            quitButton.draw(g2d, mouseX, mouseY);
+        if (pause) {//if pause is true
+            g2d.setColor(Color.black);//set color to black
+            //draws two vertical lines for the pause symbol
+            g2d.fillRect(450, 75, 15, 35);//left line
+            g2d.fillRect(480, 75, 15, 35);//right line
+            g2d.setFont(titleFont);//sets font to title font
+            g2d.drawString("Paused", 195, 110);//draws paused string
+            g2d.setFont(infoTextFont);//sets font to info text font
+            g2d.drawString("Press P again to resume", 255, 150);//draws description on how to continue
+            quitButton.draw(g2d, mouseX, mouseY);//draws the quit button
         }
     }
 
