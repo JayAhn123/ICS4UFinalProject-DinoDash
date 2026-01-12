@@ -568,6 +568,69 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         itemLevel3.add(new Coin(8050, 290));
         itemLevel3.add(new Heart(8150, 290));
 
+        //level 4
+        groundLevel4.add(new Ground(0, 320, 400, false));
+        itemLevel4.add(new Coin(200, 290));
+
+        groundLevel4.add(new Ground(600, 260, 200, false));
+        enemyLevel4.add(new Enemy(650, 210, 600, 800));
+
+        groundLevel4.add(new Ground(900, 200, 200, false));
+
+        groundLevel4.add(new Ground(1200, 260, 150, false));
+        enemyLevel4.add(new Enemy(1225, 210, 1200, 1350));
+
+        groundLevel4.add(new Ground(1450, 320, 150, false));
+
+        groundLevel4.add(new Ground(1650, 220, 100, false));
+
+        groundLevel4.add(new Ground(1850, 160, 100, false));
+
+        groundLevel4.add(new Ground(2050, 120, 100, false));
+
+        groundLevel4.add(new Ground(2250, 320, 200, false));
+        itemLevel4.add(new Coin(2350, 290));
+
+        groundLevel4.add(new Ground(2550, 260, 150, false));
+        enemyLevel4.add(new Enemy(2575, 210, 2550, 2700));
+
+        groundLevel4.add(new Ground(2800, 320, 100, false));
+
+        groundLevel4.add(new Ground(-300, 280, 200, false));
+        enemyLevel4.add(new Enemy(-250, 230, -300, -100));
+
+        groundLevel4.add(new Ground(-650, 220, 200, false));
+
+        groundLevel4.add(new Ground(-950, 260, 250, false));
+        enemyLevel4.add(new Enemy(-900, 210, -950, -700));
+        enemyLevel4.add(new Enemy(-800, 210, -950, -700));
+
+        groundLevel4.add(new Ground(-1300, 180, 200, false));
+
+        groundLevel4.add(new Ground(-1600, 320, 300, false));
+        itemLevel4.add(new Heart(-1450, 290));
+
+        groundLevel4.add(new Ground(-2000, 260, 200, false));
+        enemyLevel4.add(new Enemy(-1950, 210, -2000, -1800));
+
+        groundLevel4.add(new Ground(-2300, 200, 200, false));
+
+        groundLevel4.add(new Ground(-2600, 140, 200, false));
+        enemyLevel4.add(new Enemy(-2550, 90, -2600, -2400));
+
+        groundLevel4.add(new Ground(-2900, 80, 200, false));
+
+        groundLevel4.add(new Ground(-3200, 320, 300, false));
+        itemLevel4.add(new SpeedPowerup(-3050, 290));
+
+        groundLevel4.add(new Ground(-3600, 260, 250, false));
+        enemyLevel4.add(new Enemy(-3550, 210, -3600, -3350));
+        enemyLevel4.add(new Enemy(-3450, 210, -3600, -3350));
+
+        groundLevel4.add(new Ground(-4000, 320, 500, true));
+        itemLevel4.add(new Coin(-3800, 290));
+        itemLevel4.add(new Coin(-3750, 290));
+
         //infinite mode
         groundLevel6.add(new Ground(-110, 525, 1000, false));
         groundLevel6.add(new Ground(340, 290, 100, false));
