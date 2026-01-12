@@ -79,6 +79,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     boolean pause;
     String name = "";
     int score;
+    Clip clip;//audio clip setup for background music
 
     //variables for testing
     ArrayList<Ground> groundLevel1 = new ArrayList();
@@ -851,10 +852,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             }
         } else if (gameState.equals("gameOver")) {
             if (returnButton.wasClicked(mouseX, mouseY)) {
+                pauseSound();//stop playing dead music
                 gameState = "levelSelectScreen";
             }
         } else if (gameState.equals("win")) {
             if (continueButton.wasClicked(mouseX, mouseY)) {
+                pauseSound();//stops playing win music
                 gameState = "levelSelectScreen";
             }
         } else if (pause && (gameState.equals("level1") || gameState.equals("level2") || gameState.equals("level3") || gameState.equals("level4") || gameState.equals("level5") || gameState.equals("infiniteMode"))) {
@@ -943,13 +946,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             enemy.collisionProcedure(player, tempItemLevel, gameState, enemyToRemove);
         }
         if (player.isDead()) {
-            playSound("deadSound");//plays sound effect when user dies
+            playBackgroundSound("deadSound");//plays music when user dies
             if (gameState.equals("infiniteMode")) {
                 saveScore();
             }
             gameState = "gameOver";
         }
         if (player.isWin()) {
+            playBackgroundSound("victory");//plays victory sound effect
             gameState = "win";
         }
 
@@ -1060,19 +1064,26 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     }
 
     /**
-     * plays sound effect
+     * plays background music
      *
-     * @param soundName - name of the audio file
+     * @param soundName - audio file name
      */
-    public void playSound(String soundName) {
+    public void playBackgroundSound(String soundName) {
         try {//attempts to open file and play audio
             File sound = new File("src/dinodashfinalproject/soundEffects/" + soundName + ".wav");//sets new file to sound file
             AudioInputStream audioInput = AudioSystem.getAudioInputStream(sound);//gets audio file and converts it into audio input stream which is java's standard way to read raw audio data
-            Clip clip = AudioSystem.getClip();//initialize clip
+            clip = AudioSystem.getClip();//initialize clip
             clip.open(audioInput);//clip opens the audio input
-            clip.start();//plays the sound effect
+            clip.loop(Clip.LOOP_CONTINUOUSLY);//loops the sound effect until stopped
         } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {//catches any error that may occur
             System.out.println("Error: " + e);//prints out the error
         }
+    }
+
+    /**
+     * stops playing music
+     */
+    public void pauseSound() {
+        clip.close();//close music clip
     }
 }

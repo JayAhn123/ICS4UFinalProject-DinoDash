@@ -15,7 +15,7 @@ import javax.swing.ImageIcon;
  * @author mubas
  */
 public class Enemy extends GameObject {
-    
+
     boolean visible;
     int startXRange;
     int endXRange;
@@ -23,7 +23,7 @@ public class Enemy extends GameObject {
     int health;
     Rectangle safeHitbox;
     Image leftImage;
-    
+
     public Enemy(int x, int y, int startXRange, int endXRange) {
         super(x, y, 50, 50, "EnemyRight");
         visible = true;
@@ -52,24 +52,24 @@ public class Enemy extends GameObject {
             }
         }
     }
-    
+
     public void move() {
         x += xSpeed;
-        
+
         if (x > endXRange) {
             xSpeed = -xSpeed;
         } else if (x < startXRange) {
             xSpeed = -xSpeed;
         }
-        
+
         safeHitbox.x = x + 3;
         hitbox.x = x;
     }
-    
+
     public void collisionProcedure(Player player, ArrayList<GameItem> tempItem, String gameState, ArrayList<Enemy> enemyToRemove) {
         if (visible) {
             if (player.hitbox.intersects(hitbox)) {
-                playSound("damagedSound");//plays sound effect when user takes damage
+                GameObject.playSound("damagedSound");//plays sound effect when user takes damage
                 player.setHearts(player.getHearts() - 1);
                 if (player.getX() < x) {
                     player.setX(player.getX() - 60);
@@ -81,11 +81,12 @@ public class Enemy extends GameObject {
             } else if (player.hitbox.intersects(safeHitbox)) {
                 health -= 1;
                 player.setYSpeed(-5);
+                GameObject.playSound("enemyStomp");//playing sound effect for stepping on enemy 
                 if (health == 0) {
                     visible = false;
                     //run enemy drop
                     int chance = (int) (Math.random() * 20);
-                    if (chance >=11 && chance <= 19) {
+                    if (chance >= 11 && chance <= 19) {
                         tempItem.add(new Coin(x, y + 24));
                     } else if (chance == 2) {
                         tempItem.add(new Heart(x, y + 24));
@@ -94,7 +95,7 @@ public class Enemy extends GameObject {
                     } else if (chance == 4) {
                         tempItem.add(new SpeedPowerup(x, y + 24));
                     }
-                    
+
                     if (gameState.equals("infiniteMode")) {
                         enemyToRemove.add(this);
                     }
@@ -102,7 +103,7 @@ public class Enemy extends GameObject {
             }
         }
     }
-    
+
     public GameObject clone() {
         return new Enemy(x, y, startXRange, endXRange);
 
@@ -228,10 +229,10 @@ public class Enemy extends GameObject {
     public void setSafeHitbox(Rectangle safeHitbox) {
         this.safeHitbox = safeHitbox;
     }
-    
+
     public void reset() {
         visible = true;
         health = 2;
     }
-    
+
 }

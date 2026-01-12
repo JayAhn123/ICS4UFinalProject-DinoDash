@@ -351,7 +351,7 @@ public class Player extends GameObject {
             //then for each title in the array check if the hitboxes are intersecting
             for (Ground groundTile : groundTiles) {
                 if (groundTile.hitbox.intersects(hitbox)) {
-                    playSound("jumpSound");//plays jump sound effect
+                    GameObject.playSound("jumpSound");//plays jump sound effect
                     ySpeed = jumpHeight;//if they do intersect set y speed to -6 so we jump
                     airborne = true; //set airborne to true because we are now in air and need to do air animation
                 }
