@@ -34,86 +34,96 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  *
- * @author arbas9208
+ * @author
  */
 public class GamePanel extends JPanel implements Runnable, KeyListener, MouseListener, MouseMotionListener {
 
     //global variables
     private Thread animator;
     private final int DELAY = 20;
+
     private final Color lightBlue = new Color(143, 217, 251);
     private final Color darkGreen = new Color(66, 165, 70);
     private final Color brown = new Color(175, 87, 14);
+
     private final Font titleFont = loadTitleFont((float) 80);
     private final Font headerFont = titleFont.deriveFont((float) 40);
     private final Font infoTextFont = titleFont.deriveFont((float) 18);
+
     private boolean up_pressed = false;
     private boolean down_pressed = false;
     private boolean left_pressed = false;
     private boolean right_pressed = false;
+
     private int mouseX;
     private int mouseY;
-    Button playBtn;
-    Button infoBtn;
-    Button shopBtn;
-    Button equipSkin1Button;
-    Button equipSkin2Button;
-    Button equipSkin3Button;
-    Button buySkin2Button;
-    Button buySkin3Button;
-    Button backButton;
-    Button lvl1Button;
-    Button lvl2Button;
-    Button lvl3Button;
-    Button lvl4Button;
-    Button lvl5Button;
-    Button infiniteModeButton;
-    Button returnButton;
-    Button quitButton;
-    Button continueButton;
-    Button leaderboardButton;
-    Button searchButton;
-    Button creditsButton;
-    Image titleScreenGround;
+
+    private Button playBtn;
+    private Button infoBtn;
+    private Button shopBtn;
+    private Button equipSkin1Button;
+    private Button equipSkin2Button;
+    private Button equipSkin3Button;
+    private Button buySkin2Button;
+    private Button buySkin3Button;
+    private Button backButton;
+    private Button lvl1Button;
+    private Button lvl2Button;
+    private Button lvl3Button;
+    private Button lvl4Button;
+    private Button lvl5Button;
+    private Button infiniteModeButton;
+    private Button returnButton;
+    private Button quitButton;
+    private Button continueButton;
+    private Button leaderboardButton;
+    private Button searchButton;
+    private Button creditsButton;
+
+    private Image titleScreenGround;
     private String gameState = "titleScreen";
-    boolean pause;
-    String name = "";
-    int score;
+    private boolean pause;
+    private String name = "";
+    private int score;
     static Clip clip;//audio clip setup for background music
 
-    //variables for testing
-    ArrayList<Ground> groundLevel1 = new ArrayList();
-    ArrayList<GameItem> itemLevel1 = new ArrayList();
-    ArrayList<GameItem> tempItemLevel1 = new ArrayList();
-    ArrayList<Enemy> enemyLevel1 = new ArrayList();
-    Player player = new Player();
+    //variables for level 1
+    private ArrayList<Ground> groundLevel1 = new ArrayList();
+    private ArrayList<GameItem> itemLevel1 = new ArrayList();
+    private ArrayList<GameItem> tempItemLevel1 = new ArrayList();
+    private ArrayList<Enemy> enemyLevel1 = new ArrayList();
+    private Player player = new Player();
 
-    ArrayList<Ground> groundLevel2 = new ArrayList();
-    ArrayList<GameItem> itemLevel2 = new ArrayList();
-    ArrayList<GameItem> tempItemLevel2 = new ArrayList();
-    ArrayList<Enemy> enemyLevel2 = new ArrayList();
+    //variables for level 2
+    private ArrayList<Ground> groundLevel2 = new ArrayList();
+    private ArrayList<GameItem> itemLevel2 = new ArrayList();
+    private ArrayList<GameItem> tempItemLevel2 = new ArrayList();
+    private ArrayList<Enemy> enemyLevel2 = new ArrayList();
 
-    ArrayList<Ground> groundLevel3 = new ArrayList();
-    ArrayList<GameItem> itemLevel3 = new ArrayList();
-    ArrayList<GameItem> tempItemLevel3 = new ArrayList();
-    ArrayList<Enemy> enemyLevel3 = new ArrayList();
+    //variables for level 3
+    private ArrayList<Ground> groundLevel3 = new ArrayList();
+    private ArrayList<GameItem> itemLevel3 = new ArrayList();
+    private ArrayList<GameItem> tempItemLevel3 = new ArrayList();
+    private ArrayList<Enemy> enemyLevel3 = new ArrayList();
 
-    ArrayList<Ground> groundLevel4 = new ArrayList();
-    ArrayList<GameItem> itemLevel4 = new ArrayList();
-    ArrayList<GameItem> tempItemLevel4 = new ArrayList();
-    ArrayList<Enemy> enemyLevel4 = new ArrayList();
+    //variables for level 4
+    private ArrayList<Ground> groundLevel4 = new ArrayList();
+    private ArrayList<GameItem> itemLevel4 = new ArrayList();
+    private ArrayList<GameItem> tempItemLevel4 = new ArrayList();
+    private ArrayList<Enemy> enemyLevel4 = new ArrayList();
 
-    ArrayList<Ground> groundLevel5 = new ArrayList();
-    ArrayList<GameItem> itemLevel5 = new ArrayList();
-    ArrayList<GameItem> tempItemLevel5 = new ArrayList();
-    ArrayList<Enemy> enemyLevel5 = new ArrayList();
+    //variables for level 5
+    private ArrayList<Ground> groundLevel5 = new ArrayList();
+    private ArrayList<GameItem> itemLevel5 = new ArrayList();
+    private ArrayList<GameItem> tempItemLevel5 = new ArrayList();
+    private ArrayList<Enemy> enemyLevel5 = new ArrayList();
 
     //infinite mode
-    ArrayList<Ground> groundLevel6 = new ArrayList();
-    ArrayList<GameItem> itemLevel6 = new ArrayList();
-    ArrayList<GameItem> tempItemLevel6 = new ArrayList();
-    ArrayList<Enemy> enemyLevel6 = new ArrayList();
-    ArrayList<Enemy> enemyToRemove = new ArrayList();
+    private ArrayList<Ground> groundLevel6 = new ArrayList();
+    private ArrayList<GameItem> itemLevel6 = new ArrayList();
+    private ArrayList<GameItem> tempItemLevel6 = new ArrayList();
+    private ArrayList<Enemy> enemyLevel6 = new ArrayList();
+    private ArrayList<Enemy> enemyToRemove = new ArrayList();
 
     /**
      * This method loads the titleFont from the file and turns it into a font
@@ -152,47 +162,55 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 
         //draw based of what the gamestate is
         if (gameState.equals("titleScreen")) {
+
             //set background colour
             this.setBackground(lightBlue);
+
             //draw Game title
             g2d.setColor(Color.black);
             g2d.setFont(titleFont);
             g2d.drawString("Dino Dash", 180, 120);
+
             playBtn.draw(g2d, mouseX, mouseY);//draw buttons
             infoBtn.draw(g2d, mouseX, mouseY);
             shopBtn.draw(g2d, mouseX, mouseY);
+
             //draw ground
             g2d.drawImage(titleScreenGround, 0, 390, null);
+
         } else if (gameState.equals("shopScreen")) {
+
             g2d.setColor(darkGreen);//sets color to dark green
             //draws a box that shows the amount of coin user has
             g2d.fillRect(435, 421, 165, 50);
-            //draw background rectangles for skins
+
+            //draw a background rectangle for the skin that is equipped
             if (player.equippedSkin == 1) {
                 g2d.fillRect(100, 100, 100, 150);
-
             }
             if (player.equippedSkin == 2) {
                 g2d.fillRect(300, 100, 100, 150);
-
             }
             if (player.equippedSkin == 3) {
                 g2d.fillRect(500, 100, 100, 150);
-
             }
-            //draws String that indicates user's coin
+
+            //draws String that indicate how many coins the user has
             g2d.setFont(headerFont);//sets font
             g2d.setColor(Color.black);//sets color
             g2d.drawRect(434, 420, 165, 50);//draws border for the coin box
             g2d.drawString("Coin: " + player.getCoins(), 450, 456);//draws amount of user's coins
+
             //draw the buttons to buy the skins
-            equipSkin1Button.draw(g2d, mouseX, mouseY);
-            if (player.skin2Bought) {
+            equipSkin1Button.draw(g2d, mouseX, mouseY); // skin 1 will always be equippable
+
+            if (player.isSkin2Bought()) {//if they bought the skin show the equip button otherwise show buy button so they can buy it
                 equipSkin2Button.draw(g2d, mouseX, mouseY);
             } else {
                 buySkin2Button.draw(g2d, mouseX, mouseY);
             }
-            if (player.skin3Bought) {
+
+            if (player.isSkin3Bought()) {//if they bought the skin show the equip button otherwise show buy button so they can buy it
                 equipSkin3Button.draw(g2d, mouseX, mouseY);
             } else {
                 buySkin3Button.draw(g2d, mouseX, mouseY);
@@ -201,14 +219,16 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             //draw the back button
             backButton.draw(g2d, mouseX, mouseY);
 
-            //draw the skinds
+            //draw the skins
             g2d.drawImage(player.skin1rightStill1, 118, 145, null);
             g2d.drawImage(player.skin2rightStill1, 318, 145, null);
             g2d.drawImage(player.skin3rightStill1, 518, 145, null);
 
-        } else if (gameState.equals("infoScreen")) {
+        } else if (gameState.equals("infoScreen")) { //if the gamestate is infoscreen
+
             //draw the back button
             backButton.draw(g2d, mouseX, mouseY);
+
             //set font and draw info
             g2d.setColor(Color.black);
             g2d.setFont(headerFont); //show header
@@ -227,14 +247,20 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             g2d.drawString("Shop: purchase or equip unlocked skins", 25, 335);
             g2d.drawString("- Purchase new skins using coins, they are obtainable through all the modes", 25, 355);
             g2d.drawString("TIP: Infinite mode is more effective when it comes to collecting lots of coins", 25, 375);
+
+            //draw the credits button
             creditsButton.draw(g2d, mouseX, mouseY);
-        } else if (gameState.equals("levelSelectScreen")) {
+
+        } else if (gameState.equals("levelSelectScreen")) {//if its levelselectscreen then draw the level select screen
+
             //draw the back button
             backButton.draw(g2d, mouseX, mouseY);
+
             //draw title
-            g2d.setFont(headerFont);
+            g2d.setFont(headerFont);//set font and colour
             g2d.setColor(Color.black);
             g2d.drawString("Level Select", 235, 40);
+
             //draw buttons
             lvl1Button.draw(g2d, mouseX, mouseY);
             lvl2Button.draw(g2d, mouseX, mouseY);
@@ -244,67 +270,122 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             infiniteModeButton.draw(g2d, mouseX, mouseY);
             leaderboardButton.draw(g2d, mouseX, mouseY);
 
-        } else if (gameState.equals("level1")) {
+        } else if (gameState.equals("level1")) {//if its any of the levels then run playLevel method with the proper arrayLists
 
+            //play the level
             playLevel(g2d, groundLevel1, itemLevel1, tempItemLevel1, enemyLevel1);
 
         } else if (gameState.equals("level2")) {
-            playLevel(g2d, groundLevel2, itemLevel2, tempItemLevel2, enemyLevel2);
-        } else if (gameState.equals("level3")) {
-            playLevel(g2d, groundLevel3, itemLevel3, tempItemLevel3, enemyLevel3);
-        } else if (gameState.equals("level4")) {
-            playLevel(g2d, groundLevel4, itemLevel4, tempItemLevel4, enemyLevel4);
-        } else if (gameState.equals("level5")) {
-            playLevel(g2d, groundLevel5, itemLevel5, tempItemLevel5, enemyLevel5);
-        } else if (gameState.equals("infiniteMode")) {
 
+            //play the level
+            playLevel(g2d, groundLevel2, itemLevel2, tempItemLevel2, enemyLevel2);
+
+        } else if (gameState.equals("level3")) {
+
+            //play the level
+            playLevel(g2d, groundLevel3, itemLevel3, tempItemLevel3, enemyLevel3);
+
+        } else if (gameState.equals("level4")) {
+
+            //play the level
+            playLevel(g2d, groundLevel4, itemLevel4, tempItemLevel4, enemyLevel4);
+
+        } else if (gameState.equals("level5")) {
+
+            //play the level
+            playLevel(g2d, groundLevel5, itemLevel5, tempItemLevel5, enemyLevel5);
+
+        } else if (gameState.equals("infiniteMode")) { //if its infinte mode then its a litle different compared to a normal level
+
+            //first remove all the spawned enemies
             enemyLevel6.removeAll(enemyToRemove);
 
+            //if there are less than 5 enemies spawned
             if (enemyLevel6.size() < 5) {
+                ///spawn another one
                 enemyLevel6.add(new Enemy((int) (Math.random() * 950) - 100, 475, -100, 850));
+                //add to score because they would have to kill an enemies for there to be less than 5
                 score++;
             }
+
             g2d.setFont(headerFont);//sets font to header font
             g2d.drawString("Score: " + (score - 5), 280, 35);//draws user's current score
+
+            //play the level with infinitemodeArrays
             playLevel(g2d, groundLevel6, itemLevel6, tempItemLevel6, enemyLevel6);
 
         } else if (gameState.equals("gameOver")) {
+
+            //set colour and font
             g2d.setColor(Color.black);
             g2d.setFont(titleFont);
+            ///tell the user they died
             g2d.drawString("You Died", 215, 200);
+
+            //draw return button so they can go back
             returnButton.draw(g2d, mouseX, mouseY);
+
         } else if (gameState.equals("win")) {
+
+            //if they beat level
+            ///set colour and font
             g2d.setColor(Color.black);
             g2d.setFont(titleFont);
+            ///tell them they won
             g2d.drawString("You Won", 215, 200);
+
+            //draw continue button
             continueButton.draw(g2d, mouseX, mouseY);
+
         } else if (gameState.equals("leaderboard")) {
+
             backButton.draw(g2d, mouseX, mouseY);//draws the back button for leaderboard
             searchButton.draw(g2d, mouseX, mouseY);//draws the search button for leaderboard
-            ArrayList<Integer> scores = new ArrayList();
+
+            ArrayList<Integer> scores = new ArrayList();//make new arrayLists for scores and names to store data
             ArrayList<String> names = new ArrayList();
-            getScores(scores, names);
+            getScores(scores, names);//then get the score from file and sort them into those arrayLists
             sortScores(scores, names);
+
+            //set colour and font
             g2d.setColor(Color.black);
             g2d.setFont(titleFont);
+            //draw leaderboard
             g2d.drawString("Leaderboard", 120, 50);
+            //set font
             g2d.setFont(headerFont);
+            //draw name and score subheadings
             g2d.drawString("Name", 140, 90);
             g2d.drawString("Score", 430, 90);
+
+            //set font
             g2d.setFont(infoTextFont);
+            //for loop that will loop through the 10 first indexes of the array which are the 10 highest score as they are sorted in descending order
             for (int i = 0; i < 10; i++) {
+
+                //draw the name and score at the proper spot
                 g2d.drawString((i + 1) + ". " + names.get(i), 140, i * 30 + 120);
                 g2d.drawString(scores.get(i) + "", 430, i * 30 + 120);
+
             }
+
         } else if (gameState.equals("credits")) {
+
+            //draw back button
             backButton.draw(g2d, mouseX, mouseY);
+
+            //set font and colour
             g2d.setFont(titleFont);
             g2d.setColor(Color.black);
+            //draw credits title
             g2d.drawString("Credits", 210, 70);
+            //change font
             g2d.setFont(headerFont);
+            //draw credits
             g2d.drawString("Araib - lead programmmer", 150, 150);
             g2d.drawString("Bernie - Level Design", 150, 200);
             g2d.drawString("Jay - project manager", 150, 250);
+
         }
     }
 
@@ -328,24 +409,29 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         //setup thread
         animator = new Thread(this);
         animator.start();
+
         //setup input listeners
         setFocusable(true); // allow the panel to have focus
         requestFocusInWindow(); //focus to this panel right now
         addKeyListener(this); //add all the listeners
         addMouseListener(this);
         addMouseMotionListener(this);
+
         //add buttons on title screen
         playBtn = new Button(280, 180, 100, 50, "playButton", "playButtonHover");//create buttons for main menu
         infoBtn = new Button(280, 240, 100, 50, "infoButton", "infoButtonHover");
         shopBtn = new Button(280, 300, 100, 50, "shopButton", "shopButtonHover");
+
         //make buttons for shop
         equipSkin1Button = new Button(100, 260, 100, 50, "equipButton", "equipButtonHover");
         equipSkin2Button = new Button(300, 260, 100, 50, "equipButton", "equipButtonHover");
         equipSkin3Button = new Button(500, 260, 100, 50, "equipButton", "equipButtonHover");
         buySkin2Button = new Button(300, 260, 100, 50, "buyButton", "buyButtonHover");
         buySkin3Button = new Button(500, 260, 100, 50, "buyButton", "buyButtonHover");
+
         //make back button
         backButton = new Button(20, 420, 100, 50, "backButton", "backButtonHover");
+
         //make buttons for level select
         lvl1Button = new Button(125, 100, 50, 50, "lvl1Button", "lvl1ButtonHover");
         lvl2Button = new Button(225, 100, 50, 50, "lvl2Button", "lvl2ButtonHover");
@@ -353,17 +439,23 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         lvl4Button = new Button(425, 100, 50, 50, "lvl4Button", "lvl4ButtonHover");
         lvl5Button = new Button(525, 100, 50, 50, "lvl5Button", "lvl5ButtonHover");
         infiniteModeButton = new Button(290, 200, 120, 50, "infiniteModeButton", "infiniteModeButtonHover");
+
         //load image
         titleScreenGround = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/TitleImg.png")).getImage();
+
+        //add rest of buttons
         returnButton = new Button(300, 280, 100, 50, "returnButton", "returnButtonHover");
         continueButton = new Button(300, 280, 100, 50, "continueButton", "continueButtonHover");
         quitButton = new Button(300, 400, 100, 50, "quitButton", "quitButtonHover");
         leaderboardButton = new Button(300, 280, 100, 50, "highScoresButton", "highScoresButtonHover");
         searchButton = new Button(300, 420, 100, 50, "searchButton", "searchButtonHover");
         creditsButton = new Button(550, 420, 100, 50, "creditsButton", "creditsButtonHover");
+
+        //set pause to false
         pause = false;
-        //add to arraylist of test level
-        //Level 1
+
+        //add to arraylist of levels to set them up
+        ///COMMENTING NOT DONE FOR THIS
         groundLevel1.add(new Ground(0, 320, 400, false));
         itemLevel1.add(new Coin(200, 290));
 
@@ -692,6 +784,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
      */
     @Override
     public void keyPressed(KeyEvent e) {
+
         if (e.getKeyChar() == 'w') { //depending on key pressed set its pressed state to true
             up_pressed = true;
         } else if (e.getKeyChar() == 'a') {
@@ -701,6 +794,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         } else if (e.getKeyChar() == 'd') {
             right_pressed = true;
         }
+
     }
 
     /**
@@ -711,6 +805,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
      */
     @Override
     public void keyReleased(KeyEvent e) {
+
         if (e.getKeyChar() == 'w') { //depending on key pressed set its pressed state to true
             up_pressed = false;
         } else if (e.getKeyChar() == 'a') {
@@ -720,12 +815,16 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         } else if (e.getKeyChar() == 'd') {
             right_pressed = false;
         } else if (e.getKeyChar() == 'p' && (gameState.equals("level1") || gameState.equals("level2") || gameState.equals("level3") || gameState.equals("level4") || gameState.equals("level5") || gameState.equals("infiniteMode"))) {
+
+            //if the p key is pressed and we are in a level unpause the game if we are paused or pause the game if we are not paused
             if (pause) {
                 pause = false;
             } else {
                 pause = true;
             }
+
         }
+
     }
 
     @Override
@@ -742,150 +841,239 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
      * @param e the mouse event
      */
     @Override
-    public void mouseReleased(MouseEvent e) { //COMMENTS NOT DONE
-        mouseX = e.getX(); //update the location
+    public void mouseReleased(MouseEvent e) {
+
+        mouseX = e.getX(); //update the location of the mouse
         mouseY = e.getY();
 
         //check which was clicked and based off of that do what needs to be done
-        if (gameState.equals("titleScreen")) {//check which gamestate it is then check if anybuttons in that gamestate were clicked
+        if (gameState.equals("titleScreen")) {//check which gamestate it is then check if any buttons in that gamestate were clicked
+
             if (infoBtn.wasClicked(mouseX, mouseY)) {
-                gameState = "infoScreen";
+                gameState = "infoScreen";//go to infoscreen
             } else if (shopBtn.wasClicked(mouseX, mouseY)) {
-                gameState = "shopScreen";
+
+                gameState = "shopScreen";//go to schopscreen
                 clip.close();//stops playing menu music
                 playBackgroundSound("shop");//playing shop music
+
             } else if (playBtn.wasClicked(mouseX, mouseY)) {
-                gameState = "levelSelectScreen";
+
+                gameState = "levelSelectScreen";//go to levelselect screen
                 clip.close();//stops playing menu song
                 playBackgroundSound("levelSong");//play level selection song
+
             }
 
         } else if (gameState.equals("infoScreen")) {//do this for all gamestates and buttons
+
             if (backButton.wasClicked(mouseX, mouseY)) {
-                gameState = "titleScreen";
+                gameState = "titleScreen";//go back to titleScreen
             } else if (creditsButton.wasClicked(mouseX, mouseY)) {
-                gameState = "credits";
+                gameState = "credits"; //go to credits screen
             }
 
         } else if (gameState.equals("shopScreen")) {
+
             if (backButton.wasClicked(mouseX, mouseY)) {
-                gameState = "titleScreen";
+
+                gameState = "titleScreen";//go back to titleScreen
                 clip.close();//stops playing shop music
                 playBackgroundSound("menu");//plays main menu song
-            } else if (!player.skin2Bought && buySkin2Button.wasClicked(mouseX, mouseY) && player.getCoins() >= 50) {
-                player.skin2Bought = true;
-                player.setCoins(player.getCoins() - 50);
-            } else if (!player.skin3Bought && buySkin3Button.wasClicked(mouseX, mouseY) && player.getCoins() >= 100) {
-                player.skin3Bought = true;
-                player.setCoins(player.getCoins() - 100);
+
+            } else if (!player.isSkin2Bought() && buySkin2Button.wasClicked(mouseX, mouseY) && player.getCoins() >= 50) {
+
+                player.setSkin2Bought(true);//if the player hasnt bought the skin yet and they click the button while also having enough coins they bought the skin
+                player.setCoins(player.getCoins() - 50);//reduce coins by 50
+
+            } else if (!player.isSkin3Bought() && buySkin3Button.wasClicked(mouseX, mouseY) && player.getCoins() >= 100) {
+
+                player.setSkin3Bought(true);//if the player hasnt bought the skin yet and they click the button while also having enough coins they bought the skin
+                player.setCoins(player.getCoins() - 100);//reduce coins by 100
+
             } else if (equipSkin1Button.wasClicked(mouseX, mouseY)) {
+
+                //equip skin 1
                 player.equippedSkin = 1;
-            } else if (equipSkin2Button.wasClicked(mouseX, mouseY) && player.skin2Bought) {
+
+            } else if (equipSkin2Button.wasClicked(mouseX, mouseY) && player.isSkin2Bought()) {
+
+                //equip skin 2
                 player.equippedSkin = 2;
-            } else if (equipSkin3Button.wasClicked(mouseX, mouseY) && player.skin3Bought) {
+
+            } else if (equipSkin3Button.wasClicked(mouseX, mouseY) && player.isSkin3Bought()) {
+
+                //equip skin 3
                 player.equippedSkin = 3;
+
             }
 
         } else if (gameState.equals("levelSelectScreen")) {//else if user is in level selection screen
+
             if (backButton.wasClicked(mouseX, mouseY)) {//if user clicked the back button
+
                 gameState = "titleScreen";//sets game state to title screen
                 clip.close();//stops playing level select screen
                 playBackgroundSound("menu");//play level selection song
+
             } else if (infiniteModeButton.wasClicked(mouseX, mouseY)) {
+
+                //reset infinitemode level
                 resetLevel(itemLevel6, tempItemLevel6, enemyLevel6);
+                //despawn all enemies
                 enemyLevel6.clear();
+                //reset score
                 score = 0;
+                //reset name
                 name = "";
+
+                //while the enter a bad name keep asking
                 while (name == null || name.equals("")) {
                     name = JOptionPane.showInputDialog("What is your name? (Press q to cancel infinite mode)");
                 }
+
+                //if they quit
                 if (name.equalsIgnoreCase("q")) {//if user entered q for their name
+
                     gameState = "levelSelectScreen";//sets game state back to level selection screen
                     name = null;//sets name back to null so that user can play infinite mode later
+
                 } else {//else any other name
                     clip.close();//stops level selection song
                     playBackgroundSound("infinite");//play infinite mode song
                     gameState = "infiniteMode";//sets game state to infinite mode (starts infinite mode)
                 }
+
             } else if (lvl1Button.wasClicked(mouseX, mouseY)) {
+
+                //reset level 1
                 resetLevel(itemLevel1, tempItemLevel1, enemyLevel1);
                 clip.close();//stops level selection song
                 playBackgroundSound("lvl1");//plays level 1 background music
-                gameState = "level1";
+                gameState = "level1";//set to gameState level1
+
             } else if (lvl2Button.wasClicked(mouseX, mouseY)) {
+
+                //reset level 2
                 resetLevel(itemLevel2, tempItemLevel2, enemyLevel2);
                 clip.close();//stops level selection song
                 playBackgroundSound("lvl2");//plays level 2 background music
-                gameState = "level2";
+                gameState = "level2";//update gameState
+
             } else if (lvl3Button.wasClicked(mouseX, mouseY)) {
+
+                //reset level 3
                 resetLevel(itemLevel3, tempItemLevel3, enemyLevel3);
                 clip.close();//stops level selection song
                 playBackgroundSound("lvl3");//plays level 3 background music
-                gameState = "level3";
+                gameState = "level3";//update gameState
+
             } else if (lvl4Button.wasClicked(mouseX, mouseY)) {
+
+                //reset level 4
                 resetLevel(itemLevel4, tempItemLevel4, enemyLevel4);
                 clip.close();//stops level selection song
                 playBackgroundSound("lvl4");//plays level 4 background music
-                gameState = "level4";
+                gameState = "level4";//update gameState
+
             } else if (lvl5Button.wasClicked(mouseX, mouseY)) {
+
+                //reset Level 5
                 resetLevel(itemLevel5, tempItemLevel5, enemyLevel5);
                 clip.close();//stops level selection song
                 playBackgroundSound("lvl5");//plays level 5 background music
-                gameState = "level5";
+                gameState = "level5";//update GameState
+
             } else if (leaderboardButton.wasClicked(mouseX, mouseY)) {
+
+                //update gameState
                 gameState = "leaderboard";
+
             }
 
         } else if (gameState.equals("leaderboard")) {//else if user is in leaderboard screen
+
             if (backButton.wasClicked(mouseX, mouseY)) {//if back button was clicked
                 gameState = "levelSelectScreen";//game state sets back to level selection screen
             } else if (searchButton.wasClicked(mouseX, mouseY)) {
+
+                //setup ArrayLists
                 ArrayList<Integer> scores = new ArrayList();
                 ArrayList<Integer> indexOfScores = new ArrayList();
                 ArrayList<String> names = new ArrayList();
-                int highest = -1;
+                int highest = -1; //setup highestScore
+                //get all the score from the file
                 getScores(scores, names);
+                //get the name they are looking for
                 String name = JOptionPane.showInputDialog("Enter the person whose score you are looking for:");
-                for (int i = 0; i < names.size() - 1; i++) {
+
+                //loop through the names ArrayList
+                for (int i = 0; i < (names.size() - 1); i++) {
+                    //if this spot has the person we are looking for
                     if (name.equals(names.get(i))) {
+                        //add this index so that we know the score at this index is theirs
                         indexOfScores.add(i);
                     }
                 }
 
+                //if there are no scores mathcing up with that person that means they are not there
                 if (indexOfScores.isEmpty()) {
+                    //tell user they wer not found
                     JOptionPane.showMessageDialog(null, "Person not found.");
+
                 } else if (indexOfScores.size() == 1) {
+
+                    //if they only have 1 score then thats their highest score
+                    //get their highest score from the scores array as they were made to match up so the index in name will be thee index of their score in scores ArrayList
                     highest = scores.get(indexOfScores.get(0));
+                    //shot the user that persons highest score
                     JOptionPane.showMessageDialog(null, name + "'s highest score is " + highest);
 
                 } else {
+
+                    //they have more than 1 score so look through them all to find which is the highest and display thatg
                     for (int i = 0; i < indexOfScores.size() - 1; i++) {
+                        //loop through and check if the score at that index is higher than their highest
                         if (scores.get(indexOfScores.get(i)) > highest) {
+                            //if it is then its their new highest score
                             highest = scores.get(indexOfScores.get(i));
                         }
                     }
+
+                    //once we loop through then display theiri highest score
                     JOptionPane.showMessageDialog(null, name + "'s highest score is " + highest);
                 }
+
             }
         } else if (gameState.equals("gameOver")) {
+
+            //if they press the return button
             if (returnButton.wasClicked(mouseX, mouseY)) {
                 playBackgroundSound("levelSong");//plays level selection song
-                gameState = "levelSelectScreen";
+                gameState = "levelSelectScreen";//send them back to levelselect screen
             }
+
         } else if (gameState.equals("win")) {
+
+            //if they press continue button
             if (continueButton.wasClicked(mouseX, mouseY)) {
                 clip.close();//stops playing any music
                 playBackgroundSound("levelSong");//plays level selection song
-                gameState = "levelSelectScreen";
+                gameState = "levelSelectScreen";//send to level selec screen
             }
+
         } else if (pause && (gameState.equals("level1") || gameState.equals("level2") || gameState.equals("level3") || gameState.equals("level4") || gameState.equals("level5") || gameState.equals("infiniteMode"))) {
+
+            //if they are paused and are in a level and press quit
             if (quitButton.wasClicked(mouseX, mouseY)) {
-                gameState = "levelSelectScreen";
+                gameState = "levelSelectScreen"; //send back to levelSelectScreen
             }
         } else if (gameState.equals("credits")) {
+
             if (backButton.wasClicked(mouseX, mouseY)) {//if back button was clicked
                 gameState = "infoScreen";//game state sets back to level selection screen
             }
+
         }
     }
 
@@ -922,59 +1110,101 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         mouseY = e.getY();
     }
 
+    /**
+     * this method resets the level so they are ready to be played
+     *
+     * @param itemLevel - the arrayList of items in the level
+     * @param tempItemLevel - the arrayList of items that have been temporarily
+     * spawned by enemies dying
+     * @param enemyLevel - the arrayList of enemies in the level
+     */
     public void resetLevel(ArrayList<GameItem> itemLevel, ArrayList<GameItem> tempItemLevel, ArrayList<Enemy> enemyLevel) {
+
+        //reset player
         player.reset();
+        //empty all temporary items so they dont spawn
         tempItemLevel.clear();
+        //for each gameItem in the ArrayList reset them
         for (GameItem gameItem : itemLevel) {
-            gameItem.reset();
+            gameItem.reset();//reset it
         }
+        //for each enemy in the arrayList reset them
         for (Enemy enemy : enemyLevel) {
-            enemy.reset();
+            enemy.reset();//reset the enemy
         }
+
+        //reset pause to false
         pause = false;
     }
 
+    /**
+     * this method plays the level
+     *
+     * @param g2d - the graphics object used to draw
+     * @param groundLevel - the arrayList of ground tiles in the level
+     * @param itemLevel - the arrayList of items in the level
+     * @param tempItemLevel - the arrayList of temporary items in the level
+     * @param enemyLevel - the arrayList of enemies in the level
+     */
     public void playLevel(Graphics2D g2d, ArrayList<Ground> groundLevel, ArrayList<GameItem> itemLevel, ArrayList<GameItem> tempItemLevel, ArrayList<Enemy> enemyLevel) {
-        //test level
+
+        //if not paused update the player
         if (!pause) {
             player.move(up_pressed, down_pressed, left_pressed, right_pressed, groundLevel); //move player
             GameObject.setXOffset(player.getX() - Player.getScreenXPosition());//update offsets after movement
             GameObject.setYOffset(player.getY() - Player.getScreenYPosition());
-            player.checkDeath();
+            player.checkDeath();//check if the player died
         }
+
         player.draw(g2d, pause);//draw player
         player.drawHearts(g2d);//draw the amount of hearts th eplayer has
         player.drawCoins(g2d, infoTextFont);//draw the amount of couns the player has
+
         for (Ground groundTile : groundLevel) {//for each ground tile draw it
             groundTile.draw(g2d);
         }
-        for (GameItem gameItem : itemLevel) {
+
+        for (GameItem gameItem : itemLevel) {//for each game Item draw it
             gameItem.draw(g2d);
-            gameItem.collisionProcedure(player);
+            gameItem.collisionProcedure(player);//check if player collides with it and handle collision if they do
         }
-        for (GameItem gameItem : tempItemLevel) {
+
+        for (GameItem gameItem : tempItemLevel) {//for each game Item draw it
             gameItem.draw(g2d);
-            gameItem.collisionProcedure(player);
+            gameItem.collisionProcedure(player);//check if player collides with it and handle collision if they do
         }
+
         for (Enemy enemy : enemyLevel) {
+
+            //if not paused move enemy
             if (!pause) {
                 enemy.move();
             }
+
+            //draw enemy and handle collisions
             enemy.draw(g2d);
             enemy.collisionProcedure(player, tempItemLevel, gameState, enemyToRemove);
         }
+
         if (player.isDead()) {
+
+            //if player died
             clip.close();//stops any background music playing
             GameObject.playSound("deadSound");//plays music when user dies
             if (gameState.equals("infiniteMode")) {
-                saveScore();
+                saveScore(); //if they are in infinite mode save their score
             }
+            //update gameState
             gameState = "gameOver";
+
         }
+
         if (player.isWin()) {
+            //if player beats level
             clip.close();//stops playing level music
             playBackgroundSound("victory");//plays victory sound effect
-            gameState = "win";
+            gameState = "win";//updategameState
+
         }
 
         if (pause) {//if pause is true
@@ -988,9 +1218,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             g2d.drawString("Press P again to resume", 255, 150);//draws description on how to continue
             quitButton.draw(g2d, mouseX, mouseY);//draws the quit button
         }
+
     }
 
+    /**
+     * method that saves the infinite mode score to a file
+     */
     public void saveScore() {
+        //setup try catch statement
         try {
             // Create a FileWriter object
             // to write in the file
@@ -1001,25 +1236,46 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 
             // Closing the file writing connection
             fWriter.close();
+
         } catch (IOException e) {
-            System.out.println("Error: " + e);
+            //catch error and show it
+            JOptionPane.showMessageDialog(null, "Error: " + e);
         }
     }
 
+    /**
+     * this method gets the scores from the file
+     *
+     * @param scores - arrayList to put the score into
+     * @param names - arrayList to put the names into
+     */
     public void getScores(ArrayList<Integer> scores, ArrayList<String> names) {
+        //setup try catch statement
         try {
+            //make new fiel and scanner
             File f = new File("src/dinodashfinalproject/Scores.txt");
             Scanner s = new Scanner(f);
+
+            //while there are lines
             while (s.hasNextLine()) {
+                //get the next 2 lines and put them into proper arrayLists
                 names.add(s.nextLine());
                 scores.add(Integer.parseInt(s.nextLine()));
-
             }
+
         } catch (FileNotFoundException e) {
-            System.out.println("Error: " + e);
+            //catch error and show it
+            JOptionPane.showMessageDialog(null, "Error: " + e);
         }
     }
 
+    /**
+     * this method calls the quickSortDescending method to sort the scores and
+     * names
+     *
+     * @param scores - the ArrayList of scores
+     * @param names - the ArrayList of names
+     */
     public void sortScores(ArrayList<Integer> scores, ArrayList<String> names) {
         quickSortDescending(scores, 0, scores.size() - 1, names);
     }
@@ -1090,11 +1346,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
      */
     public static void playBackgroundSound(String soundName) {
         try {//attempts to open file and play audio
+
             File sound = new File("src/dinodashfinalproject/soundEffects/" + soundName + ".wav");//sets new file to sound file
             AudioInputStream audioInput = AudioSystem.getAudioInputStream(sound);//gets audio file and converts it into audio input stream which is java's standard way to read raw audio data
             clip = AudioSystem.getClip();//initialize clip
             clip.open(audioInput);//clip opens the audio input
             clip.loop(Clip.LOOP_CONTINUOUSLY);//loops the sound effect until stopped
+
         } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {//catches any error that may occur
             System.out.println("Error: " + e);//prints out the error
         }

@@ -157,8 +157,8 @@ public class Player extends GameObject {
     int idleAnimationCount;
     boolean dead;
     boolean win;
-    boolean skin2Bought;
-    boolean skin3Bought;
+    private boolean skin2Bought;
+    private boolean skin3Bought;
     int equippedSkin;
 
     /**
@@ -844,6 +844,42 @@ public class Player extends GameObject {
         skin3leftRun.add(skin3leftRun8);
         skin3leftJump1 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/YellowDinosaur17Left.png")).getImage();
         skin3leftJump2 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/YellowDinosaur18Left.png")).getImage();
+    }
+
+    /**
+     * this method sets the skin2Bought attributes
+     *
+     * @param skin2Bought - the boolean of if the skin is bought or not
+     */
+    public void setSkin2Bought(boolean skin2Bought) {
+        this.skin2Bought = skin2Bought;
+    }
+
+    /**
+     * this method sets the skin3Bought attributes
+     *
+     * @param skin3Bought - the boolean of if the skin is bought or not
+     */
+    public void setSkin3Bought(boolean skin3Bought) {
+        this.skin3Bought = skin3Bought;
+    }
+
+    /**
+     * this method returns if player bought skin 2 or not
+     *
+     * @return - a boolean for true if they did false if the didn't
+     */
+    public boolean isSkin2Bought() {
+        return skin2Bought;
+    }
+
+    /**
+     * this method returns if player bought skin 3 or not
+     *
+     * @return - a boolean for true if they did false if the didn't
+     */
+    public boolean isSkin3Bought() {
+        return skin3Bought;
     }
 
 }

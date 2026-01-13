@@ -38,10 +38,10 @@ public class DinoDashFinalProject extends JFrame {
         //tell the JFrame what to do when closed
         //this is important if our application has multiple windows
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null);//center window on screen
         Image icon = new ImageIcon(getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur1.png")).getImage();//get icon image to dark green dinosaur
         this.setIconImage(icon);//sets icon image to dark green dinosaur
-        GamePanel.playBackgroundSound("menu");
+        GamePanel.playBackgroundSound("menu");//play backgroudn music
     }
 
     public static void main(String[] args) {
