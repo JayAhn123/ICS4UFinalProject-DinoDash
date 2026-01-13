@@ -41,6 +41,7 @@ public class DinoDashFinalProject extends JFrame {
         setLocationRelativeTo(null);
         Image icon = new ImageIcon(getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur1.png")).getImage();//get icon image to dark green dinosaur
         this.setIconImage(icon);//sets icon image to dark green dinosaur
+        GamePanel.playBackgroundSound("menu");
     }
 
     public static void main(String[] args) {

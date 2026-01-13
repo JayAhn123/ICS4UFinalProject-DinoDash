@@ -79,7 +79,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     boolean pause;
     String name = "";
     int score;
-    Clip clip;//audio clip setup for background music
+    static Clip clip;//audio clip setup for background music
 
     //variables for testing
     ArrayList<Ground> groundLevel1 = new ArrayList();
@@ -219,7 +219,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             g2d.drawString("- In infinite mode the goal is to defeat as many enemies as you can without dying", 35, 115);
             g2d.drawString("Game Tutorial:", 25, 155);
             g2d.drawString("- A to move left, D to move right, W to jump and P to pause the game", 35, 175);
-            g2d.drawString("- To eliminate enemies, jump on them twice, or once from a higher drop", 35, 195);
+            g2d.drawString("- To eliminate enemies, jump on them twice, or once with lucky jump", 35, 195);
             g2d.drawString("There are 3 powerups that can be found in the game which will either:", 25, 235);
             g2d.drawString("- Extra Heart: Gives one more life (Max Heart is 5)", 35, 255);
             g2d.drawString("- High Jump: Makes dinosaur jump higher", 35, 275);
@@ -748,17 +748,19 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 
         //check which was clicked and based off of that do what needs to be done
         if (gameState.equals("titleScreen")) {//check which gamestate it is then check if anybuttons in that gamestate were clicked
-
             if (infoBtn.wasClicked(mouseX, mouseY)) {
                 gameState = "infoScreen";
             } else if (shopBtn.wasClicked(mouseX, mouseY)) {
                 gameState = "shopScreen";
+                clip.close();//stops playing menu music
+                playBackgroundSound("shop");//playing shop music
             } else if (playBtn.wasClicked(mouseX, mouseY)) {
                 gameState = "levelSelectScreen";
+                clip.close();//stops playing menu song
+                playBackgroundSound("levelSong");//play level selection song
             }
 
         } else if (gameState.equals("infoScreen")) {//do this for all gamestates and buttons
-
             if (backButton.wasClicked(mouseX, mouseY)) {
                 gameState = "titleScreen";
             } else if (creditsButton.wasClicked(mouseX, mouseY)) {
@@ -766,9 +768,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             }
 
         } else if (gameState.equals("shopScreen")) {
-
             if (backButton.wasClicked(mouseX, mouseY)) {
                 gameState = "titleScreen";
+                clip.close();//stops playing shop music
+                playBackgroundSound("menu");//plays main menu song
             } else if (!player.skin2Bought && buySkin2Button.wasClicked(mouseX, mouseY) && player.getCoins() >= 50) {
                 player.skin2Bought = true;
                 player.setCoins(player.getCoins() - 50);
@@ -784,9 +787,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             }
 
         } else if (gameState.equals("levelSelectScreen")) {//else if user is in level selection screen
-
             if (backButton.wasClicked(mouseX, mouseY)) {//if user clicked the back button
                 gameState = "titleScreen";//sets game state to title screen
+                clip.close();//stops playing level select screen
+                playBackgroundSound("menu");//play level selection song
             } else if (infiniteModeButton.wasClicked(mouseX, mouseY)) {
                 resetLevel(itemLevel6, tempItemLevel6, enemyLevel6);
                 enemyLevel6.clear();
@@ -798,22 +802,34 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
                     gameState = "levelSelectScreen";//sets game state back to level selection screen
                     name = null;//sets name back to null so that user can play infinite mode later
                 } else {//else any other name
+                    clip.close();//stops level selection song
+                    playBackgroundSound("infinite");//play infinite mode song
                     gameState = "infiniteMode";//sets game state to infinite mode (starts infinite mode)
                 }
             } else if (lvl1Button.wasClicked(mouseX, mouseY)) {
                 resetLevel(itemLevel1, tempItemLevel1, enemyLevel1);
+                clip.close();//stops level selection song
+                playBackgroundSound("lvl1");//plays level 1 background music
                 gameState = "level1";
             } else if (lvl2Button.wasClicked(mouseX, mouseY)) {
                 resetLevel(itemLevel2, tempItemLevel2, enemyLevel2);
+                clip.close();//stops level selection song
+                playBackgroundSound("lvl2");//plays level 2 background music
                 gameState = "level2";
             } else if (lvl3Button.wasClicked(mouseX, mouseY)) {
                 resetLevel(itemLevel3, tempItemLevel3, enemyLevel3);
+                clip.close();//stops level selection song
+                playBackgroundSound("lvl3");//plays level 3 background music
                 gameState = "level3";
             } else if (lvl4Button.wasClicked(mouseX, mouseY)) {
                 resetLevel(itemLevel4, tempItemLevel4, enemyLevel4);
+                clip.close();//stops level selection song
+                playBackgroundSound("lvl4");//plays level 4 background music
                 gameState = "level4";
             } else if (lvl5Button.wasClicked(mouseX, mouseY)) {
                 resetLevel(itemLevel5, tempItemLevel5, enemyLevel5);
+                clip.close();//stops level selection song
+                playBackgroundSound("lvl5");//plays level 5 background music
                 gameState = "level5";
             } else if (leaderboardButton.wasClicked(mouseX, mouseY)) {
                 gameState = "leaderboard";
@@ -852,12 +868,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             }
         } else if (gameState.equals("gameOver")) {
             if (returnButton.wasClicked(mouseX, mouseY)) {
-                pauseSound();//stop playing dead music
+                playBackgroundSound("levelSong");//plays level selection song
                 gameState = "levelSelectScreen";
             }
         } else if (gameState.equals("win")) {
             if (continueButton.wasClicked(mouseX, mouseY)) {
-                pauseSound();//stops playing win music
+                clip.close();//stops playing any music
+                playBackgroundSound("levelSong");//plays level selection song
                 gameState = "levelSelectScreen";
             }
         } else if (pause && (gameState.equals("level1") || gameState.equals("level2") || gameState.equals("level3") || gameState.equals("level4") || gameState.equals("level5") || gameState.equals("infiniteMode"))) {
@@ -946,13 +963,15 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             enemy.collisionProcedure(player, tempItemLevel, gameState, enemyToRemove);
         }
         if (player.isDead()) {
-            playBackgroundSound("deadSound");//plays music when user dies
+            clip.close();//stops any background music playing
+            GameObject.playSound("deadSound");//plays music when user dies
             if (gameState.equals("infiniteMode")) {
                 saveScore();
             }
             gameState = "gameOver";
         }
         if (player.isWin()) {
+            clip.close();//stops playing level music
             playBackgroundSound("victory");//plays victory sound effect
             gameState = "win";
         }
@@ -1068,7 +1087,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
      *
      * @param soundName - audio file name
      */
-    public void playBackgroundSound(String soundName) {
+    public static void playBackgroundSound(String soundName) {
         try {//attempts to open file and play audio
             File sound = new File("src/dinodashfinalproject/soundEffects/" + soundName + ".wav");//sets new file to sound file
             AudioInputStream audioInput = AudioSystem.getAudioInputStream(sound);//gets audio file and converts it into audio input stream which is java's standard way to read raw audio data
@@ -1078,12 +1097,5 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {//catches any error that may occur
             System.out.println("Error: " + e);//prints out the error
         }
-    }
-
-    /**
-     * stops playing music
-     */
-    public void pauseSound() {
-        clip.close();//close music clip
     }
 }
