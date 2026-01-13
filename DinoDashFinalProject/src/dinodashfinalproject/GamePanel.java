@@ -795,6 +795,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
                 resetLevel(itemLevel6, tempItemLevel6, enemyLevel6);
                 enemyLevel6.clear();
                 score = 0;
+                name = "";
                 while (name == null || name.equals("")) {
                     name = JOptionPane.showInputDialog("What is your name? (Press q to cancel infinite mode)");
                 }
