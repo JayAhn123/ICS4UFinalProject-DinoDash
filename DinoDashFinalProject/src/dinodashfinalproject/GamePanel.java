@@ -1008,7 +1008,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
                 String name = JOptionPane.showInputDialog("Enter the person whose score you are looking for:");
 
                 //loop through the names ArrayList
-                for (int i = 0; i < (names.size() - 1); i++) {
+                for (int i = 0; i < (names.size()); i++) {
                     //if this spot has the person we are looking for
                     if (name.equals(names.get(i))) {
                         //add this index so that we know the score at this index is theirs
