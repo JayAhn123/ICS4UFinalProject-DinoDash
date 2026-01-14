@@ -260,7 +260,7 @@ public abstract class GameObject {
      *
      * @param soundName - name of the audio file
      */
-    public static void playSound(String soundName) {
+    public void playSound(String soundName) {
         try {//attempts to open file and play audio
             File sound = new File("src/dinodashfinalproject/soundEffects/" + soundName + ".wav");//sets new file to sound file
             AudioInputStream audioInput = AudioSystem.getAudioInputStream(sound);//gets audio file and converts it into audio input stream which is java's standard way to read raw audio data

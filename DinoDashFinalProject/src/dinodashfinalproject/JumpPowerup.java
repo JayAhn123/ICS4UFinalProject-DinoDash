@@ -34,7 +34,7 @@ public class JumpPowerup extends GameItem {
     public void collisionProcedure(Player player) {
         if (visible) { // if its visible and has not been collected yet
             if (player.hitbox.intersects(hitbox)) {//check if they collide
-                GameObject.playSound("jumpCollect");//plays sound effect when user collects jump boost
+                playSound("jumpCollect");//plays sound effect when user collects jump boost
                 player.setJumpHeight(-13);//if they do make the player jump higher
                 startTime = System.nanoTime();//get the start time of the when the powerup started
                 visible = false;//set visible to false
@@ -59,7 +59,7 @@ public class JumpPowerup extends GameItem {
      *
      * @return - the new jumpPowerup item
      */
-    public GameObject clone() {
+    public JumpPowerup clone() {
         return new JumpPowerup(x, y); // return new jumpPowerup
     }
 }

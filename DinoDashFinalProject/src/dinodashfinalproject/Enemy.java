@@ -99,7 +99,7 @@ public class Enemy extends GameObject {
 
             if (player.hitbox.intersects(hitbox)) {
                 //if the player hits the dangeroues part of the enemy
-                GameObject.playSound("damagedSound");//plays sound effect when user takes damage
+                playSound("damagedSound");//plays sound effect when user takes damage
                 player.setHearts(player.getHearts() - 1);//lower hearts by 1
 
                 //depending on which side of the enemy the player is on push it back
@@ -117,7 +117,7 @@ public class Enemy extends GameObject {
                 health -= 1;
                 //bounce th eplayer back up
                 player.setYSpeed(-5);
-                GameObject.playSound("enemyStomp");//playing sound effect for stepping on enemy 
+                playSound("enemyStomp");//playing sound effect for stepping on enemy 
 
                 if (health == 0) {//if enemy health is 0 and it dies
 
@@ -152,7 +152,7 @@ public class Enemy extends GameObject {
      *
      * @return - a new cloned enemy
      */
-    public GameObject clone() {
+    public Enemy clone() {
         Enemy other = new Enemy(x, y, startXRange, endXRange);//make new enemy
         other.health = this.health;//make attributes the same
         other.visible = this.visible;

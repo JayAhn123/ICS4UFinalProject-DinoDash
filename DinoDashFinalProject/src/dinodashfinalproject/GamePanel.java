@@ -204,16 +204,19 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             //draw the buttons to buy the skins
             equipSkin1Button.draw(g2d, mouseX, mouseY); // skin 1 will always be equippable
 
+            g2d.setFont(infoTextFont);//set font for price tag
             if (player.isSkin2Bought()) {//if they bought the skin show the equip button otherwise show buy button so they can buy it
                 equipSkin2Button.draw(g2d, mouseX, mouseY);
             } else {
                 buySkin2Button.draw(g2d, mouseX, mouseY);
+                g2d.drawString("50 Coins", 317, 325);//draws price tag for red skin
             }
 
             if (player.isSkin3Bought()) {//if they bought the skin show the equip button otherwise show buy button so they can buy it
                 equipSkin3Button.draw(g2d, mouseX, mouseY);
             } else {
                 buySkin3Button.draw(g2d, mouseX, mouseY);
+                g2d.drawString("100 Coins", 514, 325);//draws price tag for yellow/gold skin
             }
 
             //draw the back button
@@ -906,6 +909,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
                 //equip skin 3
                 player.setEquippedSkin(3);
 
+            } else if ((buySkin2Button.wasClicked(mouseX, mouseY) || buySkin3Button.wasClicked(mouseX, mouseY)) && (!player.isSkin2Bought() || !player.isSkin3Bought())) {//else if user tries to purchase without enough coins
+
+                player.failedPurchase();//plays error sound effect
+
             }
 
         } else if (gameState.equals("levelSelectScreen")) {//else if user is in level selection screen
@@ -1005,7 +1012,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
                 //get all the score from the file
                 getScores(scores, names);
                 //get the name they are looking for
-                String name = JOptionPane.showInputDialog("Enter the person whose score you are looking for:");
+                String name = JOptionPane.showInputDialog("Enter the person whose score you are looking for (Case Sensitive):");
 
                 //loop through the names ArrayList
                 for (int i = 0; i < (names.size()); i++) {
@@ -1049,6 +1056,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 
             //if they press the return button
             if (returnButton.wasClicked(mouseX, mouseY)) {
+                clip.close();//stops playing losing music
                 playBackgroundSound("levelSong");//plays level selection song
                 gameState = "levelSelectScreen";//send them back to levelselect screen
             }
@@ -1190,8 +1198,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 
             //if player died
             clip.close();//stops any background music playing
-            GameObject.playSound("deadSound");//plays music when user dies
-            if (gameState.equals("infiniteMode")) {
+            playBackgroundSound("lose");//plays sad music when user loses
+            if (gameState.equals("infiniteMode")) {//if game state is inifinite mode
                 saveScore(); //if they are in infinite mode save their score
             }
             //update gameState

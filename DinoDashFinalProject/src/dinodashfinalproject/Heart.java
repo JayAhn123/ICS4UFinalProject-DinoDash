@@ -31,7 +31,7 @@ public class Heart extends GameItem {
             if (player.hitbox.intersects(hitbox)) {//check if they collide
                 if (player.getHearts() < 5) {
                     player.setHearts(player.getHearts() + 1);//if they do add 1 to player heart count
-                    GameObject.playSound("heartCollect");//makes sound effect when user collects heart
+                    playSound("heartCollect");//makes sound effect when user collects heart
                 }
                 visible = false;//set visible to false if they collect the heart
             }
@@ -43,7 +43,7 @@ public class Heart extends GameItem {
      *
      * @return - the new heart item
      */
-    public GameObject clone() {
+    public Heart clone() {
         return new Heart(x, y);//return new heart with same attributes
     }
 

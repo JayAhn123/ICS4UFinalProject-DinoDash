@@ -34,7 +34,7 @@ public class SpeedPowerup extends GameItem {
     public void collisionProcedure(Player player) {
         if (visible) { // if its visible and has not been collected yet
             if (player.hitbox.intersects(hitbox)) {//check if they collide
-                GameObject.playSound("speedCollect");//makes sound effect when user collects speed boost
+                playSound("speedCollect");//makes sound effect when user collects speed boost
                 player.setMaxSpeed(12);//if they do make the player run faster
                 startTime = System.nanoTime();//get the start time of the when the powerup started
                 visible = false;//set visible to false
@@ -59,7 +59,7 @@ public class SpeedPowerup extends GameItem {
      *
      * @return - the new SpeedPowerup item
      */
-    public GameObject clone() {
+    public SpeedPowerup clone() {
         return new SpeedPowerup(x, y); // return new SpeedPowerup
     }
 }

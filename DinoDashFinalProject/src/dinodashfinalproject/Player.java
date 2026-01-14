@@ -298,7 +298,7 @@ public class Player extends GameObject {
             //then for each title in the array check if the hitboxes are intersecting
             for (Ground groundTile : groundTiles) {
                 if (groundTile.hitbox.intersects(hitbox)) {
-                    GameObject.playSound("jumpSound");//plays jump sound effect
+                    playSound("jumpSound");//plays jump sound effect
                     ySpeed = jumpHeight;//if they do intersect set y speed to -6 so we jump
                     airborne = true; //set airborne to true because we are now in air and need to do air animation
                 }
@@ -378,6 +378,7 @@ public class Player extends GameObject {
         //if hearts gets below 1 or we fall too much then we die
         if (hearts < 1 || y > 600) {
             dead = true;//set dead to true
+            playSound("deadSound");//plays sound effect when user dies
         }
     }
 
@@ -821,6 +822,7 @@ public class Player extends GameObject {
      */
     public void setSkin2Bought(boolean skin2Bought) {
         this.skin2Bought = skin2Bought;
+        playSound("purchase");//plays sound effect when user buys a skin
     }
 
     /**
@@ -830,6 +832,14 @@ public class Player extends GameObject {
      */
     public void setSkin3Bought(boolean skin3Bought) {
         this.skin3Bought = skin3Bought;
+        playSound("purchase");//plays sound effect when user buys a skin
+    }
+
+    /**
+     * plays sound effect when user tries to purchase skins without enough coins
+     */
+    public void failedPurchase() {
+        playSound("purchaseError");//plays error sound effect
     }
 
     /**

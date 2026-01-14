@@ -29,7 +29,7 @@ public class Coin extends GameItem {
     public void collisionProcedure(Player player) {
         if (visible) {//check only if its visible
             if (player.hitbox.intersects(hitbox)) {//check if they collide
-                GameObject.playSound("coinSound");//plays sound effect when user gets a coin
+                playSound("coinSound");//plays sound effect when user gets a coin
                 player.setCoins(player.getCoins() + 1);//if they do add 1 to player coin count
                 visible = false;//set visible to false if they collect the coin
             }
@@ -41,7 +41,7 @@ public class Coin extends GameItem {
      *
      * @return - the new coin
      */
-    public GameObject clone() {
+    public Coin clone() {
         return new Coin(x, y);//return new coin with same attributes
     }
 
