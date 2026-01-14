@@ -1,5 +1,5 @@
-/* Jay Ahn
- * Dec 19, 2025
+/* Jay Ahn. Araib, Bernie
+ * Jan 13, 2025
  * GameObject Class for Dino Dash
  */
 package dinodashfinalproject;
@@ -25,9 +25,9 @@ public abstract class GameObject {
     protected int width;//width of the game object
     protected int height;//height of the game object
     protected Rectangle hitbox; //the hitbox of the game object which is a rectangle type object
-    protected String imageName;
+    protected String imageName; // the name of the image
     protected Image img; //the image that should be displayed for the object
-    protected static int xOffset;
+    protected static int xOffset;//x and y offset for the moving parts of the game
     protected static int yOffset;
 
     /**
@@ -198,6 +198,42 @@ public abstract class GameObject {
     }
 
     /**
+     * this method sets the imageName
+     *
+     * @param imageName - the new imageName
+     */
+    public void setImageName(String imageName) {
+        this.imageName = imageName; //update imageName
+    }
+
+    /**
+     * this method gets the image Name
+     *
+     * @return - the image Name
+     */
+    public String getImageName() {
+        return imageName; //return imageName
+    }
+
+    /**
+     * this method sets the image
+     *
+     * @param image - the new image
+     */
+    public void setImg(Image image) {
+        this.img = image; //update img
+    }
+
+    /**
+     * this method gets the image
+     *
+     * @return - the image
+     */
+    public Image getImg() {
+        return img; //return img
+    }
+
+    /**
      * determines if other game object is equal to current game object
      *
      * @param other - other game object that is being compared
@@ -234,5 +270,13 @@ public abstract class GameObject {
         } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {//catches any error that may occur
             System.out.println("Error: " + e);//prints out the error
         }
+    }
+
+    /**
+     * this method returns the toString
+     */
+    public String toString() {
+        return x + "\n" + y + "\n" + width + "\n" + height + "\n" + hitbox.toString() + "\n" + imageName + "\n"
+                + img.toString() + "\n" + xOffset + "\n" + yOffset;
     }
 }

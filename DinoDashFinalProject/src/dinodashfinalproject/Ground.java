@@ -1,6 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+/* Araib, Bernie, Jay
+ * January 13 2026
+ * Groudn class for levels
  */
 package dinodashfinalproject;
 
@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 
 public class Ground extends GameObject {
 
+    //attributes
     private boolean winBlock;
 
     /**
@@ -22,10 +23,10 @@ public class Ground extends GameObject {
      */
     public Ground(int x, int y, int width, boolean winBlock) {
         super(x, y, width, 50, "GroundImg");//chain to superclass constructor height is always 50
-        if (winBlock) {
+        if (winBlock) {//if its a winblock thrn changes the image
             img = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/winBlock.png")).getImage();
         }
-        this.winBlock = winBlock;
+        this.winBlock = winBlock;//set if its a winblock or not
     }
 
     /**
@@ -66,5 +67,28 @@ public class Ground extends GameObject {
      */
     public void setWinBlock(boolean winBlock) {
         this.winBlock = winBlock;
+    }
+
+    /**
+     * this method returns a string of all the attributes of the ground object
+     *
+     * @return - a string of all the attributes
+     */
+    public String toString() {
+        return super.toString() + "\n" + winBlock + "\n";
+    }
+
+    /**
+     * this method checks if 2 ground object are the same
+     *
+     * @param other - the other ground object
+     * @return - boolean of true if they are the same false if not
+     */
+    public boolean equals(Ground other) {
+        if (super.equals(other) && other.winBlock == this.winBlock) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

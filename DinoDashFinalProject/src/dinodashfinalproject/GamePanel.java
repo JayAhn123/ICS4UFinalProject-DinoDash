@@ -1,6 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+/*Araib, Bernie, Jay
+ *January 13 2025
+ * Jpanel for the game which runs everything
  */
 package dinodashfinalproject;
 
@@ -185,13 +185,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             g2d.fillRect(435, 421, 165, 50);
 
             //draw a background rectangle for the skin that is equipped
-            if (player.equippedSkin == 1) {
+            if (player.getEquippedSkin() == 1) {
                 g2d.fillRect(100, 100, 100, 150);
             }
-            if (player.equippedSkin == 2) {
+            if (player.getEquippedSkin() == 2) {
                 g2d.fillRect(300, 100, 100, 150);
             }
-            if (player.equippedSkin == 3) {
+            if (player.getEquippedSkin() == 3) {
                 g2d.fillRect(500, 100, 100, 150);
             }
 
@@ -220,9 +220,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             backButton.draw(g2d, mouseX, mouseY);
 
             //draw the skins
-            g2d.drawImage(player.skin1rightStill1, 118, 145, null);
-            g2d.drawImage(player.skin2rightStill1, 318, 145, null);
-            g2d.drawImage(player.skin3rightStill1, 518, 145, null);
+            g2d.drawImage(player.getSkin1RightStill().get(0), 118, 145, null);
+            g2d.drawImage(player.getSkin2RightStill().get(0), 318, 145, null);
+            g2d.drawImage(player.getSkin3RightStill().get(0), 518, 145, null);
 
         } else if (gameState.equals("infoScreen")) { //if the gamestate is infoscreen
 
@@ -894,17 +894,17 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             } else if (equipSkin1Button.wasClicked(mouseX, mouseY)) {
 
                 //equip skin 1
-                player.equippedSkin = 1;
+                player.setEquippedSkin(1);
 
             } else if (equipSkin2Button.wasClicked(mouseX, mouseY) && player.isSkin2Bought()) {
 
                 //equip skin 2
-                player.equippedSkin = 2;
+                player.setEquippedSkin(2);
 
             } else if (equipSkin3Button.wasClicked(mouseX, mouseY) && player.isSkin3Bought()) {
 
                 //equip skin 3
-                player.equippedSkin = 3;
+                player.setEquippedSkin(3);
 
             }
 

@@ -1,3 +1,7 @@
+/*Araib, Bernie, Jay
+ * January 13 2026
+ * Main class for the dinodash game which is the main jFrame
+ */
 package dinodashfinalproject;
 
 //import Packages

@@ -1,6 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+/* Araib, Jay, Bernie
+ * January 12 2026
+ * buton object for menus in the game
  */
 package dinodashfinalproject;
 
@@ -16,8 +16,8 @@ import javax.swing.ImageIcon;
 public class Button extends GameObject {
 
     //attributes
-    Image imgHover;
-    String imageHoverName;
+    private Image imgHover;
+    private String imageHoverName;
 
     /**
      * Primary constructor for the button object
@@ -33,6 +33,7 @@ public class Button extends GameObject {
     public Button(int x, int y, int width, int height, String imageName, String imageHoverName) {
         super(x, y, width, height, imageName); //chain to superclass constructor
         this.imageHoverName = imageHoverName; //set rest of attributes
+        //make image
         imgHover = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/" + this.imageHoverName + ".png")).getImage();
     }
 
@@ -72,6 +73,46 @@ public class Button extends GameObject {
      */
     public boolean wasClicked(int mouseX, int mouseY) {
         return hitbox.contains(mouseX, mouseY); //return if the hitbox includes the mouse current coordinates
+    }
+
+    /**
+     * this method sets the imageHoverName
+     *
+     * @param imageHoverName - the new imageHoverName
+     */
+    public void setImageHoverName(String imageHoverName) {
+        this.imageHoverName = imageHoverName; //update imageHoverName
+    }
+
+    /**
+     * this method gets the imageHoverName
+     *
+     * @return - the imageHoverName
+     */
+    public String getImageHoverName() {
+        return imageHoverName; //return imageHoverName
+    }
+
+    /**
+     * this method sets the hover image
+     *
+     * @param imgHover - the new hover image
+     */
+    public void setImgHover(Image imgHover) {
+        this.imgHover = imgHover; //update img
+    }
+
+    /**
+     * this method gets the hover image
+     *
+     * @return - the hover image
+     */
+    public Image getImgHover() {
+        return imgHover; //return img
+    }
+
+    public String toString() {
+        return super.toString() + "\n" + imageHoverName + "\n" + img.toString();
     }
 
 }
