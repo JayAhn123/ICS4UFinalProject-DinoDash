@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
@@ -16,7 +17,7 @@ import javax.swing.ImageIcon;
  *
  * @author arbas
  */
-public class Player extends GameObject {
+public class Player extends GameObject implements Serializable{
 
     //attributes
     private static final int SCREENXPOSITION = 325;

@@ -21,8 +21,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.ImageIcon;
@@ -92,7 +94,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     private ArrayList<GameItem> itemLevel1 = new ArrayList();
     private ArrayList<GameItem> tempItemLevel1 = new ArrayList();
     private ArrayList<Enemy> enemyLevel1 = new ArrayList();
-    private Player player = new Player();
+    private Player player;
 
     //variables for level 2
     private ArrayList<Ground> groundLevel2 = new ArrayList();
@@ -242,7 +244,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             g2d.drawString("- In infinite mode the goal is to defeat as many enemies as you can without dying", 35, 115);
             g2d.drawString("Game Tutorial:", 25, 155);
             g2d.drawString("- A to move left, D to move right, W to jump and P to pause the game", 35, 175);
-            g2d.drawString("- To eliminate enemies, jump on them twice, or once with lucky jump", 35, 195);
+            g2d.drawString("- To eliminate enemies, jump on them twice, or once with if you fall fast enough", 35, 195);
             g2d.drawString("There are 3 powerups that can be found in the game which will either:", 25, 235);
             g2d.drawString("- Extra Heart: Gives one more life (Max Heart is 5)", 35, 255);
             g2d.drawString("- High Jump: Makes dinosaur jump higher", 35, 275);
@@ -419,6 +421,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         addKeyListener(this); //add all the listeners
         addMouseListener(this);
         addMouseMotionListener(this);
+
+        //load the player
+        loadPlayer();
 
         //add buttons on title screen
         playBtn = new Button(280, 180, 100, 50, "playButton", "playButtonHover");//create buttons for main menu
@@ -1364,5 +1369,38 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {//catches any error that may occur
             System.out.println("Error: " + e);//prints out the error
         }
+    }
+
+    /**
+     * this method loads the player from the save file
+     */
+    public void loadPlayer() {
+
+        //try makine a fileinputstream to the file
+        try {
+            //make the connection
+            FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Saves/playerSave.txt");
+
+            try {//try making obbjectinputStream to get player object form file
+                ObjectInputStream s = new ObjectInputStream(in);//make connection
+                player = (Player) s.readObject();//set plaer to the object we got from file
+            } catch (ClassNotFoundException e) {//catch error
+                player = new Player();//set player to default player
+                //output error
+                JOptionPane.showMessageDialog(null, "Error: " + e);
+            }
+
+        } catch (IOException e) {//catch error if making fileinputStream fails
+            JOptionPane.showMessageDialog(null, "Error: " + e);
+        }
+    }
+
+    /**
+     * getter for player
+     *
+     * @return - the player
+     */
+    public Player getPlayer() {
+        return player;
     }
 }

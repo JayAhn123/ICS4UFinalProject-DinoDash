@@ -8,7 +8,12 @@ package dinodashfinalproject;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import java.awt.Image;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 
 /* Jay Ahn, Araib Basit, Bernie Gao
@@ -32,7 +37,8 @@ public class DinoDashFinalProject extends JFrame {
         //set title of the JFrame
         setTitle("Dino Dash");
         //add a custom JPanel to draw on
-        add(new GamePanel());
+        GamePanel panel = new GamePanel();
+        add(panel);
         //set the size of the window
         setSize(700, 525);
         //make it visible 
@@ -41,7 +47,7 @@ public class DinoDashFinalProject extends JFrame {
         setResizable(false);
         //tell the JFrame what to do when closed
         //this is important if our application has multiple windows
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(close(panel));
         setLocationRelativeTo(null);//center window on screen
         Image icon = new ImageIcon(getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur1.png")).getImage();//get icon image to dark green dinosaur
         this.setIconImage(icon);//sets icon image to dark green dinosaur
@@ -54,6 +60,27 @@ public class DinoDashFinalProject extends JFrame {
             //create the JFrame
             DinoDashFinalProject frame = new DinoDashFinalProject();
         });
+    }
+
+    /**
+     * this method saves and closes the game
+     * @param panel - the gamePanel
+     * @return - the closeOperation for the jFrame
+     */
+    public int close(GamePanel panel) {
+        try {
+            FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Saves/playerSave.txt");
+
+            ObjectOutput s = new ObjectOutputStream(out);
+            s.writeObject(panel.getPlayer());
+
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e);
+
+        }
+
+        return JFrame.EXIT_ON_CLOSE;
+
     }
 
 }
