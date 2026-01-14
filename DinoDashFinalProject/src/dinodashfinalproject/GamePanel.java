@@ -374,7 +374,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 
             }
 
-        } else if (gameState.equals("credits")) {
+        } else if (gameState.equals("credits")) {//else if game state is credit screen
 
             //draw back button
             backButton.draw(g2d, mouseX, mouseY);
@@ -383,13 +383,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             g2d.setFont(titleFont);
             g2d.setColor(Color.black);
             //draw credits title
-            g2d.drawString("Credits", 210, 70);
+            g2d.drawString("Credits", 215, 70);
             //change font
             g2d.setFont(headerFont);
             //draw credits
-            g2d.drawString("Araib - lead programmmer", 150, 150);
-            g2d.drawString("Bernie - Level Design", 150, 200);
-            g2d.drawString("Jay - project manager", 150, 250);
+            g2d.drawString("Araib - lead programmmer", 147, 150);
+            g2d.drawString("Bernie - Level Design", 147, 200);
+            g2d.drawString("Jay - project manager", 147, 250);
 
         }
     }
@@ -1044,7 +1044,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
                 } else {
 
                     //they have more than 1 score so look through them all to find which is the highest and display thatg
-                    for (int i = 0; i < indexOfScores.size() - 1; i++) {
+                    for (int i = 0; i < indexOfScores.size(); i++) {
                         //loop through and check if the score at that index is higher than their highest
                         if (scores.get(indexOfScores.get(i)) > highest) {
                             //if it is then its their new highest score
