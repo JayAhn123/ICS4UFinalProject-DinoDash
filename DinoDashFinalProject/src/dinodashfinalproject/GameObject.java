@@ -11,6 +11,7 @@ import java.awt.Rectangle;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.URL;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -47,7 +48,9 @@ public abstract class GameObject implements Serializable {
         this.height = height;
         hitbox = new Rectangle(x, y, width, height);
         this.imageName = imageName;//make image
-        img = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/" + this.imageName + ".png")).getImage();
+        URL url = GameObject.class.getResource(imageName + ".png");
+        ImageIcon pic = new ImageIcon(url);
+        img = pic.getImage();
     }
 
     /**
@@ -289,6 +292,8 @@ public abstract class GameObject implements Serializable {
     public void reload() {
         //load everything
         hitbox = new Rectangle(x, y, width, height);
-        img = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/" + this.imageName + ".png")).getImage();
+        URL url = GameObject.class.getResource(imageName + ".png");
+        ImageIcon pic = new ImageIcon(url);
+        img = pic.getImage();
     }
 }

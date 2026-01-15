@@ -1,6 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+/* Araib, Jay, Bernie
+ * January 14 2026
+ * abstract gameItem class for game
  */
 package dinodashfinalproject;
 
@@ -9,7 +9,7 @@ import java.awt.Graphics2D;
 
 /**
  *
- * @author mubas
+ * @author
  */
 public abstract class GameItem extends GameObject {
 
@@ -36,8 +36,11 @@ public abstract class GameItem extends GameObject {
     //abstract method for collisionsnd what happend when a collision happens
     public abstract void collisionProcedure(Player player);
 
+    /**
+     * this method resets the gameItem
+     */
     public void reset() {
-        visible = true;
+        visible = true;//reset visible
     }
 
     /**
@@ -70,6 +73,30 @@ public abstract class GameItem extends GameObject {
      */
     public void setVisible(boolean visible) {
         this.visible = visible;
+    }
+
+    /**
+     * this method checks if 2 gameitems are the same
+     *
+     * @param other - the other game item
+     * @return - true if they are the same false if not
+     */
+    public boolean equals(GameItem other) {
+        //if they are the same return true otherwise false
+        if (super.equals(other) && other.visible == this.visible) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * this method returns a string of all attributes
+     *
+     * @return the string of all the attributes
+     */
+    public String toString() {
+        return super.toString() + "\n" + visible;
     }
 
 }

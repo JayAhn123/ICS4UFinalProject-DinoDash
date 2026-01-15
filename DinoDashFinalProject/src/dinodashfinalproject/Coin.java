@@ -1,12 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+/* Araib, Jay, Bernie
+ * January 14 2026
+ * coin class for game
  */
 package dinodashfinalproject;
 
 /**
  *
- * @author mubas
+ * @author
  */
 public class Coin extends GameItem {
 

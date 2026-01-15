@@ -20,11 +20,15 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.ObjectInputStream;
+import java.io.OutputStreamWriter;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.ImageIcon;
@@ -156,7 +160,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
      *
      * @param g - the Graphics object to draw with
      */
-    private void doDrawing(Graphics g) {
+    public void doDrawing(Graphics g) {
 
         //the Graphics2D class is the class that handles all the drawing
         //must be casted from older Graphics class in order to have access to some newer methods
@@ -813,7 +817,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         enemyLevel5.add(new Enemy(9460, 250, 9250, 9670));
 
         groundLevel5.add(new Ground(9750, 300, 600, true));
-        
+
         //infinite mode
         groundLevel6.add(new Ground(-110, 525, 1000, false));
         groundLevel6.add(new Ground(340, 290, 100, false));
@@ -1322,17 +1326,20 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     public void saveScore() {
         //setup try catch statement
         try {
-            // Create a FileWriter object
+            // Create a fileoutPutStream object
             // to write in the file
-            FileWriter fWriter = new FileWriter("src/dinodashfinalproject/Scores.txt", true);
+            FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Saves/Scores.txt", true);
+            OutputStreamWriter osw = new OutputStreamWriter(out);//use outputStreamWrite to Write
+            BufferedWriter writer = new BufferedWriter(osw);//use BufferedWrite to write
+            //add the score
+            writer.newLine();
+            writer.write(name);
+            writer.newLine();
+            writer.write(String.valueOf(score - 5));
+            //close the stream
+            writer.close();
 
-            // Writing into file
-            fWriter.write("\n" + name + "\n" + (score - 5));
-
-            // Closing the file writing connection
-            fWriter.close();
-
-        } catch (IOException e) {
+        } catch (Exception e) {
             //catch error and show it
             JOptionPane.showMessageDialog(null, "Error: " + e);
         }
@@ -1345,11 +1352,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
      * @param names - arrayList to put the names into
      */
     public void getScores(ArrayList<Integer> scores, ArrayList<String> names) {
+
         //setup try catch statement
         try {
-            //make new fiel and scanner
-            File f = new File("src/dinodashfinalproject/Scores.txt");
-            Scanner s = new Scanner(f);
+            //make new file and scanner
+            FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Saves/Scores.txt");
+            Scanner s = new Scanner(in);
 
             //while there are lines
             while (s.hasNextLine()) {
@@ -1358,7 +1366,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
                 scores.add(Integer.parseInt(s.nextLine()));
             }
 
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             //catch error and show it
             JOptionPane.showMessageDialog(null, "Error: " + e);
         }
@@ -1441,9 +1449,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
      */
     public static void playBackgroundSound(String soundName) {
         try {//attempts to open file and play audio
-
-            File sound = new File("src/dinodashfinalproject/soundEffects/" + soundName + ".wav");//sets new file to sound file
-            AudioInputStream audioInput = AudioSystem.getAudioInputStream(sound);//gets audio file and converts it into audio input stream which is java's standard way to read raw audio data
+            URL url = GameObject.class.getResource("/dinodashfinalproject/soundEffects/" + soundName + ".wav");
+            AudioInputStream audioInput = AudioSystem.getAudioInputStream(url);//gets audio file and converts it into audio input stream which is java's standard way to read raw audio data
             clip = AudioSystem.getClip();//initialize clip
             clip.open(audioInput);//clip opens the audio input
             clip.loop(Clip.LOOP_CONTINUOUSLY);//loops the sound effect until stopped

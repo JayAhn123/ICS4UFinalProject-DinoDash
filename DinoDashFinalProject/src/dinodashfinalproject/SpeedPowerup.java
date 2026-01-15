@@ -1,12 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+/* Araib, Jay, Bernie
+ * January 14 2026
+ * speed powerup class for game
  */
 package dinodashfinalproject;
 
 /**
  *
- * @author mubas
+ * @author
  */
 public class SpeedPowerup extends GameItem {
 
@@ -61,5 +61,14 @@ public class SpeedPowerup extends GameItem {
      */
     public SpeedPowerup clone() {
         return new SpeedPowerup(x, y); // return new SpeedPowerup
+    }
+
+    /**
+     * this method returns a string of all attributes
+     *
+     * @return the string of all the attributes
+     */
+    public String toString() {
+        return super.toString() + "\n" + startTime + "\n" + currentTime + "\n" + timeActivated;
     }
 }

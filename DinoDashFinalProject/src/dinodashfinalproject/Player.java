@@ -10,6 +10,7 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.io.Serializable;
+import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
@@ -77,7 +78,9 @@ public class Player extends GameObject implements Serializable {
         //x,y position and with that width and height
         coins = 0; //set other attributes to defualts
         hearts = 3;
-        heartImage = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/playerHeart.png")).getImage();
+        URL url = GameObject.class.getResource("playerHeart.png");
+        ImageIcon pic = new ImageIcon(url);
+        heartImage = pic.getImage();
         jumpHeight = -10;
         maxSpeed = 7;
         loadSkins();
@@ -599,7 +602,7 @@ public class Player extends GameObject implements Serializable {
      */
     public void loadSkins() {
         //load images
-        Image skin1rightStill1 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur1.png")).getImage();
+        Image skin1rightStill1 = new ImageIcon(GameObject.class.getResource("/dinodashfinalproject/DarkGreenDinosaur1.png")).getImage();
         Image skin1rightStill2 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur2.png")).getImage();
         Image skin1rightStill3 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur3.png")).getImage();
         Image skin1rightStill4 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur4.png")).getImage();
@@ -977,9 +980,10 @@ public class Player extends GameObject implements Serializable {
         skin3leftStill = new ArrayList();
         skin3leftRun = new ArrayList();
         loadSkins();
-        //load heart image so loading form save file works
-        heartImage = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/playerHeart.png")).getImage();
-
+        //load heart image so loading from save file works
+        URL url = GameObject.class.getResource("playerHeart.png");
+        ImageIcon pic = new ImageIcon(url);
+        heartImage = pic.getImage();
     }
 
 }

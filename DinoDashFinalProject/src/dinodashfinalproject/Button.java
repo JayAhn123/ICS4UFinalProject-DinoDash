@@ -7,6 +7,7 @@ package dinodashfinalproject;
 //import necessary packages
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.net.URL;
 import javax.swing.ImageIcon;
 
 /**
@@ -34,7 +35,9 @@ public class Button extends GameObject {
         super(x, y, width, height, imageName); //chain to superclass constructor
         this.imageHoverName = imageHoverName; //set rest of attributes
         //make image
-        imgHover = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/" + this.imageHoverName + ".png")).getImage();
+        URL url = GameObject.class.getResource(imageHoverName + ".png");
+        ImageIcon pic = new ImageIcon(url);
+        imgHover = pic.getImage();
     }
 
     /**
