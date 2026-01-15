@@ -94,7 +94,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     private ArrayList<GameItem> itemLevel1 = new ArrayList();
     private ArrayList<GameItem> tempItemLevel1 = new ArrayList();
     private ArrayList<Enemy> enemyLevel1 = new ArrayList();
-    private Player player;
+    private Player player = new Player();
 
     //variables for level 2
     private ArrayList<Ground> groundLevel2 = new ArrayList();
@@ -1384,6 +1384,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             try {//try making obbjectinputStream to get player object form file
                 ObjectInputStream s = new ObjectInputStream(in);//make connection
                 player = (Player) s.readObject();//set plaer to the object we got from file
+                player.reload();//reload the player
             } catch (ClassNotFoundException e) {//catch error
                 player = new Player();//set player to default player
                 //output error
@@ -1392,6 +1393,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 
         } catch (IOException e) {//catch error if making fileinputStream fails
             JOptionPane.showMessageDialog(null, "Error: " + e);
+            player = new Player();//set player to default player//if error is caught
         }
     }
 

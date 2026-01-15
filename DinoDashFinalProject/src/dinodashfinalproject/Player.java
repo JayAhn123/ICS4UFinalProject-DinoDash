@@ -17,44 +17,44 @@ import javax.swing.ImageIcon;
  *
  * @author arbas
  */
-public class Player extends GameObject implements Serializable{
+public class Player extends GameObject implements Serializable {
 
-    //attributes
+    //attributes - some need to be transient as they do not support serializable
     private static final int SCREENXPOSITION = 325;
     private static final int SCREENYPOSITION = 213;
     private double xSpeed = 0;
     private double ySpeed = 0;
     private int coins;
     private int hearts;
-    private Image heartImage;
+    private transient Image heartImage;
     private int jumpHeight;
     private int maxSpeed;
-    private ArrayList<Image> skin1rightStill = new ArrayList();
-    private ArrayList<Image> skin1rightRun = new ArrayList();
-    private ArrayList<Image> skin1leftStill = new ArrayList();
-    private ArrayList<Image> skin1leftRun = new ArrayList();
-    private ArrayList<Image> skin2rightStill = new ArrayList();
-    private ArrayList<Image> skin2rightRun = new ArrayList();
-    private ArrayList<Image> skin2leftStill = new ArrayList();
-    private ArrayList<Image> skin2leftRun = new ArrayList();
-    private ArrayList<Image> skin3rightStill = new ArrayList();
-    private ArrayList<Image> skin3rightRun = new ArrayList();
-    private ArrayList<Image> skin3leftStill = new ArrayList();
-    private ArrayList<Image> skin3leftRun = new ArrayList();
+    private transient ArrayList<Image> skin1rightStill = new ArrayList();
+    private transient ArrayList<Image> skin1rightRun = new ArrayList();
+    private transient ArrayList<Image> skin1leftStill = new ArrayList();
+    private transient ArrayList<Image> skin1leftRun = new ArrayList();
+    private transient ArrayList<Image> skin2rightStill = new ArrayList();
+    private transient ArrayList<Image> skin2rightRun = new ArrayList();
+    private transient ArrayList<Image> skin2leftStill = new ArrayList();
+    private transient ArrayList<Image> skin2leftRun = new ArrayList();
+    private transient ArrayList<Image> skin3rightStill = new ArrayList();
+    private transient ArrayList<Image> skin3rightRun = new ArrayList();
+    private transient ArrayList<Image> skin3leftStill = new ArrayList();
+    private transient ArrayList<Image> skin3leftRun = new ArrayList();
 
-    private Image skin1rightJump1;
-    private Image skin1rightJump2;
-    private Image skin2rightJump1;
-    private Image skin2rightJump2;
-    private Image skin3rightJump1;
-    private Image skin3rightJump2;
+    private transient Image skin1rightJump1;
+    private transient Image skin1rightJump2;
+    private transient Image skin2rightJump1;
+    private transient Image skin2rightJump2;
+    private transient Image skin3rightJump1;
+    private transient Image skin3rightJump2;
 
-    private Image skin1leftJump1;
-    private Image skin1leftJump2;
-    private Image skin2leftJump1;
-    private Image skin2leftJump2;
-    private Image skin3leftJump1;
-    private Image skin3leftJump2;
+    private transient Image skin1leftJump1;
+    private transient Image skin1leftJump2;
+    private transient Image skin2leftJump1;
+    private transient Image skin2leftJump2;
+    private transient Image skin3leftJump1;
+    private transient Image skin3leftJump2;
 
     private boolean facingRight;
     private boolean airborne;
@@ -66,6 +66,7 @@ public class Player extends GameObject implements Serializable{
     private boolean skin2Bought;
     private boolean skin3Bought;
     private int equippedSkin;
+    private static final long serialVersionUID = 1L;//set version for saving
 
     /**
      * primary constructor
@@ -74,7 +75,7 @@ public class Player extends GameObject implements Serializable{
         super(325, 213, 64, 64, "DarkGreenDinosaur1"); //chain to superclass constructor
         //no paramters needed ass dino will always start with default skin, at that
         //x,y position and with that width and height
-        coins = 160; //set other attributes to defualts
+        coins = 0; //set other attributes to defualts
         hearts = 3;
         heartImage = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/playerHeart.png")).getImage();
         jumpHeight = -10;
@@ -596,7 +597,7 @@ public class Player extends GameObject implements Serializable{
     /**
      * this method loads all the images for the skins
      */
-    private void loadSkins() {
+    public void loadSkins() {
         //load images
         Image skin1rightStill1 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur1.png")).getImage();
         Image skin1rightStill2 = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/DarkGreenDinosaur2.png")).getImage();
@@ -954,6 +955,31 @@ public class Player extends GameObject implements Serializable{
         } else {
             return false;
         }
+    }
+
+    /**
+     * this method reloads transient variables that were set to null after
+     * saving and loading
+     */
+    public void reload() {
+        super.reload();
+        //load skins
+        skin1rightStill = new ArrayList();
+        skin1rightRun = new ArrayList();
+        skin1leftStill = new ArrayList();
+        skin1leftRun = new ArrayList();
+        skin2rightStill = new ArrayList();
+        skin2rightRun = new ArrayList();
+        skin2leftStill = new ArrayList();
+        skin2leftRun = new ArrayList();
+        skin3rightStill = new ArrayList();
+        skin3rightRun = new ArrayList();
+        skin3leftStill = new ArrayList();
+        skin3leftRun = new ArrayList();
+        loadSkins();
+        //load heart image so loading form save file works
+        heartImage = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/playerHeart.png")).getImage();
+
     }
 
 }

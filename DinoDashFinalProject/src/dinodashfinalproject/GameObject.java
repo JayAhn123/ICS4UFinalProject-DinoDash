@@ -10,6 +10,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -17,18 +18,19 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 
-public abstract class GameObject {
+public abstract class GameObject implements Serializable {
 
     //attributes
     protected int x;//x position of the game object
     protected int y;//y position of the game object
     protected int width;//width of the game object
     protected int height;//height of the game object
-    protected Rectangle hitbox; //the hitbox of the game object which is a rectangle type object
+    protected transient Rectangle hitbox; //the hitbox of the game object which is a rectangle type object
     protected String imageName; // the name of the image
-    protected Image img; //the image that should be displayed for the object
+    protected transient Image img; //the image that should be displayed for the object
     protected static int xOffset;//x and y offset for the moving parts of the game
     protected static int yOffset;
+    private static final long serialVersionUID = 1L; //set version
 
     /**
      * Primary Constructor that instantiates game object
@@ -278,5 +280,15 @@ public abstract class GameObject {
     public String toString() {
         return x + "\n" + y + "\n" + width + "\n" + height + "\n" + hitbox.toString() + "\n" + imageName + "\n"
                 + img.toString() + "\n" + xOffset + "\n" + yOffset;
+    }
+
+    /**
+     * this method reload transient variables that were null after saving and
+     * loading
+     */
+    public void reload() {
+        //load everything
+        hitbox = new Rectangle(x, y, width, height);
+        img = new ImageIcon(this.getClass().getResource("/dinodashfinalproject/" + this.imageName + ".png")).getImage();
     }
 }
