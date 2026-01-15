@@ -1,5 +1,5 @@
 /*Araib, Bernie, Jay
- *January 13 2025
+ *January 13 2026
  * Jpanel for the game which runs everything
  */
 package dinodashfinalproject;
@@ -467,7 +467,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         pause = false;
 
         //add to arraylist of levels to set them up
-        ///COMMENTING NOT DONE FOR THIS
+        //essentially adding ground blocks, items, and enemy for each level
+        //level 1
         groundLevel1.add(new Ground(0, 320, 400, false));
         itemLevel1.add(new Coin(200, 290));
 

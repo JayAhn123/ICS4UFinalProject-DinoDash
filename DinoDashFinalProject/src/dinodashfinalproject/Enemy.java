@@ -1,5 +1,5 @@
 /* Araib, Jay, Bernie
- * January 13 2025
+ * January 13 2026
  * enemy class for game
  */
 package dinodashfinalproject;
