@@ -1,5 +1,5 @@
 /* Jay Ahn. Araib, Bernie
- * Jan 13, 2025
+ * Jan 13, 2026
  * GameObject Class for Dino Dash
  */
 package dinodashfinalproject;

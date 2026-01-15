@@ -99,4 +99,6 @@ public abstract class GameItem extends GameObject {
         return super.toString() + "\n" + visible;
     }
 
+    //abstract method for cloning game items
+    public abstract GameItem clone();
 }
