@@ -732,6 +732,88 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
         itemLevel4.add(new Coin(-3800, 290));
         itemLevel4.add(new Coin(-3750, 290));
 
+        //level 5
+        groundLevel5.add(new Ground(0, 420, 800, false));
+
+        groundLevel5.add(new Ground(950, 360, 160, false));
+        groundLevel5.add(new Ground(1200, 300, 200, false));
+
+        groundLevel5.add(new Ground(1500, 260, 350, false));
+        enemyLevel5.add(new Enemy(1550, 210, 1500, 1820));
+        enemyLevel5.add(new Enemy(1630, 210, 1500, 1820));
+        enemyLevel5.add(new Enemy(1710, 210, 1500, 1820));
+
+        groundLevel5.add(new Ground(1650, 120, 120, false));
+
+        groundLevel5.add(new Ground(2100, 180, 360, false));
+        enemyLevel5.add(new Enemy(2150, 130, 2100, 2460));
+        enemyLevel5.add(new Enemy(2230, 130, 2100, 2460));
+
+        groundLevel5.add(new Ground(2550, 240, 150, false));
+        groundLevel5.add(new Ground(2800, 200, 160, false));
+
+        groundLevel5.add(new Ground(3100, 160, 420, false));
+        enemyLevel5.add(new Enemy(3150, 110, 3100, 3520));
+        enemyLevel5.add(new Enemy(3230, 110, 3100, 3520));
+        enemyLevel5.add(new Enemy(3310, 110, 3100, 3520));
+
+        groundLevel5.add(new Ground(2950, 120, 120, false));
+        groundLevel5.add(new Ground(2700, 80, 120, false));
+
+        groundLevel5.add(new Ground(3600, 80, 320, false));
+        enemyLevel5.add(new Enemy(3650, 30, 3600, 3920));
+        enemyLevel5.add(new Enemy(3730, 30, 3600, 3920));
+        enemyLevel5.add(new Enemy(3810, 30, 3600, 3920));
+
+        groundLevel5.add(new Ground(4050, 140, 160, false));
+        groundLevel5.add(new Ground(4300, 200, 160, false));
+
+        groundLevel5.add(new Ground(4600, 200, 380, false));
+        enemyLevel5.add(new Enemy(4650, 150, 4600, 4980));
+        enemyLevel5.add(new Enemy(4730, 150, 4600, 4980));
+        enemyLevel5.add(new Enemy(4810, 150, 4600, 4980));
+
+        groundLevel5.add(new Ground(4450, 160, 120, false));
+        groundLevel5.add(new Ground(4200, 120, 120, false));
+
+        groundLevel5.add(new Ground(5150, 120, 260, false));
+        enemyLevel5.add(new Enemy(5200, 70, 5150, 5410));
+        enemyLevel5.add(new Enemy(5280, 70, 5150, 5410));
+
+        groundLevel5.add(new Ground(5500, 180, 160, false));
+        groundLevel5.add(new Ground(5750, 140, 200, false));
+
+        groundLevel5.add(new Ground(6050, 140, 420, false));
+        enemyLevel5.add(new Enemy(6100, 90, 6050, 6470));
+        enemyLevel5.add(new Enemy(6180, 90, 6050, 6470));
+        enemyLevel5.add(new Enemy(6260, 90, 6050, 6470));
+
+        groundLevel5.add(new Ground(6550, 200, 160, false));
+        groundLevel5.add(new Ground(6800, 260, 160, false));
+
+        groundLevel5.add(new Ground(7100, 260, 420, false));
+        enemyLevel5.add(new Enemy(7150, 210, 7100, 7520));
+        enemyLevel5.add(new Enemy(7230, 210, 7100, 7520));
+        enemyLevel5.add(new Enemy(7310, 210, 7100, 7520));
+
+        groundLevel5.add(new Ground(7600, 220, 160, false));
+        groundLevel5.add(new Ground(7850, 180, 160, false));
+
+        groundLevel5.add(new Ground(8150, 180, 420, false));
+        enemyLevel5.add(new Enemy(8200, 130, 8150, 8570));
+        enemyLevel5.add(new Enemy(8280, 130, 8150, 8570));
+        enemyLevel5.add(new Enemy(8360, 130, 8150, 8570));
+
+        groundLevel5.add(new Ground(8700, 240, 180, false));
+        groundLevel5.add(new Ground(8950, 300, 180, false));
+
+        groundLevel5.add(new Ground(9250, 300, 420, false));
+        enemyLevel5.add(new Enemy(9300, 250, 9250, 9670));
+        enemyLevel5.add(new Enemy(9380, 250, 9250, 9670));
+        enemyLevel5.add(new Enemy(9460, 250, 9250, 9670));
+
+        groundLevel5.add(new Ground(9750, 300, 600, true));
+        
         //infinite mode
         groundLevel6.add(new Ground(-110, 525, 1000, false));
         groundLevel6.add(new Ground(340, 290, 100, false));
