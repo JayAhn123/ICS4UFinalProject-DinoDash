@@ -1449,7 +1449,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
      */
     public static void playBackgroundSound(String soundName) {
         try {//attempts to open file and play audio
-            URL url = GameObject.class.getResource("/dinodashfinalproject/soundEffects/" + soundName + ".wav");
+            URL url = GamePanel.class.getResource("/dinodashfinalproject/soundEffects/" + soundName + ".wav");
             AudioInputStream audioInput = AudioSystem.getAudioInputStream(url);//gets audio file and converts it into audio input stream which is java's standard way to read raw audio data
             clip = AudioSystem.getClip();//initialize clip
             clip.open(audioInput);//clip opens the audio input

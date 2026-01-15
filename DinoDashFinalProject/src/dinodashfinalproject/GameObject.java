@@ -18,6 +18,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public abstract class GameObject implements Serializable {
 
@@ -267,13 +268,13 @@ public abstract class GameObject implements Serializable {
      */
     public void playSound(String soundName) {
         try {//attempts to open file and play audio
-            File sound = new File("src/dinodashfinalproject/soundEffects/" + soundName + ".wav");//sets new file to sound file
-            AudioInputStream audioInput = AudioSystem.getAudioInputStream(sound);//gets audio file and converts it into audio input stream which is java's standard way to read raw audio data
+            URL url = GameObject.class.getResource("/dinodashfinalproject/soundEffects/" + soundName + ".wav");
+            AudioInputStream audioInput = AudioSystem.getAudioInputStream(url);//gets audio file and converts it into audio input stream which is java's standard way to read raw audio data
             Clip clip = AudioSystem.getClip();//initialize clip
             clip.open(audioInput);//clip opens the audio input
             clip.start();//plays the sound effect
         } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {//catches any error that may occur
-            System.out.println("Error: " + e);//prints out the error
+            JOptionPane.showMessageDialog(null, "Error: " + e);//prints out the error
         }
     }
 
