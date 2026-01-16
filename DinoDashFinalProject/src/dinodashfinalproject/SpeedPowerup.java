@@ -1,13 +1,9 @@
 /* Araib, Jay, Bernie
  * January 14 2026
- * speed powerup class for game
+ * speed powerup class that extends game item
  */
 package dinodashfinalproject;
 
-/**
- *
- * @author
- */
 public class SpeedPowerup extends GameItem {
 
     //attributes

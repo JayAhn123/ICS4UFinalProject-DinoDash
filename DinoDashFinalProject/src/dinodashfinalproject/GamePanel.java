@@ -1,5 +1,5 @@
-/*Araib, Bernie, Jay
- *January 13 2026
+/* Araib, Bernie, Jay
+ * January 13 2026
  * Jpanel for the game which runs everything
  */
 package dinodashfinalproject;
@@ -38,10 +38,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-/**
- *
- * @author
- */
+
 public class GamePanel extends JPanel implements Runnable, KeyListener, MouseListener, MouseMotionListener {
 
     //global variables

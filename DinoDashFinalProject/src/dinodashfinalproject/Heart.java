@@ -1,13 +1,9 @@
 /* Araib, Jay, Bernie
  * January 14 2026
- * hearts class for game
+ * hearts class that extends game item
  */
 package dinodashfinalproject;
 
-/**
- *
- * @author mubas
- */
 public class Heart extends GameItem {
 
     /**

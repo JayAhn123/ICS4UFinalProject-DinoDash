@@ -1,6 +1,6 @@
 /* Araib, Jay, Bernie
  * January 13 2026
- * enemy class for game
+ * enemy class that extends game object
  */
 package dinodashfinalproject;
 
@@ -11,10 +11,6 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author mubas
- */
 public class Enemy extends GameObject {
 
     //attributes

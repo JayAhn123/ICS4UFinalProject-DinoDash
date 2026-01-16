@@ -1,13 +1,9 @@
 /* Araib, Jay, Bernie
  * January 14 2026
- * Jump powerup class for game
+ * Jump powerup class that extends game item
  */
 package dinodashfinalproject;
 
-/**
- *
- * @author
- */
 public class JumpPowerup extends GameItem {
 
     //attributes

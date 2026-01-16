@@ -1,4 +1,4 @@
-/*Araib, Bernie, Jay
+/* Araib, Bernie, Jay
  * January 13 2026
  * Main class for the dinodash game which is the main jFrame
  */
@@ -15,11 +15,6 @@ import java.io.ObjectOutputStream;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-
-/* Jay Ahn, Araib Basit, Bernie Gao
- * Dec 29 2025
- * Main Class that displays the game
- */
 public class DinoDashFinalProject extends JFrame {
 
     /**

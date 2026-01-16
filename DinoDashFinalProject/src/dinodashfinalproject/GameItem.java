@@ -1,16 +1,12 @@
 /* Araib, Jay, Bernie
  * January 14 2026
- * abstract gameItem class for game
+ * abstract gameItem class that extends game object
  */
 package dinodashfinalproject;
 
 //import packages
 import java.awt.Graphics2D;
 
-/**
- *
- * @author
- */
 public abstract class GameItem extends GameObject {
 
     //attributes

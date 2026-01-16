@@ -1,13 +1,9 @@
 /* Araib, Jay, Bernie
  * January 14 2026
- * coin class for game
+ * coin class that extends game item
  */
 package dinodashfinalproject;
 
-/**
- *
- * @author
- */
 public class Coin extends GameItem {
 
     /**

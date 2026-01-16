@@ -1,6 +1,6 @@
 /* Araib, Jay, Bernie
  * January 12 2026
- * buton object for menus in the game
+ * button object for menus in the game that extends game object
  */
 package dinodashfinalproject;
 
@@ -8,12 +8,9 @@ package dinodashfinalproject;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.net.URL;
+import java.util.Objects;
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author
- */
 public class Button extends GameObject {
 
     //attributes
@@ -114,8 +111,28 @@ public class Button extends GameObject {
         return imgHover; //return img
     }
 
+    /**
+     * toString method that formats button into string
+     *
+     * @return - formatted string about the button
+     */
     public String toString() {
         return super.toString() + "\n" + imageHoverName + "\n" + img.toString();
+    }
+
+    /**
+     * equals method for button
+     *
+     * @param obj - other button checking for equality
+     * @return - boolean whether they are equal or not
+     */
+    public boolean equals(Button obj) {
+        //if two buttons have same attributes
+        if (super.equals(obj) && this.imageHoverName.equals(obj.imageHoverName) && this.imageName.equals(obj.imageName)) {
+            return true;//return true
+        } else {//else they are not equal
+            return false;//return false
+        }
     }
 
 }

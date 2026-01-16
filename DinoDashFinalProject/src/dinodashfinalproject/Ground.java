@@ -1,6 +1,6 @@
 /* Araib, Bernie, Jay
  * January 13 2026
- * Groudn class for levels
+ * Ground class for levels that extends game object
  */
 package dinodashfinalproject;
 

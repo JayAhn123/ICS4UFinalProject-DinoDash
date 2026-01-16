@@ -1,6 +1,6 @@
 /* Araib , Jay, Bernie
  * Jan 13 2026
- * player class
+ * player class that extends game object
  */
 package dinodashfinalproject;
 
@@ -14,10 +14,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author arbas
- */
 public class Player extends GameObject implements Serializable {
 
     //attributes - some need to be transient as they do not support serializable
@@ -984,6 +980,15 @@ public class Player extends GameObject implements Serializable {
         URL url = GameObject.class.getResource("playerHeart.png");
         ImageIcon pic = new ImageIcon(url);
         heartImage = pic.getImage();
+    }
+
+    /**
+     * toString method for player class
+     *
+     * @return - formatted string about player
+     */
+    public String toString() {
+        return "Player{" + "xSpeed=" + xSpeed + ", ySpeed=" + ySpeed + ", coins=" + coins + ", hearts=" + hearts + ", heartImage=" + heartImage + ", jumpHeight=" + jumpHeight + ", maxSpeed=" + maxSpeed + ", facingRight=" + facingRight + ", airborne=" + airborne + ", dead=" + dead + ", win=" + win + ", skin2Bought=" + skin2Bought + ", skin3Bought=" + skin3Bought + ", equippedSkin=" + equippedSkin + '}';
     }
 
 }
