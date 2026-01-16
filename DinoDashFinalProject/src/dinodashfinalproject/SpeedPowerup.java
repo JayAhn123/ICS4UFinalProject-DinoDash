@@ -10,6 +10,7 @@ public class SpeedPowerup extends GameItem {
     private long startTime;
     private long currentTime;
     private long timeActivated;
+    private boolean activated;
 
     /**
      * primary constructor for SpeedPowerup object
@@ -19,6 +20,7 @@ public class SpeedPowerup extends GameItem {
      */
     public SpeedPowerup(int x, int y) {
         super(x, y, "SpeedPowerup");//chain to superclas constructor image will always be the same as a SpeedPowerup image
+        activated = false;//initialize activated to false
     }
 
     /**
@@ -34,9 +36,9 @@ public class SpeedPowerup extends GameItem {
                 player.setMaxSpeed(12);//if they do make the player run faster
                 startTime = System.nanoTime();//get the start time of the when the powerup started
                 visible = false;//set visible to false
+                activated = true;//sets active to true
             }
-
-        } else if (!visible && player.getMaxSpeed() != 7) {//if its not visible which means it has already been collected
+        } else if (!visible && player.getMaxSpeed() != 7 && activated) {//if its not visible which means it has already been collected and the boost is active
             //and the player max speed has not already been reset back then this runs
 
             //get current time
@@ -46,6 +48,7 @@ public class SpeedPowerup extends GameItem {
             //if it  is more than 5 seconds
             if (timeActivated / 100000000 > 50) {
                 player.setMaxSpeed(7);//reset max speedback to normal
+                activated = false;//sets activated to false
             }
         }
     }
@@ -65,6 +68,24 @@ public class SpeedPowerup extends GameItem {
      * @return the string of all the attributes
      */
     public String toString() {
-        return super.toString() + "\n" + startTime + "\n" + currentTime + "\n" + timeActivated;
+        return super.toString() + "\n" + startTime + "\n" + currentTime + "\n" + timeActivated + "\n" + activated;
+    }
+
+    /**
+     * this is a setter for the activated attribute
+     *
+     * @param activated - boolean of if its activated or not
+     */
+    public void setActivated(boolean activated) {
+        this.activated = activated;
+    }
+
+    /**
+     * This is a getter for the activated attribute
+     *
+     * @return - a boolean true is the powerup is active false if not
+     */
+    public boolean isActivated() {
+        return activated;
     }
 }
